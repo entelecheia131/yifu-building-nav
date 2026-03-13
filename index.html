@@ -844,24 +844,59 @@
             });
         });
 
-        // 路线生成函数
+        // ===================== 完全按你截图句式的路线逻辑 =====================
         function generateRoute(current, target) {
+            // 处理电梯显示格式（兼容数组/字符串）
+            const getElevatorText = (elevator) => {
+                if (Array.isArray(elevator)) return elevator.join('/');
+                return elevator;
+            };
+
+            const currentElevator = getElevatorText(current.elevator);
+            const targetElevator = getElevatorText(target.elevator);
+            const currentFloor = current.floor;
+            const targetFloor = target.floor;
+            const currentArea = current.area;
+            const targetArea = target.area;
+            // 可换乘电梯的楼层（斜杠分隔）
+            const transferFloors = '2/5/6/7/8楼';
+
+            // 场景1：从室外进入
             if (current.type === 'outdoor') {
-                return `1. 从逸夫楼正门进入<br>2. 乘坐<span class="highlight">${target.elevator}</span>电梯/楼梯到达${target.floor}楼<br>3. 前往${target.area}区域，找到${target.type}${target.num}教室`;
-            }
-            
-            if (current.floor === target.floor) {
-                const floorType = floorConfig[current.floor].type;
-                
-                if (floorType === 'full' || (floorType === 'half' && floorConfig[current.floor].connect[current.area]?.includes(target.area))) {
-                    return `1. 从当前${current.area}区域直接前往<span class="highlight">${target.area}</span>区域<br>2. 找到${target.type}${target.num}教室`;
+                if (targetFloor === 1) {
+                    return `您可从室外直接进入，前往<span class="highlight">1楼${targetArea}</span>区域，该教室就在您附近。`;
                 } else {
-                    return `1. 从当前${current.area}区域前往<span class="highlight">${current.elevator}</span>电梯/楼梯<br>2. 下到1楼后换乘${target.elevator}电梯/楼梯上${target.floor}楼<br>3. 前往${target.area}区域，找到${target.type}${target.num}教室`;
+                    return `您可从室外进入，前往1楼大厅，乘坐<span class="highlight">${targetElevator}</span>电梯，到达<span class="highlight">${targetFloor}楼</span>后，该教室就在您附近。`;
                 }
-            } else {
-                return `1. 从当前位置前往<span class="highlight">${current.elevator}</span>电梯/楼梯<br>2. 前往${target.floor}楼<br>3. 前往${target.area}区域，找到${target.type}${target.num}教室`;
+            }
+
+            // 场景2：同楼层移动
+            if (currentFloor === targetFloor) {
+                const floorSetting = floorConfig[currentFloor];
+                const isConnected = floorSetting.connect === 'all' || 
+                                   (floorSetting.connect[currentArea] && floorSetting.connect[currentArea].includes(targetArea));
+                
+                if (isConnected) {
+                    return `您可在当前楼层直接步行，从<span class="highlight">${currentArea}</span>区域前往<span class="highlight">${targetArea}</span>区域，该教室就在您附近。`;
+                } else {
+                    return `您当前所在的<span class="highlight">${currentFloor}楼${currentArea}区域</span>，与目标<span class="highlight">${targetFloor}楼${targetArea}区域</span>无法直接互通，推荐路线：<br><br>先到达<span class="highlight">${transferFloors}</span>，在该楼层乘坐<span class="highlight">${targetElevator}</span>电梯，即可到达<span class="highlight">${targetFloor}楼</span>目标教室所在区域。`;
+                }
+            }
+
+            // 场景3：不同楼层移动
+            else {
+                const floorSetting = floorConfig[currentFloor];
+                const isConnected = floorSetting.connect === 'all' || 
+                                   (floorSetting.connect[currentArea] && floorSetting.connect[currentArea].includes(targetArea));
+                
+                if (isConnected && currentElevator === targetElevator) {
+                    return `您可在当前楼层直接乘坐<span class="highlight">${currentElevator}</span>电梯，到达<span class="highlight">${targetFloor}楼</span>，出电梯后该教室就在您附近。`;
+                } else {
+                    return `您当前所在的<span class="highlight">${currentFloor}楼${currentArea}区域</span>，与目标<span class="highlight">${targetFloor}楼${targetArea}区域</span>无法直接互通，推荐路线：<br><br>先到达<span class="highlight">${transferFloors}</span>，在该楼层乘坐<span class="highlight">${targetElevator}</span>电梯，即可到达<span class="highlight">${targetFloor}楼</span>目标教室所在区域。`;
+                }
             }
         }
+        // =====================================================================
     </script>
 </body>
 </html>
