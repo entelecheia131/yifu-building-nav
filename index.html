@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -9,14 +9,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
             width: 100%;
             min-height: 100vh;
-            background: #f5f5f5;
+            background: #f0f7ff;
             padding: 10px 0;
             overflow-x: hidden;
             overflow-y: auto;
@@ -27,42 +26,70 @@
             max-width: 400px;
             min-height: calc(100vh - 20px);
             background: #ffffff;
-            border: 3px solid #335599;
+            border: 3px solid #2a6099;
             border-radius: 30px;
             padding: 30px 20px 40px 20px;
             margin: 0 auto;
             position: relative;
+            box-shadow: 0 8px 24px rgba(42, 96, 153, 0.15);
+        }
+
+        /* 学校图标样式 */
+        .school-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #e8f4fc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .school-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .page {
             width: 100%;
             display: none;
+            padding-top: 15px;
         }
 
-            .page.active {
-                display: block;
-            }
+        .page.active {
+            display: block;
+        }
 
+        /* 页面1标题样式 - 楷体、居中、调整大小 */
         .page-title {
             text-align: center;
-            color: #1a3366;
+            color: #1a508b;
             margin-bottom: 25px;
             line-height: 1.4;
+            padding-top: 10px;
+            padding-left: 0 !important; /* 取消之前的左偏移 */
         }
 
-            .page-title h1 {
-                font-size: 26px;
-                font-weight: bold;
-                margin-bottom: 5px;
-            }
+        .page-title h1 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+            font-family: "KaiTi", "STKaiti", serif; /* 楷体 */
+        }
 
-            .page-title p {
-                font-size: 18px;
-                font-weight: 500;
-                text-align: left;
-                margin-top: 20px;
-            }
+        .page-title p {
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left !important; /* 左对齐 */
+            margin-top: 20px;
+            color: #336699;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
 
+        /* 选择器容器 - 移除粉色线条 */
         .picker-container {
             display: flex;
             justify-content: space-between;
@@ -70,9 +97,17 @@
             width: 100%;
             height: 180px;
             margin: 20px 0;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
+            border: 1px solid #d1e7ff;
+            border-radius: 12px;
             overflow: hidden;
+            background: #f8fbff;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* 移除粉色线条 */
+        .picker-container::after {
+            display: none;
         }
 
         .picker-column {
@@ -80,26 +115,51 @@
             height: 100%;
             overflow: hidden;
             position: relative;
+            border-right: 1px solid #e6f0ff;
+        }
+        .picker-column:last-child {
+            border-right: none;
         }
 
-            .picker-column::before,
-            .picker-column::after {
-                content: '';
-                position: absolute;
-                left: 0;
-                right: 0;
-                height: 1px;
-                background: #335599;
-                z-index: 2;
-            }
+        /* 选择器上下分隔线 - 保留但调整样式 */
+        .picker-column::before,
+        .picker-column::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #2a6099;
+            z-index: 2;
+        }
 
-            .picker-column::before {
-                top: 70px;
-            }
+        .picker-column::before {
+            top: 70px;
+        }
 
-            .picker-column::after {
-                bottom: 70px;
-            }
+        .picker-column::after {
+            bottom: 70px;
+        }
+
+        /* 选择器顶部标签 - 只保留第一列的"教室"，后两列统一为"教室号" */
+        .picker-column:nth-child(1) .picker-label {
+            content: '教室';
+        }
+        .picker-column:nth-child(2) .picker-label,
+        .picker-column:nth-child(3) .picker-label {
+            content: '教室号';
+        }
+
+        .picker-label {
+            position:absolute;
+            top:10px;
+            left:50%;
+            transform:translateX(-50%);
+            font-size:18px;
+            font-weight:500;
+            z-index:3;
+            color:#1a508b;
+        }
 
         .picker-select {
             width: 100%;
@@ -113,27 +173,28 @@
             overflow-y: scroll;
             -ms-overflow-style: none;
             scrollbar-width: none;
+            padding: 70px 0;
         }
 
-            .picker-select::-webkit-scrollbar {
-                display: none;
-            }
+        .picker-select::-webkit-scrollbar {
+            display: none;
+        }
 
-            .picker-select option {
-                height: 40px;
-                line-height: 40px;
-                scroll-snap-align: center;
-                color: #666;
-            }
+        .picker-select option {
+            height: 40px;
+            line-height: 40px;
+            scroll-snap-align: center;
+            color: #4a7cad;
+        }
 
-                .picker-select option:checked {
-                    color: #000000;
-                    font-weight: bold;
-                    font-size: 26px;
-                }
+        .picker-select option:checked {
+            color: #1a508b;
+            font-weight: bold;
+            font-size: 26px;
+        }
 
         .indoor-picker .picker-column {
-            background: #e8f5e9;
+            background: #e8f5f9;
         }
 
         .radio-group {
@@ -146,8 +207,8 @@
         .radio-item {
             width: 120px;
             height: 50px;
-            border: 2px solid #333;
-            border-radius: 4px;
+            border: 2px solid #2a6099;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -155,11 +216,15 @@
             font-weight: 500;
             cursor: pointer;
             user-select: none;
+            background: #f8fbff;
+            transition: all 0.2s ease;
         }
 
-            .radio-item.active {
-                background: #f9e7d2;
-            }
+        .radio-item.active {
+            background: #e8f4fc;
+            border-color: #2a6099;
+            box-shadow: 0 2px 8px rgba(42, 96, 153, 0.2);
+        }
 
         .btn-group {
             display: flex;
@@ -172,126 +237,153 @@
         .btn {
             flex: 1;
             height: 50px;
-            border: 2px solid #333;
-            border-radius: 4px;
-            background: #f9e7d2;
+            border: 2px solid #2a6099;
+            border-radius: 8px;
+            background: #e8f4fc;
+            color: #1a508b;
             font-size: 22px;
             font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
         }
 
-            .btn:active {
-                opacity: 0.8;
-            }
-        /* 楼层图容器 适配手机宽度 */
+        .btn:active {
+            opacity: 0.8;
+            transform: scale(0.98);
+        }
+        .btn:hover {
+            background: #d1e7ff;
+        }
+
+        /* 楼层图容器 */
         .map-box {
             width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            border: 1px solid #d1e7ff;
+            border-radius: 12px;
             margin: 15px 0;
-            padding: 10px;
+            padding: 15px;
+            background: #f8fbff;
+            box-shadow: 0 2px 8px rgba(42, 96, 153, 0.08);
         }
-        /* 楼层图图片样式 自适应不变形 */
+        
         .map-img {
             width: 100%;
             height: auto;
-            border-radius: 4px;
+            border-radius: 8px;
             display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        /* 图片加载失败的占位 */
+        
         .map-placeholder {
             width: 100%;
-            height: 160px;
-            background: #f5f5f5;
-            border: 1px dashed #999;
-            border-radius: 4px;
+            height: 180px;
+            background: #f5faff;
+            border: 1px dashed #99c2e8;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #666;
+            color: #6699cc;
             font-size: 14px;
         }
 
         .map-title {
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 10px;
+            color: #1a508b;
         }
 
         .position-info {
             font-size: 18px;
             margin: 10px 0;
-            line-height: 1.5;
+            line-height: 1.6;
+            color: #336699;
         }
 
-            .position-info span {
-                color: #1a3366;
-                font-weight: bold;
-            }
+        .position-info span {
+            color: #1a508b;
+            font-weight: bold;
+        }
 
         .route-result {
             margin: 20px 0;
         }
 
-            .route-result h3 {
-                font-size: 22px;
-                margin-bottom: 10px;
-            }
-
-        .route-text {
-            border: 2px solid #333;
-            border-radius: 4px;
-            padding: 15px;
-            font-size: 18px;
-            line-height: 1.6;
-            margin-top: 15px;
+        .route-result h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #1a508b;
+            text-align: center;
         }
 
-            .route-text .highlight {
-                background: #ffeb3b;
-                font-weight: bold;
-                padding: 2px 4px;
-                border-radius: 2px;
-            }
+        .route-text {
+            border: 2px solid #2a6099;
+            border-radius: 8px;
+            padding: 18px;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-top: 15px;
+            background: #f8fbff;
+            color: #336699;
+        }
+
+        .route-text .highlight {
+            background: #d1e7ff;
+            color: #1a508b;
+            font-weight: bold;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
 
         .tip-text {
-            color: #666;
+            color: #6699cc;
             font-size: 14px;
             margin: 5px 0;
         }
 
         .error-text {
-            color: #d32f2f;
+            color: #e74c3c;
             font-size: 14px;
             margin-top: 10px;
             text-align: center;
+            padding: 5px;
+            border-radius: 4px;
+            background: #ffeaea;
         }
     </style>
 </head>
 <body>
     <div class="app-container">
+        <!-- 学校图标 -->
+        <div class="school-logo" id="school-logo">
+            <img src="./xupt.png" alt="西安邮电大学校徽">
+        </div>
+
         <!-- 页面1：选择目标教室 -->
         <div class="page active" id="page1">
             <div class="page-title">
                 <h1>欢迎来到</h1>
-                <h1>西安邮电大学逸</h1>
-                <h1>夫教学楼</h1>
+                <h1>西安邮电大学逸夫教学楼</h1>
                 <p>选择您要去的教室：</p>
             </div>
             <div class="picker-container">
+                <!-- 第一列：教室类型 (FZ/FF) -->
                 <div class="picker-column">
-                    <label style="position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:500;z-index:3;">教室</label>
+                    <div class="picker-label">教室</div>
                     <select class="picker-select" id="target-type">
                         <option value="FZ" selected>FZ</option>
                         <option value="FF">FF</option>
                     </select>
                 </div>
+                <!-- 第二列：教室号第一位 (楼层/十位) -->
                 <div class="picker-column">
-                    <label style="position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:500;z-index:3;">楼层</label>
+                    <div class="picker-label">教室号</div>
                     <select class="picker-select" id="target-floor">
                         <option value="1">1</option>
                         <option value="2" selected>2</option>
@@ -303,10 +395,11 @@
                         <option value="8">8</option>
                     </select>
                 </div>
+                <!-- 第三列：教室号后两位 -->
                 <div class="picker-column">
-                    <label style="position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:500;z-index:3;">教室号</label>
+                    <div class="picker-label">教室号</div>
                     <select class="picker-select" id="target-num">
-                        <!-- 联动生成有效教室号 -->
+                        <!-- 联动生成后两位教室号 -->
                     </select>
                 </div>
             </div>
@@ -319,7 +412,7 @@
         <!-- 页面2：选择当前位置 -->
         <div class="page" id="page2">
             <div class="page-title">
-                <p style="text-align:left;font-size:22px;font-weight:bold;margin:0;">选择您当前位置：</p>
+                <p style="text-align:left;font-size:22px;font-weight:bold;margin:0;color:#1a508b;font-family:'Microsoft YaHei',sans-serif;">选择您当前位置：</p>
             </div>
             <div class="radio-group">
                 <div class="radio-item active" data-type="outdoor" id="radio-outdoor">室外</div>
@@ -328,14 +421,14 @@
             <p class="tip-text" id="indoor-tip" style="display:none;">选择离您最近的教室：</p>
             <div class="picker-container indoor-picker" id="indoor-picker" style="display:none;">
                 <div class="picker-column">
-                    <label style="position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:500;z-index:3;">教室</label>
+                    <div class="picker-label">教室</div>
                     <select class="picker-select" id="current-type">
                         <option value="FZ" selected>FZ</option>
                         <option value="FF">FF</option>
                     </select>
                 </div>
                 <div class="picker-column">
-                    <label style="position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:500;z-index:3;">楼层</label>
+                    <div class="picker-label">教室号</div>
                     <select class="picker-select" id="current-floor">
                         <option value="1">1</option>
                         <option value="2" selected>2</option>
@@ -348,9 +441,9 @@
                     </select>
                 </div>
                 <div class="picker-column">
-                    <label style="position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:500;z-index:3;">教室号</label>
+                    <div class="picker-label">教室号</div>
                     <select class="picker-select" id="current-num">
-                        <!-- 联动生成有效教室号 -->
+                        <!-- 联动生成后两位教室号 -->
                     </select>
                 </div>
             </div>
@@ -365,7 +458,6 @@
         <div class="page" id="page3">
             <div class="map-box">
                 <p class="map-title">您的当前位置楼层图：</p>
-                <!-- 动态加载当前位置平面图 自动匹配楼层区域 -->
                 <div id="current-map-container">
                     <div class="map-placeholder">
                         <p>当前位置楼层图占位</p>
@@ -379,7 +471,6 @@
 
             <div class="map-box">
                 <p class="map-title">您想到达的教室位置楼层图：</p>
-                <!-- 动态加载目标位置平面图 自动匹配楼层区域 -->
                 <div id="target-map-container">
                     <div class="map-placeholder">
                         <p>目标位置楼层图占位</p>
@@ -403,7 +494,6 @@
         <div class="page" id="page4">
             <div class="map-box">
                 <p class="map-title">当前位置</p>
-                <!-- 动态加载当前位置平面图 -->
                 <div id="result-current-map-container">
                     <div class="map-placeholder">
                         <p>当前位置楼层图占位</p>
@@ -413,7 +503,6 @@
 
             <div class="map-box">
                 <p class="map-title">到达位置</p>
-                <!-- 动态加载目标位置平面图 -->
                 <div id="result-target-map-container">
                     <div class="map-placeholder">
                         <p>目标位置楼层图占位</p>
@@ -436,62 +525,60 @@
     </div>
 
     <script>
-        // ===================== 核心配置 100%匹配原始楼层图 =====================
-        // FZ教室按原始PPT拆分为A/B/C/D四个精准区间，FF教室固定CD区域
+        // 核心配置 - 调整为后两位教室号的配置
         const classroomConfig = {
             FZ: {
                 2: [
-                    { start: 201, end: 210, area: 'A', elevator: 'A' },
-                    { start: 211, end: 221, area: 'C', elevator: 'C' },
-                    { start: 222, end: 231, area: 'D', elevator: 'D' },
-                    { start: 232, end: 242, area: 'B', elevator: 'B' },
+                    { start: 1, end: 10, area: 'A', elevator: 'A' },    // 201-210
+                    { start: 11, end: 21, area: 'C', elevator: 'C' },  // 211-221
+                    { start: 22, end: 31, area: 'D', elevator: 'D' },  // 222-231
+                    { start: 32, end: 42, area: 'B', elevator: 'B' },  // 232-242
                 ],
                 3: [
-                    { start: 301, end: 311, area: 'A', elevator: 'A' },
-                    { start: 312, end: 322, area: 'C', elevator: 'C' },
-                    { start: 323, end: 333, area: 'D', elevator: 'D' },
-                    { start: 334, end: 344, area: 'B', elevator: 'B' },
+                    { start: 1, end: 11, area: 'A', elevator: 'A' },    // 301-311
+                    { start: 12, end: 22, area: 'C', elevator: 'C' },  // 312-322
+                    { start: 23, end: 33, area: 'D', elevator: 'D' },  // 323-333
+                    { start: 34, end: 44, area: 'B', elevator: 'B' },  // 334-344
                 ],
                 4: [
-                    { start: 401, end: 411, area: 'A', elevator: 'A' },
-                    { start: 412, end: 422, area: 'C', elevator: 'C' },
-                    { start: 423, end: 433, area: 'D', elevator: 'D' },
-                    { start: 434, end: 444, area: 'B', elevator: 'B' },
+                    { start: 1, end: 11, area: 'A', elevator: 'A' },    // 401-411
+                    { start: 12, end: 22, area: 'C', elevator: 'C' },  // 412-422
+                    { start: 23, end: 33, area: 'D', elevator: 'D' },  // 423-433
+                    { start: 34, end: 44, area: 'B', elevator: 'B' },  // 434-444
                 ],
                 5: [
-                    { start: 501, end: 515, area: 'A', elevator: 'A' },
-                    { start: 516, end: 528, area: 'C', elevator: 'C' },
-                    { start: 529, end: 541, area: 'D', elevator: 'D' },
-                    { start: 542, end: 559, area: 'B', elevator: 'B' },
+                    { start: 1, end: 15, area: 'A', elevator: 'A' },    // 501-515
+                    { start: 16, end: 28, area: 'C', elevator: 'C' },  // 516-528
+                    { start: 29, end: 41, area: 'D', elevator: 'D' },  // 529-541
+                    { start: 42, end: 59, area: 'B', elevator: 'B' },  // 542-559
                 ],
                 6: [
-                    { start: 601, end: 615, area: 'A', elevator: 'A' },
-                    { start: 616, end: 628, area: 'C', elevator: 'C' },
-                    { start: 629, end: 641, area: 'D', elevator: 'D' },
-                    { start: 642, end: 661, area: 'B', elevator: 'B' },
+                    { start: 1, end: 15, area: 'A', elevator: 'A' },    // 601-615
+                    { start: 16, end: 28, area: 'C', elevator: 'C' },  // 616-628
+                    { start: 29, end: 41, area: 'D', elevator: 'D' },  // 629-641
+                    { start: 42, end: 61, area: 'B', elevator: 'B' },  // 642-661
                 ],
                 7: [
-                    { start: 701, end: 726, area: 'A', elevator: 'A' },
-                    { start: 727, end: 748, area: 'C', elevator: 'C' },
-                    { start: 749, end: 769, area: 'D', elevator: 'D' },
-                    { start: 770, end: 796, area: 'B', elevator: 'B' },
+                    { start: 1, end: 26, area: 'A', elevator: 'A' },    // 701-726
+                    { start: 27, end: 48, area: 'C', elevator: 'C' },  // 727-748
+                    { start: 49, end: 69, area: 'D', elevator: 'D' },  // 749-769
+                    { start: 70, end: 96, area: 'B', elevator: 'B' },  // 770-796
                 ],
                 8: [
-                    { start: 801, end: 809, area: 'A', elevator: 'A' },
-                    { start: 810, end: 818, area: 'C', elevator: 'C' },
-                    { start: 819, end: 827, area: 'D', elevator: 'D' },
-                    { start: 828, end: 831, area: 'B', elevator: 'B' },
+                    { start: 1, end: 9, area: 'A', elevator: 'A' },     // 801-809
+                    { start: 10, end: 18, area: 'C', elevator: 'C' },   // 810-818
+                    { start: 19, end: 27, area: 'D', elevator: 'D' },   // 819-827
+                    { start: 28, end: 31, area: 'B', elevator: 'B' },   // 828-831
                 ],
             },
-            // FF教室全楼层固定CD区域，完全匹配楼层图
             FF: {
-                2: [{ start: 201, end: 208, area: 'CD', elevator: ['C', 'D'] }],
-                3: [{ start: 301, end: 308, area: 'CD', elevator: ['C', 'D'] }],
-                4: [{ start: 401, end: 411, area: 'CD', elevator: ['C', 'D'] }],
-                5: [], // 5楼无FF教室，FF5xx自动匹配6楼
-                6: [{ start: 501, end: 511, area: 'CD', elevator: ['C', 'D'] }],
-                7: [{ start: 601, end: 610, area: 'CD', elevator: ['C', 'D'] }],
-                8: [{ start: 701, end: 706, area: 'CD', elevator: ['C', 'D'] }]
+                2: [{ start: 1, end: 8, area: 'CD', elevator: ['C', 'D'] }],    // 201-208
+                3: [{ start: 1, end: 8, area: 'CD', elevator: ['C', 'D'] }],    // 301-308
+                4: [{ start: 1, end: 11, area: 'CD', elevator: ['C', 'D'] }],   // 401-411
+                5: [],                                                         // 5楼无FF教室
+                6: [{ start: 1, end: 11, area: 'CD', elevator: ['C', 'D'] }],   // 601-611
+                7: [{ start: 1, end: 10, area: 'CD', elevator: ['C', 'D'] }],   // 701-710
+                8: [{ start: 1, end: 6, area: 'CD', elevator: ['C', 'D'] }]     // 801-806
             }
         };
 
@@ -509,340 +596,271 @@
         let targetClassroom = null;
         let currentPosition = null;
 
-        // ===================== 平面图路径匹配核心函数 =====================
+        // 平面图路径匹配函数
         function getMapImagePath(position) {
-            // 室外/1楼，统一返回1楼室外图
             if (position.type === 'outdoor' || position.floor === 1) {
                 return './floor_1_outdoor.png';
             }
             const floor = position.floor;
             let area = position.area?.toLowerCase() || '';
 
-            // 2、5、6、7、8楼全连通，统一用full图
             if ([2, 5, 6, 7, 8].includes(floor)) {
                 return `./floor_${floor}_full.png`;
             }
 
-            // 3、4楼分区域匹配
             if ([3, 4].includes(floor)) {
                 if (area === 'a') return `./floor_${floor}_a.png`;
                 if (area === 'b') return `./floor_${floor}_b.png`;
-                // CD区域/FF教室统一用cd图
                 if (area.includes('c') || area.includes('d')) return `./floor_${floor}_cd.png`;
             }
 
-            // 兜底返回空，显示占位图
             return '';
         }
 
-        // 加载平面图到指定容器
+        // 加载平面图
         function loadMapToContainer(containerId, position) {
             const container = document.getElementById(containerId);
             const imgPath = getMapImagePath(position);
-
-            // 清空容器
+            
             container.innerHTML = '';
-
-            // 无匹配路径，显示占位
-            if (!imgPath) {
-                container.innerHTML = `
+            
+            if (imgPath) {
+                const img = document.createElement('img');
+                img.src = imgPath;
+                img.className = 'map-img';
+                img.alt = `${position.floor}楼${position.area || ''}区域平面图`;
+                
+                img.onerror = function() {
+                    container.innerHTML = `
                         <div class="map-placeholder">
-                            <p>暂无对应楼层图</p>
-                            <p>请确认楼层和区域信息正确</p>
+                            <p>无法加载楼层图</p>
+                            <p>路径：${imgPath}</p>
                         </div>
                     `;
-                return;
-            }
-
-            // 创建图片元素，加载失败显示友好提示
-            const img = document.createElement('img');
-            img.src = imgPath;
-            img.className = 'map-img';
-            img.alt = `${position.floor}楼平面图`;
-
-            img.onerror = function () {
-                container.innerHTML = `
-                        <div class="map-placeholder">
-                            <p>图片加载失败</p>
-                            <p>请确认文件名：${imgPath}</p>
-                            <p>图片需和HTML文件放在同一文件夹</p>
-                        </div>
-                    `;
-            };
-
-            container.appendChild(img);
-        }
-
-        // ===================== 楼层-教室号联动核心逻辑 =====================
-        function generateNumOptions(start, end) {
-            let options = '';
-            for (let i = start; i <= end; i++) {
-                const num = i.toString().padStart(2, '0');
-                options += `<option value="${num}">${num}</option>`;
-            }
-            return options;
-        }
-
-        // 联动更新教室号滚轮，自动获取楼层最大最小教室号
-        function updateNumPicker(typeSelectId, floorSelectId, numSelectId) {
-            const type = document.getElementById(typeSelectId).value;
-            const floor = document.getElementById(floorSelectId).value;
-            const numSelect = document.getElementById(numSelectId);
-            let options = '';
-
-            if (type === 'FZ') {
-                const floorData = classroomConfig.FZ[floor];
-                if (floorData && floorData.length > 0) {
-                    // 获取该楼层FZ教室的最小和最大编号，生成完整区间
-                    const minStart = Math.min(...floorData.map(item => item.start));
-                    const maxEnd = Math.max(...floorData.map(item => item.end));
-                    options = generateNumOptions(minStart % 100, maxEnd % 100);
-                } else {
-                    options = generateNumOptions(1, 99);
-                }
-            } else if (type === 'FF') {
-                // FF教室按楼层生成对应区间
-                switch (floor) {
-                    case '2': options = generateNumOptions(1, 8); break;
-                    case '3': options = generateNumOptions(1, 8); break;
-                    case '4': options = generateNumOptions(1, 11); break;
-                    case '5': options = generateNumOptions(1, 11); break;
-                    case '6': options = generateNumOptions(1, 11); break;
-                    case '7': options = generateNumOptions(1, 10); break;
-                    case '8': options = generateNumOptions(1, 6); break;
-                    default: options = generateNumOptions(1, 99);
-                }
-            }
-
-            numSelect.innerHTML = options;
-        }
-
-        // 教室解析函数：FZ精准匹配区域，FF固定CD区域
-        function parseClassroom(type, floor, num) {
-            if (type !== 'FF') {
-                const fullNum = parseInt(`${floor}${num}`);
-                const floorData = classroomConfig[type]?.[parseInt(floor)];
-                if (!floorData) return null;
-                // 精准匹配FZ教室对应的区域
-                for (let item of floorData) {
-                    if (fullNum >= item.start && fullNum <= item.end) {
-                        return {
-                            type,
-                            floor: parseInt(floor),
-                            num,
-                            fullNum: `${type}${fullNum}`,
-                            area: item.area,
-                            elevator: item.elevator
-                        };
-                    }
-                }
-                return null;
-            }
-
-            // FF教室：遍历匹配，固定CD区域
-            const inputFullNum = parseInt(`${floor}${num}`);
-            for (let f = 2; f <= 8; f++) {
-                const ffFloorData = classroomConfig.FF[f];
-                if (!ffFloorData) continue;
-                for (let item of ffFloorData) {
-                    if (inputFullNum >= item.start && inputFullNum <= item.end) {
-                        return {
-                            type: 'FF',
-                            floor: f,
-                            num: num,
-                            fullNum: `FF${inputFullNum}`,
-                            area: 'CD',
-                            elevator: ['C', 'D']
-                        };
-                    }
-                }
-            }
-
-            // FF兜底匹配，强制CD区域
-            return {
-                type: 'FF',
-                floor: inputFullNum >= 701 ? 8 : inputFullNum >= 601 ? 7 : inputFullNum >= 501 ? 6 : inputFullNum >= 401 ? 4 : inputFullNum >= 301 ? 3 : 2,
-                num: num,
-                fullNum: `FF${inputFullNum}`,
-                area: 'CD',
-                elevator: ['C', 'D']
-            };
-        }
-
-        // 中转楼层获取
-        function getValidTransferFloors(currentElevator, targetElevator) {
-            const validFloors = [];
-            for (let f = 2; f <= 8; f++) {
-                const info = floorConfig[f];
-                if (info.type === 'full') { validFloors.push(f); continue; }
-                if (info.type === 'half') {
-                    if (Array.isArray(targetElevator)) {
-                        for (let te of targetElevator) {
-                            if (info.connect[currentElevator]?.includes(te)) { validFloors.push(f); break; }
-                        }
-                    } else {
-                        if (info.connect[currentElevator]?.includes(targetElevator)) validFloors.push(f);
-                    }
-                }
-            }
-            return [...new Set(validFloors)].sort((a, b) => a - b);
-        }
-
-        // 路线规划核心算法
-        function planRoute(current, target) {
-            if (current.type === 'indoor' && current.floor === target.floor && current.area === target.area) {
-                return '您当前已在目标教室所在区域，<span class="highlight">此教室就在附近</span>。';
-            }
-            if (current.type === 'outdoor') {
-                const elevatorText = Array.isArray(target.elevator) ? target.elevator.join('或') : target.elevator;
-                return `您可从1楼入口进入，直接乘坐<span class="highlight">${elevatorText}电梯</span>，到达<span class="highlight">${target.floor}楼</span>，出电梯即可到达目标教室所在区域。`;
-            }
-            const targetFloorInfo = floorConfig[target.floor];
-            let canDirect = false;
-            if (targetFloorInfo.type === 'full') canDirect = true;
-            else if (targetFloorInfo.type === 'half') {
-                const arriveArea = current.elevator;
-                if (Array.isArray(target.elevator)) {
-                    for (let te of target.elevator) {
-                        if (targetFloorInfo.connect[arriveArea].includes(te)) { canDirect = true; break; }
-                    }
-                } else {
-                    canDirect = targetFloorInfo.connect[arriveArea].includes(target.elevator);
-                }
-            } else if (targetFloorInfo.type === 'separate') {
-                canDirect = Array.isArray(target.elevator) ? target.elevator.includes(current.elevator) : current.elevator === target.elevator;
-            }
-            if (canDirect) {
-                if (current.floor === target.floor) {
-                    return `您可在当前<span class="highlight">${current.floor}楼</span>，直接步行前往目标教室所在的<span class="highlight">${target.area}区域</span>，<span class="highlight">此教室就在附近</span>。`;
-                } else {
-                    return `您可在当前楼层直接乘坐<span class="highlight">${current.elevator}电梯</span>，到达<span class="highlight">${target.floor}楼</span>，出电梯后步行前往目标教室所在的<span class="highlight">${target.area}区域</span>即可。`;
-                }
-            }
-            let transferFloors = [];
-            if (Array.isArray(target.elevator)) {
-                const cFloors = getValidTransferFloors(current.elevator, 'C');
-                const dFloors = getValidTransferFloors(current.elevator, 'D');
-                transferFloors = [...new Set([...cFloors, ...dFloors])].sort((a, b) => a - b);
+                };
+                
+                container.appendChild(img);
             } else {
-                transferFloors = getValidTransferFloors(current.elevator, target.elevator);
+                container.innerHTML = `
+                    <div class="map-placeholder">
+                        <p>暂无该区域平面图</p>
+                        <p>楼层：${position.floor} 区域：${position.area || '未知'}</p>
+                    </div>
+                `;
             }
-            const transferFloorStr = transferFloors.join('/');
-            const elevatorText = Array.isArray(target.elevator) ? target.elevator.join('或') : target.elevator;
-            return `您当前所在的<span class="highlight">${current.floor}楼${current.area}区域</span>，与目标<span class="highlight">${target.floor}楼${target.area}区域</span>无法直接互通，推荐路线：<br/><br/>先到达<span class="highlight">${transferFloorStr}楼</span>，在该楼层乘坐<span class="highlight">${elevatorText}电梯</span>，即可到达<span class="highlight">${target.floor}楼</span>目标教室所在区域。`;
         }
 
-        // 页面切换函数
-        function switchPage(fromId, toId) {
-            document.getElementById(fromId).classList.remove('active');
-            document.getElementById(toId).classList.add('active');
-            document.querySelectorAll('.error-text').forEach(el => el.innerText = '');
-            window.scrollTo(0, 0);
-            document.querySelector('.app-container').scrollTo(0, 0);
+        // 生成后两位教室号选项
+        function generateClassroomNumbers(typeSelect, floorSelect, numSelect) {
+            const type = typeSelect.value;
+            const floor = floorSelect.value;
+            const config = classroomConfig[type]?.[floor] || [];
+            
+            numSelect.innerHTML = '';
+            
+            // 生成后两位教室号（补零显示）
+            config.forEach(item => {
+                for (let i = item.start; i <= item.end; i++) {
+                    const option = document.createElement('option');
+                    const displayNum = i < 10 ? `0${i}` : `${i}`; // 补零，如1→01，10→10
+                    option.value = i;
+                    option.textContent = displayNum;
+                    numSelect.appendChild(option);
+                }
+            });
+            
+            if (numSelect.options.length > 0) {
+                numSelect.selectedIndex = 0;
+            }
         }
 
-        // 页面初始化
-        window.onload = function () {
-            // 初始化教室号滚轮
-            updateNumPicker('target-type', 'target-floor', 'target-num');
-            updateNumPicker('current-type', 'current-floor', 'current-num');
+        // 页面切换逻辑
+        function switchPage(fromPageId, toPageId) {
+            document.getElementById(fromPageId).classList.remove('active');
+            document.getElementById(toPageId).classList.add('active');
+            
+            const logo = document.getElementById('school-logo');
+            if (toPageId === 'page1') {
+                logo.style.display = 'block';
+            } else {
+                logo.style.display = 'none';
+            }
+        }
 
-            // 目标教室联动监听
-            document.getElementById('target-type').addEventListener('change', () => {
-                updateNumPicker('target-type', 'target-floor', 'target-num');
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 目标教室选择器
+            const targetType = document.getElementById('target-type');
+            const targetFloor = document.getElementById('target-floor');
+            const targetNum = document.getElementById('target-num');
+            
+            // 当前教室选择器
+            const currentType = document.getElementById('current-type');
+            const currentFloor = document.getElementById('current-floor');
+            const currentNum = document.getElementById('current-num');
+            
+            // 初始化生成教室号
+            generateClassroomNumbers(targetType, targetFloor, targetNum);
+            generateClassroomNumbers(currentType, currentFloor, currentNum);
+            
+            // 联动事件
+            targetType.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
+            targetFloor.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
+            currentType.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
+            currentFloor.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
+            
+            // 室内/室外切换
+            const radioOutdoor = document.getElementById('radio-outdoor');
+            const radioIndoor = document.getElementById('radio-indoor');
+            const indoorTip = document.getElementById('indoor-tip');
+            const indoorPicker = document.getElementById('indoor-picker');
+            
+            radioOutdoor.addEventListener('click', function() {
+                radioOutdoor.classList.add('active');
+                radioIndoor.classList.remove('active');
+                indoorTip.style.display = 'none';
+                indoorPicker.style.display = 'none';
             });
-            document.getElementById('target-floor').addEventListener('change', () => {
-                updateNumPicker('target-type', 'target-floor', 'target-num');
+            
+            radioIndoor.addEventListener('click', function() {
+                radioIndoor.classList.add('active');
+                radioOutdoor.classList.remove('active');
+                indoorTip.style.display = 'block';
+                indoorPicker.style.display = 'flex';
             });
-
-            // 当前位置联动监听
-            document.getElementById('current-type').addEventListener('change', () => {
-                updateNumPicker('current-type', 'current-floor', 'current-num');
-            });
-            document.getElementById('current-floor').addEventListener('change', () => {
-                updateNumPicker('current-type', 'current-floor', 'current-num');
-            });
-
+            
             // 页面1下一步
-            document.getElementById('page1-next').addEventListener('click', () => {
-                const type = document.getElementById('target-type').value;
-                const floor = document.getElementById('target-floor').value;
-                const num = document.getElementById('target-num').value;
-                const classroom = parseClassroom(type, floor, num);
-                if (!classroom) {
-                    document.getElementById('page1-error').innerText = `该教室${type}${floor}${num}不存在，请重新选择`;
+            document.getElementById('page1-next').addEventListener('click', function() {
+                const type = targetType.value;
+                const floor = targetFloor.value;
+                const num = targetNum.value;
+                
+                if (!num) {
+                    document.getElementById('page1-error').textContent = '请选择有效的教室号';
                     return;
                 }
-                targetClassroom = classroom;
+                
+                // 拼接完整教室号
+                const fullNum = `${floor}${num.padStart(2, '0')}`;
+                const config = classroomConfig[type][floor].find(item => num >= item.start && num <= item.end);
+                
+                targetClassroom = {
+                    type,
+                    floor: parseInt(floor),
+                    num: parseInt(fullNum),
+                    area: config?.area || '',
+                    elevator: config?.elevator || ''
+                };
+                
+                document.getElementById('page1-error').textContent = '';
                 switchPage('page1', 'page2');
             });
-
-            // 室外/室内切换
-            document.querySelectorAll('.radio-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    const type = item.dataset.type;
-                    document.getElementById('indoor-tip').style.display = type === 'indoor' ? 'block' : 'none';
-                    document.getElementById('indoor-picker').style.display = type === 'indoor' ? 'flex' : 'none';
-                });
+            
+            // 页面2上一步
+            document.getElementById('page2-prev').addEventListener('click', function() {
+                switchPage('page2', 'page1');
             });
-
-            // 页面2上一步/下一步
-            document.getElementById('page2-prev').addEventListener('click', () => switchPage('page2', 'page1'));
-            document.getElementById('page2-next').addEventListener('click', () => {
-                const isOutdoor = document.getElementById('radio-outdoor').classList.contains('active');
-                if (isOutdoor) {
-                    currentPosition = { type: 'outdoor', floor: 1 };
-                    switchPage('page2', 'page3');
-                    renderPage3();
+            
+            // 页面2下一步
+            document.getElementById('page2-next').addEventListener('click', function() {
+                let position = {};
+                
+                if (radioOutdoor.classList.contains('active')) {
+                    position = {
+                        type: 'outdoor',
+                        floor: 1,
+                        area: 'outdoor',
+                        elevator: 'all'
+                    };
                 } else {
-                    const type = document.getElementById('current-type').value;
-                    const floor = document.getElementById('current-floor').value;
-                    const num = document.getElementById('current-num').value;
-                    const classroom = parseClassroom(type, floor, num);
-                    if (!classroom) {
-                        document.getElementById('page2-error').innerText = `该教室${type}${floor}${num}不存在，请重新选择`;
+                    const type = currentType.value;
+                    const floor = currentFloor.value;
+                    const num = currentNum.value;
+                    
+                    if (!num) {
+                        document.getElementById('page2-error').textContent = '请选择有效的教室号';
                         return;
                     }
-                    currentPosition = { type: 'indoor', ...classroom };
-                    switchPage('page2', 'page3');
-                    renderPage3();
+                    
+                    const fullNum = `${floor}${num.padStart(2, '0')}`;
+                    const config = classroomConfig[type][floor].find(item => num >= item.start && num <= item.end);
+                    
+                    position = {
+                        type: 'indoor',
+                        floor: parseInt(floor),
+                        num: parseInt(fullNum),
+                        area: config?.area || '',
+                        elevator: config?.elevator || ''
+                    };
                 }
-            });
-
-            // 页面3位置信息+平面图渲染
-            function renderPage3() {
-                // 渲染文字信息，精准显示区域
-                const currentTextEl = document.getElementById('current-info');
-                currentTextEl.innerText = currentPosition.type === 'outdoor' ? '室外一层' : `${currentPosition.floor}楼${currentPosition.area}区域`;
-                const targetTextEl = document.getElementById('target-info');
-                targetTextEl.innerText = `${targetClassroom.floor}楼${targetClassroom.area}区域`;
-
-                // 加载对应平面图
+                
+                currentPosition = position;
+                document.getElementById('page2-error').textContent = '';
+                
+                // 更新位置信息
+                document.getElementById('current-info').textContent = 
+                    position.type === 'outdoor' ? '室外一层' : `${position.floor}楼${position.area}区域`;
+                document.getElementById('target-info').textContent = 
+                    `${targetClassroom.floor}楼${targetClassroom.area}区域`;
+                
+                // 加载平面图
                 loadMapToContainer('current-map-container', currentPosition);
                 loadMapToContainer('target-map-container', targetClassroom);
-            }
-
-            // 页面3上一步/寻找路线
-            document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page2'));
-            document.getElementById('page3-plan').addEventListener('click', () => {
-                const route = planRoute(currentPosition, targetClassroom);
+                
+                switchPage('page2', 'page3');
+            });
+            
+            // 页面3上一步
+            document.getElementById('page3-prev').addEventListener('click', function() {
+                switchPage('page3', 'page2');
+            });
+            
+            // 页面3寻找路线
+            document.getElementById('page3-plan').addEventListener('click', function() {
+                let route = generateRoute(currentPosition, targetClassroom);
+                
                 document.getElementById('route-text').innerHTML = route;
-                // 加载结果页平面图
                 loadMapToContainer('result-current-map-container', currentPosition);
                 loadMapToContainer('result-target-map-container', targetClassroom);
+                
                 switchPage('page3', 'page4');
             });
-
-            // 页面4上一步/结束
-            document.getElementById('page4-prev').addEventListener('click', () => switchPage('page4', 'page3'));
-            document.getElementById('page4-end').addEventListener('click', () => {
+            
+            // 页面4上一步
+            document.getElementById('page4-prev').addEventListener('click', function() {
+                switchPage('page4', 'page3');
+            });
+            
+            // 页面4结束
+            document.getElementById('page4-end').addEventListener('click', function() {
                 targetClassroom = null;
                 currentPosition = null;
-                document.getElementById('radio-outdoor').click();
+                radioOutdoor.classList.add('active');
+                radioIndoor.classList.remove('active');
+                indoorTip.style.display = 'none';
+                indoorPicker.style.display = 'none';
+                
                 switchPage('page4', 'page1');
             });
+        });
+
+        // 路线生成函数
+        function generateRoute(current, target) {
+            if (current.type === 'outdoor') {
+                return `1. 从逸夫楼正门进入<br>2. 乘坐<span class="highlight">${target.elevator}</span>电梯/楼梯到达${target.floor}楼<br>3. 前往${target.area}区域，找到${target.type}${target.num}教室`;
+            }
+            
+            if (current.floor === target.floor) {
+                const floorType = floorConfig[current.floor].type;
+                
+                if (floorType === 'full' || (floorType === 'half' && floorConfig[current.floor].connect[current.area]?.includes(target.area))) {
+                    return `1. 从当前${current.area}区域直接前往<span class="highlight">${target.area}</span>区域<br>2. 找到${target.type}${target.num}教室`;
+                } else {
+                    return `1. 从当前${current.area}区域前往<span class="highlight">${current.elevator}</span>电梯/楼梯<br>2. 下到1楼后换乘${target.elevator}电梯/楼梯上${target.floor}楼<br>3. 前往${target.area}区域，找到${target.type}${target.num}教室`;
+                }
+            } else {
+                return `1. 从当前位置前往<span class="highlight">${current.elevator}</span>电梯/楼梯<br>2. 前往${target.floor}楼<br>3. 前往${target.area}区域，找到${target.type}${target.num}教室`;
+            }
         }
     </script>
 </body>
