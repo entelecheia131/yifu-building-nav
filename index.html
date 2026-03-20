@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>西邮逸夫楼教室引导</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background: #f0f7ff;
+            padding: 10px 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .app-container {
+            width: 95%;
+            max-width: 400px;
+            min-height: calc(100vh - 20px);
+            background: #ffffff;
+            border: 3px solid #2a6099;
+            border-radius: 30px;
+            padding: 30px 20px 40px 20px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(42, 96, 153, 0.15);
+        }
+
+        .school-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #e8f4fc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+            .school-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .page {
+            width: 100%;
+            display: none;
+            padding-top: 15px;
+        }
+
+            .page.active {
+                display: block;
+            }
+
+        .page-title {
+            text-align: center;
+            color: #1a508b;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            padding-top: 10px;
+        }
+
+            .page-title h1 {
+                font-size: 26px;
+                font-weight: bold;
+                margin-bottom: 5px;
+                letter-spacing: 2px;
+                font-family: "KaiTi", "STKaiti", serif;
+            }
+
+            .page-title p {
+                font-size: 18px;
+                font-weight: 500;
+                text-align: left;
+                margin-top: 20px;
+                color: #336699;
+                font-family: "Microsoft YaHei", sans-serif;
+            }
+
+        .picker-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 180px;
+            margin: 20px 0;
+            border: 1px solid #d1e7ff;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f8fbff;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+            .picker-container::after {
+                display: none;
+            }
+
+        .picker-column {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            border-right: 1px solid #e6f0ff;
+        }
+
+            .picker-column:last-child {
+                border-right: none;
+            }
+
+            .picker-column::before,
+            .picker-column::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: #2a6099;
+                z-index: 2;
+            }
+
+            .picker-column::before {
+                top: 70px;
+            }
+
+            .picker-column::after {
+                bottom: 70px;
+            }
+
+        .picker-label {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 500;
+            z-index: 3;
+            color: #1a508b;
+        }
+
+        .picker-select {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-size: 24px;
+            text-align: center;
+            background: transparent;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            padding: 70px 0;
+        }
+
+            .picker-select::-webkit-scrollbar {
+                display: none;
+            }
+
+            .picker-select option {
+                height: 40px;
+                line-height: 40px;
+                scroll-snap-align: center;
+                color: #4a7cad;
+            }
+
+                .picker-select option:checked {
+                    color: #1a508b;
+                    font-weight: bold;
+                    font-size: 26px;
+                }
+
+        .indoor-picker .picker-column {
+            background: #e8f5f9;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .radio-item {
+            width: 120px;
+            height: 50px;
+            border: 2px solid #2a6099;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+            background: #f8fbff;
+            transition: all 0.2s ease;
+            color: #1a508b;
+        }
+
+            .radio-item.active {
+                background: #e8f4fc;
+                border-color: #2a6099;
+                box-shadow: 0 2px 8px rgba(42, 96, 153, 0.2);
+            }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+            padding-bottom: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            height: 50px;
+            border: 2px solid #2a6099;
+            border-radius: 8px;
+            background: #e8f4fc;
+            color: #1a508b;
+            font-size: 22px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(42, 96, 153, 0.1);
+        }
+
+            .btn:active {
+                opacity: 0.95;
+                transform: scale(0.98);
+                background: #fff3cd;
+                color: #746000;
+                border-color: #2a6099;
+                box-shadow: 0 1px 2px rgba(220, 180, 40, 0.3);
+            }
+
+            .btn:hover {
+                background: #d1e7ff;
+                box-shadow: 0 3px 6px rgba(42, 96, 153, 0.15);
+            }
+
+        .map-box {
+            width: 100%;
+            border: 1px solid #d1e7ff;
+            border-radius: 12px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8fbff;
+            box-shadow: 0 2px 8px rgba(42, 96, 153, 0.08);
+        }
+
+        .map-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 180px;
+            background: #f5faff;
+            border: 1px dashed #99c2e8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6699cc;
+            font-size: 14px;
+        }
+
+        .map-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a508b;
+        }
+
+        .position-info {
+            font-size: 18px;
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #336699;
+        }
+
+            .position-info span {
+                color: #1a508b;
+                font-weight: bold;
+            }
+
+        .route-result {
+            margin: 20px 0;
+        }
+
+            .route-result h3 {
+                font-size: 22px;
+                margin-bottom: 10px;
+                color: #1a508b;
+                text-align: center;
+            }
+
+        .route-text {
+            border: 2px solid #2a6099;
+            border-radius: 8px;
+            padding: 18px;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-top: 15px;
+            background: #f8fbff;
+            color: #336699;
+        }
+
+            .route-text .highlight {
+                background: #d1e7ff;
+                color: #1a508b;
+                font-weight: bold;
+                padding: 3px 6px;
+                border-radius: 4px;
+            }
+
+        .tip-text {
+            color: #6699cc;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .error-text {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            padding: 5px;
+            border-radius: 4px;
+            background: #ffeaea;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="school-logo" id="school-logo">
+            <img src="./xupt.png" alt="西安邮电大学校徽">
+        </div>
+
+        <!-- 页面1：选择目标教室 -->
+        <div class="page active" id="page1">
+            <div class="page-title">
+                <h1>欢迎来到</h1>
+                <h1>西安邮电大学逸夫教学楼</h1>
+                <p>选择您要去的教室：</p>
+            </div>
+            <div class="picker-container">
+                <div class="picker-column">
+                    <div class="picker-label">教室</div>
+                    <select class="picker-select" id="target-type">
+                        <option value="FZ" selected>FZ</option>
+                        <option value="FF">FF</option>
+                    </select>
+                </div>
+                <div class="picker-column">
+                    <div class="picker-label">教室号</div>
+                    <select class="picker-select" id="target-floor">
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div class="picker-column">
+                    <div class="picker-label">教室号</div>
+                    <select class="picker-select" id="target-num">
+                        <!-- 联动生成后两位教室号 -->
+                    </select>
+                </div>
+            </div>
+            <p class="error-text" id="page1-error"></p>
+            <div class="btn-group">
+                <button class="btn" id="page1-next">下一步</button>
+            </div>
+        </div>
+
+        <!-- 页面2：选择当前位置 -->
+        <div class="page" id="page2">
+            <div class="page-title">
+                <p style="text-align:left;font-size:22px;font-weight:bold;margin:0;color:#1a508b;font-family:'Microsoft YaHei',sans-serif;">选择您当前位置：</p>
+            </div>
+            <div class="radio-group">
+                <div class="radio-item active" data-type="室外" id="radio-室外">室外</div>
+                <div class="radio-item" data-type="室内" id="radio-室内">室内</div>
+            </div>
+            <p class="tip-text" id="室内-tip" style="display:none;">选择离您最近的教室：</p>
+            <div class="picker-container indoor-picker" id="室内-picker" style="display:none;">
+                <div class="picker-column">
+                    <div class="picker-label">教室</div>
+                    <select class="picker-select" id="current-type">
+                        <option value="FZ" selected>FZ</option>
+                        <option value="FF">FF</option>
+                    </select>
+                </div>
+                <div class="picker-column">
+                    <div class="picker-label">教室号</div>
+                    <select class="picker-select" id="current-floor">
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div class="picker-column">
+                    <div class="picker-label">教室号</div>
+                    <select class="picker-select" id="current-num">
+                        <!-- 联动生成后两位教室号 -->
+                    </select>
+                </div>
+            </div>
+            <p class="error-text" id="page2-error"></p>
+            <div class="btn-group">
+                <button class="btn" id="page2-prev">上一步</button>
+                <button class="btn" id="page2-next">生成路线</button>
+            </div>
+        </div>
+
+        <!-- 页面3：结果页 -->
+        <div class="page" id="page3">
+            <div class="map-box">
+                <p class="map-title">您的当前位置楼层图：</p>
+                <div id="current-map-container">
+                    <div class="map-placeholder">
+                        <p>当前位置楼层图占位</p>
+                    </div>
+                </div>
+                <div class="position-info" id="current-position-text">
+                    您位于<span id="current-info">FZ601（离A电梯近）</span>
+                </div>
+            </div>
+
+            <div class="map-box">
+                <p class="map-title">您想到达的教室位置楼层图：</p>
+                <div id="target-map-container">
+                    <div class="map-placeholder">
+                        <p>目标位置楼层图占位</p>
+                    </div>
+                </div>
+                <div class="position-info" id="target-position-text">
+                    您要到达<span id="target-info">FZ241（实际2楼，离B电梯近）</span>
+                </div>
+            </div>
+
+            <div class="route-result">
+                <h3>已为您找到最合适路线：</h3>
+                <div class="route-text" id="route-text"></div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn" id="page3-prev">重新选择</button>
+                <button class="btn" id="page3-end">结束</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 100%匹配平面图的教室配置
+        const classroomConfig = {
+            FZ: {
+                1: [{ start: 1, end: 10, elevator: 'A' }],
+                2: [
+                    { start: 1, end: 10, elevator: 'A' },
+                    { start: 11, end: 21, elevator: 'C' },
+                    { start: 22, end: 31, elevator: 'D' },
+                    { start: 32, end: 42, elevator: 'B' },
+                ],
+                3: [
+                    { start: 1, end: 11, elevator: 'A' },
+                    { start: 12, end: 22, elevator: 'C' },
+                    { start: 23, end: 33, elevator: 'D' },
+                    { start: 34, end: 44, elevator: 'B' },
+                ],
+                4: [
+                    { start: 1, end: 11, elevator: 'A' },
+                    { start: 12, end: 22, elevator: 'C' },
+                    { start: 23, end: 33, elevator: 'D' },
+                    { start: 34, end: 44, elevator: 'B' },
+                ],
+                5: [
+                    { start: 1, end: 15, elevator: 'A' },
+                    { start: 16, end: 28, elevator: 'C' },
+                    { start: 29, end: 41, elevator: 'D' },
+                    { start: 42, end: 59, elevator: 'B' },
+                ],
+                6: [
+                    { start: 1, end: 15, elevator: 'A' },
+                    { start: 16, end: 28, elevator: 'C' },
+                    { start: 29, end: 41, elevator: 'D' },
+                    { start: 42, end: 61, elevator: 'B' },
+                ],
+                7: [
+                    { start: 1, end: 26, elevator: 'A' },
+                    { start: 27, end: 48, elevator: 'C' },
+                    { start: 49, end: 69, elevator: 'D' },
+                    { start: 70, end: 96, elevator: 'B' },
+                ],
+                8: [
+                    { start: 1, end: 9, elevator: 'A' },
+                    { start: 10, end: 18, elevator: 'C' },
+                    { start: 19, end: 27, elevator: 'D' },
+                    { start: 28, end: 31, elevator: 'B' },
+                ],
+            },
+            FF: {
+                1: [{ start: 1, end: 5, elevator: ['C', 'D'] }],
+                2: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
+                3: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
+                4: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
+                5: [{ start: 1, end: 11, elevator: ['C', 'D'] }], // 匹配平面图FF501-511
+                6: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
+                7: [{ start: 1, end: 10, elevator: ['C', 'D'] }],
+                8: [{ start: 1, end: 6, elevator: ['C', 'D'] }]
+            }
+        };
+
+        // FF教室号与实际楼层映射
+        const ffFloorMap = {
+            '1': 1, '2': 2, '3': 3, '4': 4, '5': 6, '6': 7, '7': 8, '8': 9
+        };
+
+        // 全联通楼层配置
+        const fullConnectFloors = new Set([2, 5, 6, 7, 8]);
+
+        let targetClassroom = null;
+        let currentPosition = null;
+
+        // 三列联动生成教室号
+        function generateClassroomNumbers(typeSelect, floorSelect, numSelect) {
+            const type = typeSelect.value;
+            const classNumFirst = floorSelect.value;
+            const config = classroomConfig[type][classNumFirst] || [];
+            numSelect.innerHTML = '';
+            config.forEach(item => {
+                for (let i = item.start; i <= item.end; i++) {
+                    const option = document.createElement('option');
+                    const displayNum = i < 10 ? `0${i}` : `${i}`;
+                    option.value = i;
+                    option.textContent = displayNum;
+                    numSelect.appendChild(option);
+                }
+            });
+            if (numSelect.options.length > 0) {
+                numSelect.selectedIndex = 0;
+            }
+        }
+
+        // 页面切换
+        function switchPage(fromPageId, toPageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(toPageId).classList.add('active');
+        }
+
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            const targetType = document.getElementById('target-type');
+            const targetFloor = document.getElementById('target-floor');
+            const targetNum = document.getElementById('target-num');
+            const currentType = document.getElementById('current-type');
+            const currentFloor = document.getElementById('current-floor');
+            const currentNum = document.getElementById('current-num');
+
+            // 初始化联动
+            generateClassroomNumbers(targetType, targetFloor, targetNum);
+            generateClassroomNumbers(currentType, currentFloor, currentNum);
+
+            // 联动事件
+            targetType.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
+            targetFloor.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
+            currentType.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
+            currentFloor.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
+
+            // 室内/室外切换
+            document.querySelectorAll('.radio-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('active'));
+                    el.classList.add('active');
+                    const isIndoor = el.dataset.type === '室内';
+                    document.getElementById('室内-tip').style.display = isIndoor ? 'block' : 'none';
+                    document.getElementById('室内-picker').style.display = isIndoor ? 'flex' : 'none';
+                });
+            });
+
+            // 页面1下一步
+            document.getElementById('page1-next').addEventListener('click', () => {
+                const type = targetType.value;
+                const first = targetFloor.value;
+                const num = targetNum.value;
+                const fullNum = `${first}${num.toString().padStart(2, '0')}`;
+                const sections = classroomConfig[type][first];
+                const room = sections.find(s => num >= s.start && num <= s.end);
+                const realFloor = type === 'FF' ? ffFloorMap[first] : parseInt(first);
+                const elevatorText = Array.isArray(room.elevator) ? room.elevator.join('/') : room.elevator;
+                targetClassroom = {
+                    type,
+                    code: `${type}${fullNum}`,
+                    realFloor,
+                    elevator: elevatorText
+                };
+                document.getElementById('page1-error').textContent = '';
+                switchPage('page1', 'page2');
+            });
+
+            // 页面2上一步
+            document.getElementById('page2-prev').addEventListener('click', () => {
+                switchPage('page2', 'page1');
+            });
+
+            // 页面2生成路线
+            document.getElementById('page2-next').addEventListener('click', () => {
+                const isOutdoor = document.querySelector('.radio-item.active').dataset.type === '室外';
+                if (isOutdoor) {
+                    currentPosition = { type: '室外', realFloor: 1, elevator: '所有' };
+                } else {
+                    const type = currentType.value;
+                    const first = currentFloor.value;
+                    const num = currentNum.value;
+                    const fullNum = `${first}${num.toString().padStart(2, '0')}`;
+                    const sections = classroomConfig[type][first];
+                    const room = sections.find(s => num >= s.start && num <= s.end);
+                    const realFloor = type === 'FF' ? ffFloorMap[first] : parseInt(first);
+                    const elevatorText = Array.isArray(room.elevator) ? room.elevator.join('/') : room.elevator;
+                    currentPosition = {
+                        type: '室内',
+                        code: `${type}${fullNum}`,
+                        realFloor,
+                        elevator: elevatorText
+                    };
+                }
+
+                // 位置显示文本
+                document.getElementById('current-info').textContent = isOutdoor ? `室外一层（离所有电梯近）` : `${currentPosition.code}（离${currentPosition.elevator}电梯近）`;
+                document.getElementById('target-info').textContent = `${targetClassroom.code}（实际${targetClassroom.realFloor}楼，离${targetClassroom.elevator}电梯近）`;
+
+                // 生成路线
+                const route = generateRoute(currentPosition, targetClassroom);
+                document.getElementById('route-text').innerHTML = route;
+                switchPage('page2', 'page3');
+            });
+
+            // 页面3按钮
+            document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page1'));
+            document.getElementById('page3-end').addEventListener('click', () => switchPage('page3', 'page1'));
+        });
+
+        // 修正后的路线生成逻辑
+        function generateRoute(current, target) {
+            const currFloor = current.realFloor;
+            const tgtFloor = target.realFloor;
+            const currElevator = current.elevator;
+            const tgtElevator = target.elevator;
+            const tgtCode = target.code;
+            const isTgtFloorFull = fullConnectFloors.has(tgtFloor);
+            const direction = currFloor > tgtFloor ? '下' : '上';
+
+            // 场景1：从室外出发
+            if (current.type === '室外') {
+                if (isTgtFloorFull) {
+                    return `您可从室外进入1楼大厅，乘坐<span class="highlight">任意电梯</span>到达<span class="highlight">${tgtFloor}楼</span>，本楼层全联通，步行到<span class="highlight">${tgtElevator}</span>电梯附近即可找到${tgtCode}。`;
+                } else {
+                    return `您可从室外进入1楼大厅，乘坐<span class="highlight">${tgtElevator}</span>电梯到达<span class="highlight">${tgtFloor}楼</span>，${tgtCode}就在电梯附近。`;
+                }
+            }
+
+            // 场景2：同楼层移动
+            if (currFloor === tgtFloor) {
+                const isCurrFloorFull = fullConnectFloors.has(currFloor);
+                if (isCurrFloorFull) {
+                    return `您当前已在${currFloor}楼，本楼层全联通，直接步行到<span class="highlight">${tgtElevator}</span>电梯附近，即可找到${tgtCode}。`;
+                } else {
+                    return `您当前所在的${currFloor}楼区域不互通，需先乘坐<span class="highlight">${currElevator}</span>电梯到<span class="highlight">2/5/6/7/8楼</span>，换乘<span class="highlight">${tgtElevator}</span>电梯返回${tgtFloor}楼，即可找到${tgtCode}。`;
+                }
+            }
+
+            // 场景3：不同楼层移动
+            else {
+                // 目标楼层是全联通的
+                if (isTgtFloorFull) {
+                    return `您当前在${currFloor}楼，可乘坐<span class="highlight">任意电梯</span>${direction}至<span class="highlight">${tgtFloor}楼</span>，本楼层全联通，步行到<span class="highlight">${tgtElevator}</span>电梯附近即可找到${tgtCode}。`;
+                }
+                // 目标楼层是不联通的
+                else {
+                    return `您当前在${currFloor}楼，需先乘坐<span class="highlight">任意电梯</span>到<span class="highlight">2/5/6/7/8楼</span>，步行到<span class="highlight">${tgtElevator}</span>电梯口，乘坐该电梯${direction}至<span class="highlight">${tgtFloor}楼</span>，即可找到${tgtCode}。`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
