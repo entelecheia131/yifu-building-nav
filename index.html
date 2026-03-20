@@ -44,6 +44,7 @@
             overflow: hidden;
             border: 2px solid #e8f4fc;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 999;
         }
 
             .school-logo img {
@@ -78,14 +79,31 @@
                 font-family: "KaiTi", "STKaiti", serif;
             }
 
-            .page-title p {
-                font-size: 18px;
-                font-weight: 500;
-                text-align: left;
-                margin-top: 20px;
-                color: #336699;
-                font-family: "Microsoft YaHei", sans-serif;
-            }
+        /* 重点修改1：页面2的标题样式，增加顶部内边距和底部外边距 */
+        #page2 .page-title p {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+            color: #1a508b;
+            font-family: 'Microsoft YaHei',sans-serif;
+            padding-top: 40px; /* 增加顶部内边距，远离顶部 */
+            margin-bottom: 30px; /* 增加底部外边距，远离下方按钮 */
+            text-align: left;
+        }
+
+        /* 重点修改2：页面3整体下移，解决和校徽重叠问题 */
+        #page3 {
+            padding-top: 80px !important; /* 大幅增加顶部内边距，远离校徽 */
+        }
+
+        .page-title p {
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            margin-top: 20px;
+            color: #336699;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
 
         .picker-container {
             display: flex;
@@ -375,21 +393,18 @@
                 <div class="picker-column">
                     <div class="picker-label">教室号</div>
                     <select class="picker-select" id="target-floor">
-                        <option value="1">1</option>
+                        <!-- 移除1，仅保留2-7 -->
                         <option value="2" selected>2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
                         <option value="7">7</option>
-                        <option value="8">8</option>
                     </select>
                 </div>
                 <div class="picker-column">
                     <div class="picker-label">教室号</div>
-                    <select class="picker-select" id="target-num">
-                        <!-- 联动生成后两位教室号 -->
-                    </select>
+                    <select class="picker-select" id="target-num"></select>
                 </div>
             </div>
             <p class="error-text" id="page1-error"></p>
@@ -398,10 +413,10 @@
             </div>
         </div>
 
-        <!-- 页面2：选择当前位置 -->
+        <!-- 页面2：选择当前位置（整体下移，解决重叠） -->
         <div class="page" id="page2">
             <div class="page-title">
-                <p style="text-align:left;font-size:22px;font-weight:bold;margin:0;color:#1a508b;font-family:'Microsoft YaHei',sans-serif;">选择您当前位置：</p>
+                <p>选择您当前位置：</p>
             </div>
             <div class="radio-group">
                 <div class="radio-item active" data-type="室外" id="radio-室外">室外</div>
@@ -419,21 +434,18 @@
                 <div class="picker-column">
                     <div class="picker-label">教室号</div>
                     <select class="picker-select" id="current-floor">
-                        <option value="1">1</option>
+                        <!-- 移除1，仅保留2-7 -->
                         <option value="2" selected>2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
                         <option value="7">7</option>
-                        <option value="8">8</option>
                     </select>
                 </div>
                 <div class="picker-column">
                     <div class="picker-label">教室号</div>
-                    <select class="picker-select" id="current-num">
-                        <!-- 联动生成后两位教室号 -->
-                    </select>
+                    <select class="picker-select" id="current-num"></select>
                 </div>
             </div>
             <p class="error-text" id="page2-error"></p>
@@ -443,7 +455,7 @@
             </div>
         </div>
 
-        <!-- 页面3：结果页 -->
+        <!-- 页面3：结果页（直接展示路线） -->
         <div class="page" id="page3">
             <div class="map-box">
                 <p class="map-title">您的当前位置楼层图：</p>
@@ -453,7 +465,7 @@
                     </div>
                 </div>
                 <div class="position-info" id="current-position-text">
-                    您位于<span id="current-info">FZ601（离A电梯近）</span>
+                    您位于<span id="current-info">FZ601</span>
                 </div>
             </div>
 
@@ -465,12 +477,13 @@
                     </div>
                 </div>
                 <div class="position-info" id="target-position-text">
-                    您要到达<span id="target-info">FZ241（实际2楼，离B电梯近）</span>
+                    您要到达<span id="target-info">FF506</span>
                 </div>
             </div>
 
+            <!-- 直接展示路线，无额外操作 -->
             <div class="route-result">
-                <h3>已为您找到最合适路线：</h3>
+                <h3>最优路线指引：</h3>
                 <div class="route-text" id="route-text"></div>
             </div>
 
@@ -482,10 +495,9 @@
     </div>
 
     <script>
-        // 100%匹配平面图的教室配置
+        // 核心配置：教室号→电梯映射（严格按规则）
         const classroomConfig = {
             FZ: {
-                1: [{ start: 1, end: 10, elevator: 'A' }],
                 2: [
                     { start: 1, end: 10, elevator: 'A' },
                     { start: 11, end: 21, elevator: 'C' },
@@ -521,38 +533,32 @@
                     { start: 27, end: 48, elevator: 'C' },
                     { start: 49, end: 69, elevator: 'D' },
                     { start: 70, end: 96, elevator: 'B' },
-                ],
-                8: [
-                    { start: 1, end: 9, elevator: 'A' },
-                    { start: 10, end: 18, elevator: 'C' },
-                    { start: 19, end: 27, elevator: 'D' },
-                    { start: 28, end: 31, elevator: 'B' },
-                ],
+                ]
             },
             FF: {
-                1: [{ start: 1, end: 5, elevator: ['C', 'D'] }],
                 2: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
                 3: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
                 4: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
-                5: [{ start: 1, end: 11, elevator: ['C', 'D'] }], // 匹配平面图FF501-511
+                5: [{ start: 1, end: 10, elevator: ['C', 'D'] }],
                 6: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
-                7: [{ start: 1, end: 10, elevator: ['C', 'D'] }],
-                8: [{ start: 1, end: 6, elevator: ['C', 'D'] }]
+                7: [{ start: 1, end: 10, elevator: ['C', 'D'] }]
             }
         };
 
-        // FF教室号与实际楼层映射
+        // FF教室号首数字 → 实际楼层映射（严格规则）
         const ffFloorMap = {
-            '1': 1, '2': 2, '3': 3, '4': 4, '5': 6, '6': 7, '7': 8, '8': 9
+            '2': 2, '3': 3, '4': 4, '5': 6, '6': 7, '7': 8
         };
 
-        // 全联通楼层配置
+        // 全联通楼层（可到达多个电梯的楼层）
         const fullConnectFloors = new Set([2, 5, 6, 7, 8]);
+        // 可到达C/D电梯的楼层文案（明确列出）
+        const connectFloorText = '2楼、5楼、6楼、7楼、8楼';
 
         let targetClassroom = null;
         let currentPosition = null;
 
-        // 三列联动生成教室号
+        // 生成教室号后两位选项
         function generateClassroomNumbers(typeSelect, floorSelect, numSelect) {
             const type = typeSelect.value;
             const classNumFirst = floorSelect.value;
@@ -578,6 +584,69 @@
             document.getElementById(toPageId).classList.add('active');
         }
 
+        // 获取教室信息（电梯、实际楼层）
+        function getClassroomInfo(type, numFirst, numLast) {
+            const num = parseInt(numLast);
+            const sections = classroomConfig[type][numFirst] || [];
+            const section = sections.find(s => num >= s.start && num <= s.end);
+            if (!section) return null;
+
+            // 计算实际楼层
+            let realFloor;
+            if (type === 'FF') {
+                realFloor = ffFloorMap[numFirst] || parseInt(numFirst);
+            } else {
+                realFloor = parseInt(numFirst);
+            }
+
+            return {
+                code: `${type}${numFirst}${num.toString().padStart(2, '0')}`,
+                realFloor: realFloor,
+                elevator: section.elevator, // 电梯（单个/数组）
+                elevatorStr: Array.isArray(section.elevator) ? section.elevator.join('/') : section.elevator
+            };
+        }
+
+        // 核心路线生成逻辑（严格按最新规则）
+        function generateRoute(current, target) {
+            // 场景1：室外出发（去掉"离XX电梯最近"）
+            if (current.type === '室外') {
+                const targetElevator = target.elevatorStr;
+                return `您当前在室外，请直接乘坐<span class="highlight">${targetElevator}</span>电梯上至${target.realFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
+            }
+
+            // 场景2：室内出发
+            const currElevator = current.elevatorStr;
+            const targetElevator = target.elevatorStr;
+            const currFloor = current.realFloor;
+            const targetFloor = target.realFloor;
+
+            // 同楼层判断
+            if (currFloor === targetFloor) {
+                if (fullConnectFloors.has(currFloor)) {
+                    return `您与目标教室在同一楼层且本楼层全联通，直接步行前往<span class="highlight">${target.code}</span>即可。`;
+                } else {
+                    return `您与目标教室在同一楼层但本楼层不联通，请在本楼层前往<span class="highlight">${targetElevator}</span>电梯区域，再上下楼前往<span class="highlight">${target.code}</span>。`;
+                }
+            }
+
+            // 不同楼层：同一电梯区域
+            if (currElevator === targetElevator ||
+                (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
+                (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
+                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，乘坐该电梯上至${target.realFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
+            }
+
+            // 不同楼层+不同电梯区域：判断当前楼层是否联通
+            if (fullConnectFloors.has(currFloor)) {
+                // 当前楼层全联通 → 直接在本楼层换电梯
+                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，在本楼层步行到<span class="highlight">${targetElevator}</span>电梯，乘坐该电梯上至${target.realFloor}楼，<span class="highlight">${target.code}</span>就在附近。`;
+            } else {
+                // 当前楼层不联通 → 明确列出可到达目标电梯的具体楼层
+                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，先前往能到达<span class="highlight">${targetElevator}</span>电梯的${connectFloorText}，再乘坐<span class="highlight">${targetElevator}</span>电梯上至${target.realFloor}楼，<span class="highlight">${target.code}</span>就在附近。`;
+            }
+        }
+
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function () {
             const targetType = document.getElementById('target-type');
@@ -587,11 +656,11 @@
             const currentFloor = document.getElementById('current-floor');
             const currentNum = document.getElementById('current-num');
 
-            // 初始化联动
+            // 初始化教室号选项（仅2-7）
             generateClassroomNumbers(targetType, targetFloor, targetNum);
             generateClassroomNumbers(currentType, currentFloor, currentNum);
 
-            // 联动事件
+            // 联动更新教室号
             targetType.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
             targetFloor.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
             currentType.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
@@ -608,109 +677,57 @@
                 });
             });
 
-            // 页面1下一步
+            // 页面1→页面2
             document.getElementById('page1-next').addEventListener('click', () => {
                 const type = targetType.value;
                 const first = targetFloor.value;
                 const num = targetNum.value;
-                const fullNum = `${first}${num.toString().padStart(2, '0')}`;
-                const sections = classroomConfig[type][first];
-                const room = sections.find(s => num >= s.start && num <= s.end);
-                const realFloor = type === 'FF' ? ffFloorMap[first] : parseInt(first);
-                const elevatorText = Array.isArray(room.elevator) ? room.elevator.join('/') : room.elevator;
-                targetClassroom = {
-                    type,
-                    code: `${type}${fullNum}`,
-                    realFloor,
-                    elevator: elevatorText
-                };
+                targetClassroom = getClassroomInfo(type, first, num);
+                if (!targetClassroom) {
+                    document.getElementById('page1-error').textContent = '请选择有效的教室号！';
+                    return;
+                }
                 document.getElementById('page1-error').textContent = '';
                 switchPage('page1', 'page2');
             });
 
-            // 页面2上一步
+            // 页面2→页面1
             document.getElementById('page2-prev').addEventListener('click', () => {
                 switchPage('page2', 'page1');
             });
 
-            // 页面2生成路线
+            // 页面2→页面3（直接生成路线）
             document.getElementById('page2-next').addEventListener('click', () => {
                 const isOutdoor = document.querySelector('.radio-item.active').dataset.type === '室外';
                 if (isOutdoor) {
-                    currentPosition = { type: '室外', realFloor: 1, elevator: '所有' };
+                    currentPosition = { type: '室外', realFloor: 1 };
                 } else {
                     const type = currentType.value;
                     const first = currentFloor.value;
                     const num = currentNum.value;
-                    const fullNum = `${first}${num.toString().padStart(2, '0')}`;
-                    const sections = classroomConfig[type][first];
-                    const room = sections.find(s => num >= s.start && num <= s.end);
-                    const realFloor = type === 'FF' ? ffFloorMap[first] : parseInt(first);
-                    const elevatorText = Array.isArray(room.elevator) ? room.elevator.join('/') : room.elevator;
-                    currentPosition = {
-                        type: '室内',
-                        code: `${type}${fullNum}`,
-                        realFloor,
-                        elevator: elevatorText
-                    };
+                    currentPosition = getClassroomInfo(type, first, num);
+                    if (!currentPosition) {
+                        document.getElementById('page2-error').textContent = '请选择有效的当前教室！';
+                        return;
+                    }
+                    currentPosition.type = '室内';
                 }
 
-                // 位置显示文本
-                document.getElementById('current-info').textContent = isOutdoor ? `室外一层（离所有电梯近）` : `${currentPosition.code}（离${currentPosition.elevator}电梯近）`;
-                document.getElementById('target-info').textContent = `${targetClassroom.code}（实际${targetClassroom.realFloor}楼，离${targetClassroom.elevator}电梯近）`;
+                // 填充位置信息
+                document.getElementById('current-info').textContent = isOutdoor ? '室外' : currentPosition.code;
+                document.getElementById('target-info').textContent = targetClassroom.code;
 
-                // 生成路线
+                // 生成并展示路线
                 const route = generateRoute(currentPosition, targetClassroom);
                 document.getElementById('route-text').innerHTML = route;
+
                 switchPage('page2', 'page3');
             });
 
-            // 页面3按钮
+            // 页面3返回/结束
             document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page1'));
             document.getElementById('page3-end').addEventListener('click', () => switchPage('page3', 'page1'));
         });
-
-        // 修正后的路线生成逻辑
-        function generateRoute(current, target) {
-            const currFloor = current.realFloor;
-            const tgtFloor = target.realFloor;
-            const currElevator = current.elevator;
-            const tgtElevator = target.elevator;
-            const tgtCode = target.code;
-            const isTgtFloorFull = fullConnectFloors.has(tgtFloor);
-            const direction = currFloor > tgtFloor ? '下' : '上';
-
-            // 场景1：从室外出发
-            if (current.type === '室外') {
-                if (isTgtFloorFull) {
-                    return `您可从室外进入1楼大厅，乘坐<span class="highlight">任意电梯</span>到达<span class="highlight">${tgtFloor}楼</span>，本楼层全联通，步行到<span class="highlight">${tgtElevator}</span>电梯附近即可找到${tgtCode}。`;
-                } else {
-                    return `您可从室外进入1楼大厅，乘坐<span class="highlight">${tgtElevator}</span>电梯到达<span class="highlight">${tgtFloor}楼</span>，${tgtCode}就在电梯附近。`;
-                }
-            }
-
-            // 场景2：同楼层移动
-            if (currFloor === tgtFloor) {
-                const isCurrFloorFull = fullConnectFloors.has(currFloor);
-                if (isCurrFloorFull) {
-                    return `您当前已在${currFloor}楼，本楼层全联通，直接步行到<span class="highlight">${tgtElevator}</span>电梯附近，即可找到${tgtCode}。`;
-                } else {
-                    return `您当前所在的${currFloor}楼区域不互通，需先乘坐<span class="highlight">${currElevator}</span>电梯到<span class="highlight">2/5/6/7/8楼</span>，换乘<span class="highlight">${tgtElevator}</span>电梯返回${tgtFloor}楼，即可找到${tgtCode}。`;
-                }
-            }
-
-            // 场景3：不同楼层移动
-            else {
-                // 目标楼层是全联通的
-                if (isTgtFloorFull) {
-                    return `您当前在${currFloor}楼，可乘坐<span class="highlight">任意电梯</span>${direction}至<span class="highlight">${tgtFloor}楼</span>，本楼层全联通，步行到<span class="highlight">${tgtElevator}</span>电梯附近即可找到${tgtCode}。`;
-                }
-                // 目标楼层是不联通的
-                else {
-                    return `您当前在${currFloor}楼，需先乘坐<span class="highlight">任意电梯</span>到<span class="highlight">2/5/6/7/8楼</span>，步行到<span class="highlight">${tgtElevator}</span>电梯口，乘坐该电梯${direction}至<span class="highlight">${tgtFloor}楼</span>，即可找到${tgtCode}。`;
-                }
-            }
-        }
     </script>
 </body>
 </html>
