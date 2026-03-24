@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>西邮逸夫楼教室引导</title>
     <!-- Font Awesome 6 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-
     <style>
         * {
             margin: 0;
@@ -29,7 +26,7 @@
             width: 92%;
             max-width: 400px;
             min-height: calc(100vh - 20px);
-            background-image: url('./images/yifu_bg.png');
+            background-image: url('yifu_bg.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -551,13 +548,11 @@
         }
     </style>
 </head>
-
 <body>
     <div class="app-container">
         <div class="school-logo" id="school-logo">
-            <img src="./xupt.png" alt="西安邮电大学校徽">
+            <img src="xupt.png" alt="西安邮电大学校徽">
         </div>
-
         <!-- 页面1：选择目标教室 -->
         <div class="page active" id="page1">
             <div class="page-title">
@@ -597,7 +592,6 @@
                 </button>
             </div>
         </div>
-
         <!-- 页面2：选择当前位置 -->
         <div class="page" id="page2">
             <div class="page-title">
@@ -647,7 +641,6 @@
                 </button>
             </div>
         </div>
-
         <!-- 页面3：结果页 -->
         <div class="page" id="page3">
             <div class="map-box">
@@ -662,7 +655,6 @@
                     <i class="fas fa-location-dot"></i> 您位于<span id="current-info">FZ301</span>
                 </div>
             </div>
-
             <div class="map-box">
                 <p class="map-title"><i class="fas fa-location-dot"></i> 您想到达的教室位置楼层图：</p>
                 <div id="target-map-container">
@@ -675,12 +667,10 @@
                     <i class="fas fa-flag-checkered"></i> 您要到达<span id="target-info">FZ540</span>
                 </div>
             </div>
-
             <div class="route-result">
                 <h3><i class="fas fa-map-signs"></i> 最优路线指引：</h3>
                 <div class="route-text" id="route-text"></div>
             </div>
-
             <div class="btn-group">
                 <button class="btn btn-secondary" id="page3-prev">
                     <i class="fas fa-redo"></i> 重新选择
@@ -691,9 +681,6 @@
             </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
-
     <script>
         const classroomConfig = {
             FZ: {
@@ -935,7 +922,7 @@
 
         function setMapImage(mapImg, mapPlaceholder, imageName) {
             if (imageName) {
-                mapImg.src = `images/${imageName}.png`;
+                mapImg.src = `${imageName}.png`;
                 mapImg.style.display = 'block';
                 mapPlaceholder.style.display = 'none';
 
@@ -946,7 +933,7 @@
                 };
             } else {
                 // 室外：显示室外图
-                mapImg.src = `images/floor_1_outdoor.png`;  // 改成你的室外图片路径
+                mapImg.src = `floor_1_outdoor.png`;
                 mapImg.style.display = 'block';
                 mapPlaceholder.style.display = 'none';
 
@@ -1042,11 +1029,6 @@
             document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page1'));
             document.getElementById('page3-end').addEventListener('click', () => switchPage('page3', 'page1'));
         });
-
-
-
-
     </script>
 </body>
-
 </html>
