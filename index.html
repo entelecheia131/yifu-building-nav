@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>西邮逸夫楼教室引导</title>
+    <!-- Font Awesome 6 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
     <style>
         * {
             margin: 0;
@@ -15,37 +20,48 @@
         html, body {
             width: 100%;
             min-height: 100vh;
-            background: #f0f7ff;
-            padding: 10px 0;
-            overflow-x: hidden;
-            overflow-y: auto;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #EFF2FA; /* 云朵色背景，与天空呼应 */
         }
 
+        /* 卡片容器 - 与背景融合 */
         .app-container {
-            width: 95%;
+            width: 92%;
             max-width: 400px;
             min-height: calc(100vh - 20px);
-            background: #ffffff;
-            border: 3px solid #2a6099;
-            border-radius: 30px;
+            background-image: url('./images/yifu_bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(239, 242, 250, 0.7); /* 云朵色半透蒙版 */
+            background-blend-mode: overlay;
+            border-radius: 28px;
             padding: 30px 20px 40px 20px;
-            margin: 0 auto;
+            margin: 10px auto;
             position: relative;
-            box-shadow: 0 8px 24px rgba(42, 96, 153, 0.15);
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(18, 49, 88, 0.12);
         }
 
         .school-logo {
             position: absolute;
             top: 20px;
             left: 20px;
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid #e8f4fc;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: white;
+            box-shadow: 0 4px 12px rgba(18, 49, 88, 0.15);
             z-index: 999;
+            transition: all 0.25s ease;
+            border: 2px solid rgba(52, 145, 207, 0.3);
         }
+
+            .school-logo:hover {
+                transform: scale(1.02);
+                box-shadow: 0 6px 16px rgba(18, 49, 88, 0.2);
+            }
 
             .school-logo img {
                 width: 100%;
@@ -56,114 +72,133 @@
         .page {
             width: 100%;
             display: none;
-            padding-top: 15px;
+            padding-top: 10px;
+            animation: fadeIn 0.3s ease-out;
         }
 
             .page.active {
                 display: block;
             }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 标题样式 */
         .page-title {
             text-align: center;
-            color: #1a508b;
-            margin-bottom: 25px;
-            line-height: 1.4;
+            margin-bottom: 28px;
             padding-top: 10px;
         }
 
             .page-title h1 {
-                font-size: 26px;
-                font-weight: bold;
-                margin-bottom: 5px;
-                letter-spacing: 2px;
+                font-size: 27px;
+                font-weight: 600;
+                margin-bottom: 6px;
+                letter-spacing: 1px;
+                color: #123158; /* 校徽深蓝 */
                 font-family: "KaiTi", "STKaiti", serif;
             }
 
-        /* 重点修改1：页面2的标题样式，增加顶部内边距和底部外边距 */
-        #page2 .page-title p {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 0;
-            color: #1a508b;
-            font-family: 'Microsoft YaHei',sans-serif;
-            padding-top: 40px; /* 增加顶部内边距，远离顶部 */
-            margin-bottom: 30px; /* 增加底部外边距，远离下方按钮 */
+                .page-title h1:first-child {
+                    font-size: 25px;
+                    font-weight: 600;
+                    color: #7B5E66; /* 大楼暖棕 */
+                }
+
+        #page1 .page-title p {
+            font-size: 16px; /* 改成你想要的字号 */
+            font-weight: 500; /* 加粗，600-700 都可以 */
+            margin: 10 0 10px 0;
+            padding-left: 10px;
+            border-left: 3px solid #3491CF;
+            line-height: 1.4;
             text-align: left;
+            color: #7B5E66; /* 大楼暖棕 */ /* 可选：改颜色 */
         }
 
-        /* 重点修改2：页面3整体下移，解决和校徽重叠问题 */
+        #page2 .page-title p {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0;
+            color: #123158;
+            padding-top: 36px;
+            margin-bottom: 20px;
+            text-align: left;
+            border-left: 3px solid #3491CF; /* 天空蓝装饰线 */
+            padding-left: 12px;
+        }
+
         #page3 {
-            padding-top: 80px !important; /* 大幅增加顶部内边距，远离校徽 */
+            padding-top: 65px !important;
         }
 
         .page-title p {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 500;
             text-align: left;
-            margin-top: 20px;
-            color: #336699;
-            font-family: "Microsoft YaHei", sans-serif;
+            margin-top: 16px;
+            color: #7B5E66;
         }
 
+        /* 图标样式 */
+        i {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .page-title h1 i {
+            color: #3491CF; /* 天空蓝 */
+            font-size: 1.1em;
+        }
+
+        .page-title p i {
+            color: #7B5E66;
+        }
+
+        /* 下拉选择器 */
         .picker-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            height: 180px;
-            margin: 20px 0;
-            border: 1px solid #d1e7ff;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #f8fbff;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-            position: relative;
+            margin: 16px 0 24px 0;
+            gap: 10px;
         }
-
-            .picker-container::after {
-                display: none;
-            }
 
         .picker-column {
             flex: 1;
-            height: 100%;
-            overflow: hidden;
+            height: 52px;
             position: relative;
-            border-right: 1px solid #e6f0ff;
+            background: white;
+            border: 1px solid #D4DCE8;
+            border-radius: 14px;
+            transition: all 0.2s ease;
         }
 
-            .picker-column:last-child {
-                border-right: none;
-            }
-
-            .picker-column::before,
-            .picker-column::after {
-                content: '';
-                position: absolute;
-                left: 0;
-                right: 0;
-                height: 2px;
-                background: #2a6099;
-                z-index: 2;
-            }
-
-            .picker-column::before {
-                top: 70px;
-            }
-
-            .picker-column::after {
-                bottom: 70px;
+            .picker-column:focus-within {
+                border-color: #3491CF;
+                box-shadow: 0 0 0 3px rgba(52, 145, 207, 0.15);
             }
 
         .picker-label {
             position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 18px;
+            top: -10px;
+            left: 12px;
+            font-size: 11px;
             font-weight: 500;
             z-index: 3;
-            color: #1a508b;
+            color: #7B5E66;
+            background: white;
+            padding: 0 6px;
+            border-radius: 10px;
+            pointer-events: none;
         }
 
         .picker-select {
@@ -171,204 +206,352 @@
             height: 100%;
             border: none;
             outline: none;
-            font-size: 24px;
+            font-size: 17px;
+            font-weight: 500;
             text-align: center;
             background: transparent;
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            padding: 70px 0;
+            cursor: pointer;
+            color: #123158;
+            padding: 0 28px 0 12px;
+            appearance: none;
+            -webkit-appearance: none;
         }
 
-            .picker-select::-webkit-scrollbar {
-                display: none;
-            }
-
             .picker-select option {
-                height: 40px;
-                line-height: 40px;
-                scroll-snap-align: center;
-                color: #4a7cad;
+                color: #123158;
+                font-size: 15px;
+                padding: 8px;
             }
 
                 .picker-select option:checked {
-                    color: #1a508b;
-                    font-weight: bold;
-                    font-size: 26px;
+                    color: #3491CF;
+                    font-weight: 600;
                 }
 
-        .indoor-picker .picker-column {
-            background: #e8f5f9;
+        /* 下拉箭头 */
+        .picker-column::after {
+            content: '▼';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: #7B5E66;
+            pointer-events: none;
+            transition: transform 0.2s linear;
         }
 
+        .picker-select:focus ~ .picker-column::after,
+        .picker-column:focus-within::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .indoor-picker {
+            margin-bottom: 0;
+        }
+
+            .indoor-picker .picker-column {
+                background: white;
+            }
+
+        /* 单选按钮组 */
         .radio-group {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .radio-item {
-            width: 120px;
-            height: 50px;
-            border: 2px solid #2a6099;
-            border-radius: 8px;
+            flex: 1;
+            height: 48px;
+            border: 1px solid #D4DCE8;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            gap: 8px;
+            font-size: 16px;
             font-weight: 500;
             cursor: pointer;
-            user-select: none;
-            background: #f8fbff;
+            background: white;
             transition: all 0.2s ease;
-            color: #1a508b;
+            color: #7B5E66;
         }
 
-            .radio-item.active {
-                background: #e8f4fc;
-                border-color: #2a6099;
-                box-shadow: 0 2px 8px rgba(42, 96, 153, 0.2);
+            .radio-item i {
+                font-size: 1em;
+                transition: all 0.2s ease;
             }
 
+            .radio-item:hover {
+                border-color: #3491CF;
+                background: rgba(52, 145, 207, 0.05);
+                transform: translateY(-1px);
+            }
+
+            .radio-item.active {
+                background: #3491CF; /* 天空蓝选中 */
+                border-color: #3491CF;
+                color: white;
+                box-shadow: 0 4px 12px rgba(52, 145, 207, 0.25);
+            }
+
+                .radio-item.active i {
+                    color: white;
+                }
+
+        /* 按钮组 */
         .btn-group {
             display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 20px;
-            padding-bottom: 10px;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
         }
 
         .btn {
-            flex: 1;
-            height: 50px;
-            border: 2px solid #2a6099;
-            border-radius: 8px;
-            background: #e8f4fc;
-            color: #1a508b;
-            font-size: 22px;
-            font-weight: 500;
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(42, 96, 153, 0.1);
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.3px;
         }
 
-            .btn:active {
-                opacity: 0.95;
+        /* 主按钮 - 校徽深蓝 */
+        .btn-primary {
+            background: #123158; /* 校徽深蓝 */
+            color: white;
+            box-shadow: 0 2px 8px rgba(18, 49, 88, 0.2);
+        }
+
+            .btn-primary i {
+                color: white;
+                transition: transform 0.2s ease;
+            }
+
+            .btn-primary:hover {
+                background: #1A4680;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(18, 49, 88, 0.25);
+            }
+
+                .btn-primary:hover i {
+                    transform: translateX(3px);
+                }
+
+            .btn-primary:active {
                 transform: scale(0.98);
-                background: #fff3cd;
-                color: #746000;
-                border-color: #2a6099;
-                box-shadow: 0 1px 2px rgba(220, 180, 40, 0.3);
             }
 
-            .btn:hover {
-                background: #d1e7ff;
-                box-shadow: 0 3px 6px rgba(42, 96, 153, 0.15);
-            }
-
-        .map-box {
-            width: 100%;
-            border: 1px solid #d1e7ff;
-            border-radius: 12px;
-            margin: 15px 0;
-            padding: 15px;
-            background: #f8fbff;
-            box-shadow: 0 2px 8px rgba(42, 96, 153, 0.08);
+        /* 次按钮 - 暖棕边框 */
+        .btn-secondary {
+            background: white;
+            color: #7B5E66;
+            border: 1px solid #D4DCE8;
         }
+
+            .btn-secondary i {
+                color: #7B5E66;
+                transition: all 0.2s ease;
+            }
+
+            .btn-secondary:hover {
+                background: #F8F9FC;
+                border-color: #3491CF;
+                color: #3491CF;
+                transform: translateY(-1px);
+            }
+
+                .btn-secondary:hover i {
+                    color: #3491CF;
+                }
+
+            .btn-secondary:active {
+                transform: scale(0.98);
+            }
+
+        /* 地图卡片 */
+        .map-box {
+            border-radius: 16px;
+            margin: 16px 0;
+            padding: 16px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+            .map-box:hover {
+                box-shadow: 0 4px 12px rgba(18, 49, 88, 0.08);
+                transform: translateY(-1px);
+            }
 
         .map-img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
-            display: block;
+            border-radius: 12px;
+            display: none;
             margin: 0 auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .map-placeholder {
             width: 100%;
-            height: 180px;
-            background: #f5faff;
-            border: 1px dashed #99c2e8;
-            border-radius: 8px;
+            height: 170px;
+            background: #F8F9FC;
+            border: 1px dashed #D4DCE8;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6699cc;
-            font-size: 14px;
+            color: #7B5E66;
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.5;
         }
 
+            .map-placeholder i {
+                color: #3491CF;
+                margin-right: 6px;
+            }
+
         .map-title {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #1a508b;
+            margin-bottom: 12px;
+            color: #123158;
+            letter-spacing: 0.3px;
         }
+
+            .map-title i {
+                color: #3491CF;
+                margin-right: 6px;
+            }
 
         .position-info {
             font-size: 18px;
-            margin: 10px 0;
-            line-height: 1.6;
-            color: #336699;
+            font-weight: 600;
+            margin: 12px 0 0;
+            line-height: 1.4;
+            color: #3491CF; /* 天空蓝高亮 */
+            padding: 8px 12px;
+            background: rgba(52, 145, 207, 0.05);
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeInText 0.2s ease-out;
         }
 
-            .position-info span {
-                color: #1a508b;
-                font-weight: bold;
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
             }
 
+            to {
+                opacity: 1;
+            }
+        }
+
+        .position-info i {
+            color: #3491CF;
+        }
+
+        .position-info span {
+            color: #3491CF;
+            font-weight: 700;
+        }
+
+        /* 路线结果 */
         .route-result {
             margin: 20px 0;
         }
 
             .route-result h3 {
-                font-size: 22px;
-                margin-bottom: 10px;
-                color: #1a508b;
+                font-size: 18px;
+                margin-bottom: 12px;
+                color: #123158;
                 text-align: center;
+                font-weight: 600;
             }
 
+                .route-result h3 i {
+                    color: #3491CF;
+                }
+
         .route-text {
-            border: 2px solid #2a6099;
-            border-radius: 8px;
+            border-radius: 14px;
             padding: 18px;
-            font-size: 18px;
-            line-height: 1.8;
-            margin-top: 15px;
-            background: #f8fbff;
-            color: #336699;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            background: white;
+            color: #123158;
+            animation: fadeInText 0.2s ease-out;
+            border: 1px solid #E8EDF3;
         }
 
             .route-text .highlight {
-                background: #d1e7ff;
-                color: #1a508b;
-                font-weight: bold;
-                padding: 3px 6px;
-                border-radius: 4px;
+                color: #3491CF;
+                font-weight: 700;
+                display: inline-block;
+            }
+
+        /* 辅助元素 */
+        .tip-text {
+            color: #7B5E66;
+            font-size: 13px;
+            margin: 8px 0;
+        }
+
+            .tip-text i {
+                color: #3491CF;
             }
 
         .tip-text {
-            color: #6699cc;
-            font-size: 14px;
-            margin: 5px 0;
+            color: #123158; /* 改成深蓝色，更醒目 */
+            font-size: 17px; /* 更大字号 */
+            font-weight: 600; /* 加粗 */
+            margin: 12px 0 27px 0; /* 增加上下间距 */
+            padding-left: 8px; /* 左边留点空间 */
+            border-left: 3px solid #3491CF; /* 加蓝线装饰，和上面统一 */
         }
 
         .error-text {
-            color: #e74c3c;
-            font-size: 14px;
+            color: #3491CF;
+            font-size: 13px;
             margin-top: 10px;
             text-align: center;
-            padding: 5px;
-            border-radius: 4px;
-            background: #ffeaea;
+            padding: 6px;
+            border-radius: 10px;
+            background: rgba(52, 145, 207, 0.05);
+        }
+
+        /* 加载动画 */
+        .btn-primary.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+            .btn-primary.loading i {
+                animation: rotate 0.8s linear infinite;
+            }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="app-container">
         <div class="school-logo" id="school-logo">
@@ -378,124 +561,140 @@
         <!-- 页面1：选择目标教室 -->
         <div class="page active" id="page1">
             <div class="page-title">
-                <h1>欢迎来到</h1>
+                <h1><i class="fas fa-school"></i> 欢迎来到</h1>
                 <h1>西安邮电大学逸夫教学楼</h1>
-                <p>选择您要去的教室：</p>
+                <p><i class="fas fa-chalkboard-user"></i> 选择您要去的教室：</p>
             </div>
             <div class="picker-container">
                 <div class="picker-column">
-                    <div class="picker-label">教室</div>
+                    <div class="picker-label"><i class="fas fa-tag"></i> 教室</div>
                     <select class="picker-select" id="target-type">
                         <option value="FZ" selected>FZ</option>
                         <option value="FF">FF</option>
                     </select>
                 </div>
                 <div class="picker-column">
-                    <div class="picker-label">教室号</div>
+                    <div class="picker-label"><i class="fas fa-layer-group"></i> 编号</div>
                     <select class="picker-select" id="target-floor">
-                        <!-- 移除1，仅保留2-7 -->
                         <option value="2" selected>2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
                         <option value="7">7</option>
+                        <option value="8">8</option>
                     </select>
                 </div>
                 <div class="picker-column">
-                    <div class="picker-label">教室号</div>
+                    <div class="picker-label"><i class="fas fa-hashtag"></i> 号数</div>
                     <select class="picker-select" id="target-num"></select>
                 </div>
             </div>
             <p class="error-text" id="page1-error"></p>
             <div class="btn-group">
-                <button class="btn" id="page1-next">下一步</button>
+                <button class="btn btn-primary" id="page1-next">
+                    <i class="fas fa-arrow-right"></i> 下一步
+                </button>
             </div>
         </div>
 
-        <!-- 页面2：选择当前位置（整体下移，解决重叠） -->
+        <!-- 页面2：选择当前位置 -->
         <div class="page" id="page2">
             <div class="page-title">
-                <p>选择您当前位置：</p>
+                <p><i class="fas fa-location-dot"></i> 选择您当前位置：</p>
             </div>
             <div class="radio-group">
-                <div class="radio-item active" data-type="室外" id="radio-室外">室外</div>
-                <div class="radio-item" data-type="室内" id="radio-室内">室内</div>
+                <div class="radio-item active" data-type="室外">
+                    <i class="fas fa-tree"></i> 室外
+                </div>
+                <div class="radio-item" data-type="室内">
+                    <i class="fas fa-building"></i> 室内
+                </div>
             </div>
-            <p class="tip-text" id="室内-tip" style="display:none;">选择离您最近的教室：</p>
+            <p class="tip-text" id="室内-tip" style="display:none;"><i class="fas fa-info-circle"></i> 选择离您最近的教室：</p>
             <div class="picker-container indoor-picker" id="室内-picker" style="display:none;">
                 <div class="picker-column">
-                    <div class="picker-label">教室</div>
+                    <div class="picker-label"><i class="fas fa-tag"></i> 教室</div>
                     <select class="picker-select" id="current-type">
                         <option value="FZ" selected>FZ</option>
                         <option value="FF">FF</option>
                     </select>
                 </div>
                 <div class="picker-column">
-                    <div class="picker-label">教室号</div>
+                    <div class="picker-label"><i class="fas fa-layer-group"></i> 编号</div>
                     <select class="picker-select" id="current-floor">
-                        <!-- 移除1，仅保留2-7 -->
                         <option value="2" selected>2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
                         <option value="7">7</option>
+                        <option value="8">8</option>
                     </select>
                 </div>
                 <div class="picker-column">
-                    <div class="picker-label">教室号</div>
+                    <div class="picker-label"><i class="fas fa-hashtag"></i> 号数</div>
                     <select class="picker-select" id="current-num"></select>
                 </div>
             </div>
             <p class="error-text" id="page2-error"></p>
             <div class="btn-group">
-                <button class="btn" id="page2-prev">上一步</button>
-                <button class="btn" id="page2-next">生成路线</button>
+                <button class="btn btn-secondary" id="page2-prev">
+                    <i class="fas fa-arrow-left"></i> 上一步
+                </button>
+                <button class="btn btn-primary" id="page2-next">
+                    <i class="fas fa-route"></i> 生成路线
+                </button>
             </div>
         </div>
 
-        <!-- 页面3：结果页（直接展示路线） -->
+        <!-- 页面3：结果页 -->
         <div class="page" id="page3">
             <div class="map-box">
-                <p class="map-title">您的当前位置楼层图：</p>
+                <p class="map-title"><i class="fas fa-map"></i> 您的当前位置楼层图：</p>
                 <div id="current-map-container">
-                    <div class="map-placeholder">
-                        <p>当前位置楼层图占位</p>
+                    <img id="current-map-img" class="map-img" src="" alt="当前位置平面图">
+                    <div id="current-map-placeholder" class="map-placeholder">
+                        <p><i class="fas fa-image"></i> 当前位置楼层图占位</p>
                     </div>
                 </div>
                 <div class="position-info" id="current-position-text">
-                    您位于<span id="current-info">FZ601</span>
+                    <i class="fas fa-location-dot"></i> 您位于<span id="current-info">FZ301</span>
                 </div>
             </div>
 
             <div class="map-box">
-                <p class="map-title">您想到达的教室位置楼层图：</p>
+                <p class="map-title"><i class="fas fa-location-dot"></i> 您想到达的教室位置楼层图：</p>
                 <div id="target-map-container">
-                    <div class="map-placeholder">
-                        <p>目标位置楼层图占位</p>
+                    <img id="target-map-img" class="map-img" src="" alt="目标位置平面图">
+                    <div id="target-map-placeholder" class="map-placeholder">
+                        <p><i class="fas fa-image"></i> 目标位置楼层图占位</p>
                     </div>
                 </div>
                 <div class="position-info" id="target-position-text">
-                    您要到达<span id="target-info">FF506</span>
+                    <i class="fas fa-flag-checkered"></i> 您要到达<span id="target-info">FZ540</span>
                 </div>
             </div>
 
-            <!-- 直接展示路线，无额外操作 -->
             <div class="route-result">
-                <h3>最优路线指引：</h3>
+                <h3><i class="fas fa-map-signs"></i> 最优路线指引：</h3>
                 <div class="route-text" id="route-text"></div>
             </div>
 
             <div class="btn-group">
-                <button class="btn" id="page3-prev">重新选择</button>
-                <button class="btn" id="page3-end">结束</button>
+                <button class="btn btn-secondary" id="page3-prev">
+                    <i class="fas fa-redo"></i> 重新选择
+                </button>
+                <button class="btn btn-primary" id="page3-end">
+                    <i class="fas fa-check"></i> 结束
+                </button>
             </div>
         </div>
     </div>
 
+    <script src="script.js"></script>
+
     <script>
-        // 核心配置：教室号→电梯映射（严格按规则）
         const classroomConfig = {
             FZ: {
                 2: [
@@ -533,32 +732,41 @@
                     { start: 27, end: 48, elevator: 'C' },
                     { start: 49, end: 69, elevator: 'D' },
                     { start: 70, end: 96, elevator: 'B' },
+                ],
+                8: [
+                    { start: 1, end: 9, elevator: 'A' },
+                    { start: 10, end: 18, elevator: 'C' },
+                    { start: 19, end: 27, elevator: 'D' },
+                    { start: 28, end: 31, elevator: 'B' },
                 ]
             },
             FF: {
                 2: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
                 3: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
                 4: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
-                5: [{ start: 1, end: 10, elevator: ['C', 'D'] }],
+                5: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
                 6: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
-                7: [{ start: 1, end: 10, elevator: ['C', 'D'] }]
+                7: [{ start: 1, end: 10, elevator: ['C', 'D'] }],
+                8: []
             }
         };
 
-        // FF教室号首数字 → 实际楼层映射（严格规则）
         const ffFloorMap = {
-            '2': 2, '3': 3, '4': 4, '5': 6, '6': 7, '7': 8
+            '2': 2,
+            '3': 3,
+            '4': 4,
+            '5': 6,
+            '6': 7,
+            '7': 8
         };
 
-        // 全联通楼层（可到达多个电梯的楼层）
         const fullConnectFloors = new Set([2, 5, 6, 7, 8]);
-        // 可到达C/D电梯的楼层文案（明确列出）
-        const connectFloorText = '2楼、5楼、6楼、7楼、8楼';
+        const connectFloorList = '2楼、5楼、6楼、7楼、8楼';
+        const connectFloorText = '2楼、5楼、6楼、7楼、8楼（可任选其一）';
 
         let targetClassroom = null;
         let currentPosition = null;
 
-        // 生成教室号后两位选项
         function generateClassroomNumbers(typeSelect, floorSelect, numSelect) {
             const type = typeSelect.value;
             const classNumFirst = floorSelect.value;
@@ -578,20 +786,17 @@
             }
         }
 
-        // 页面切换
         function switchPage(fromPageId, toPageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(toPageId).classList.add('active');
         }
 
-        // 获取教室信息（电梯、实际楼层）
         function getClassroomInfo(type, numFirst, numLast) {
             const num = parseInt(numLast);
             const sections = classroomConfig[type][numFirst] || [];
             const section = sections.find(s => num >= s.start && num <= s.end);
             if (!section) return null;
 
-            // 计算实际楼层
             let realFloor;
             if (type === 'FF') {
                 realFloor = ffFloorMap[numFirst] || parseInt(numFirst);
@@ -602,52 +807,159 @@
             return {
                 code: `${type}${numFirst}${num.toString().padStart(2, '0')}`,
                 realFloor: realFloor,
-                elevator: section.elevator, // 电梯（单个/数组）
+                elevator: section.elevator,
                 elevatorStr: Array.isArray(section.elevator) ? section.elevator.join('/') : section.elevator
             };
         }
 
-        // 核心路线生成逻辑（严格按最新规则）
         function generateRoute(current, target) {
-            // 场景1：室外出发（去掉"离XX电梯最近"）
-            if (current.type === '室外') {
-                const targetElevator = target.elevatorStr;
-                return `您当前在室外，请直接乘坐<span class="highlight">${targetElevator}</span>电梯上至${target.realFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
+            if (current.code === target.code) {
+                return `您当前就在<span class="highlight">${target.code}</span>，无需移动。`;
             }
 
-            // 场景2：室内出发
+            if (current.type === '室外') {
+                const targetElevator = target.elevatorStr;
+                return `您当前在室外，请直接乘坐<span class="highlight">${targetElevator}</span>电梯前往${target.realFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
+            }
+
             const currElevator = current.elevatorStr;
             const targetElevator = target.elevatorStr;
             const currFloor = current.realFloor;
             const targetFloor = target.realFloor;
+            const isCurrConnect = fullConnectFloors.has(currFloor);
+            const isTargetConnect = fullConnectFloors.has(targetFloor);
 
-            // 同楼层判断
             if (currFloor === targetFloor) {
-                if (fullConnectFloors.has(currFloor)) {
-                    return `您与目标教室在同一楼层且本楼层全联通，直接步行前往<span class="highlight">${target.code}</span>即可。`;
+                if (currElevator === targetElevator ||
+                    (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
+                    (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
+                    return `您要去的<span class="highlight">${target.code}</span>就在当前<span class="highlight">${current.code}</span>附近，直接步行到达即可。`;
                 } else {
-                    return `您与目标教室在同一楼层但本楼层不联通，请在本楼层前往<span class="highlight">${targetElevator}</span>电梯区域，再上下楼前往<span class="highlight">${target.code}</span>。`;
+                    if (!isCurrConnect) {
+                        return `您与目标教室在同一楼层但本楼层不连通，请先前往${connectFloorText}，换乘<span class="highlight">${targetElevator}</span>电梯后，再前往${target.realFloor}楼的<span class="highlight">${target.code}</span>。`;
+                    } else {
+                        return `您与目标教室在同一楼层且本楼层连通，可直接步行到<span class="highlight">${targetElevator}</span>电梯附近，再前往<span class="highlight">${target.code}</span>。`;
+                    }
                 }
             }
 
-            // 不同楼层：同一电梯区域
             if (currElevator === targetElevator ||
                 (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
                 (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
-                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，乘坐该电梯上至${target.realFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
+                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，直接乘坐该电梯前往${targetFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
             }
 
-            // 不同楼层+不同电梯区域：判断当前楼层是否联通
-            if (fullConnectFloors.has(currFloor)) {
-                // 当前楼层全联通 → 直接在本楼层换电梯
-                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，在本楼层步行到<span class="highlight">${targetElevator}</span>电梯，乘坐该电梯上至${target.realFloor}楼，<span class="highlight">${target.code}</span>就在附近。`;
+            if (isTargetConnect && !isCurrConnect) {
+                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，先乘坐该电梯前往${targetFloor}楼，再步行到<span class="highlight">${targetElevator}</span>电梯附近，即可到达<span class="highlight">${target.code}</span>。`;
+            } else if (!isTargetConnect && isCurrConnect) {
+                return `您当前所在楼层连通，可先步行到<span class="highlight">${targetElevator}</span>电梯附近，再乘坐该电梯前往${targetFloor}楼，<span class="highlight">${target.code}</span>就在附近。`;
+            } else if (!isTargetConnect && !isCurrConnect) {
+                return `您当前所在楼层和目标楼层均不连通，请先前往${connectFloorList}中的任意一层，换乘<span class="highlight">${targetElevator}</span>电梯后，再前往${targetFloor}楼的<span class="highlight">${target.code}</span>。`;
             } else {
-                // 当前楼层不联通 → 明确列出可到达目标电梯的具体楼层
-                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，先前往能到达<span class="highlight">${targetElevator}</span>电梯的${connectFloorText}，再乘坐<span class="highlight">${targetElevator}</span>电梯上至${target.realFloor}楼，<span class="highlight">${target.code}</span>就在附近。`;
+                return `您当前所在楼层和目标楼层均连通，有两种路线可选：<br>1. 在当前楼层步行到<span class="highlight">${targetElevator}</span>电梯附近，乘坐该电梯前往${targetFloor}楼；<br>2. 先乘坐<span class="highlight">${currElevator}</span>电梯前往${targetFloor}楼，再步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>两种路线均可到达<span class="highlight">${target.code}</span>。`;
             }
         }
 
-        // 页面初始化
+        // ==================== 图片加载功能 ====================
+
+        function getMapImageName(floor, zone) {
+            // 二楼统一使用 floor_2_full
+            if (floor === 2) {
+                return `floor_2_full`;
+            }
+
+            // 全联通楼层（5-8F）
+            if (fullConnectFloors.has(floor)) {
+                return `floor_${floor}_full`;
+            }
+
+            // 不连通楼层（3-4F）
+            if (zone === 'A') {
+                return `floor_${floor}_a`;
+            }
+            if (zone === 'B') {
+                return `floor_${floor}_b`;
+            }
+            // C区或D区都返回 cd 图
+            if (zone === 'C' || zone === 'D') {
+                return `floor_${floor}_cd`;
+            }
+
+            return `floor_${floor}_full`;
+        }
+
+        function getCurrentMapImage(current) {
+            // 室外：返回 null，显示室外占位符
+            if (current.type === '室外') {
+                return null;
+            }
+
+            const actualFloor = current.realFloor;
+
+            // FF教室特殊处理
+            if (current.type === 'FF') {
+                if (fullConnectFloors.has(actualFloor)) {
+                    return `floor_${actualFloor}_full`;
+                } else {
+                    return `floor_${actualFloor}_cd`;
+                }
+            }
+
+            // FZ教室：根据区间获取图片
+            let zone = current.elevatorStr;
+            if (zone.includes('/')) {
+                zone = zone.split('/')[0];
+            }
+            return getMapImageName(actualFloor, zone);
+        }
+
+        function getTargetMapImage(target) {
+            const actualFloor = target.realFloor;
+
+            // FF教室
+            if (target.type === 'FF') {
+                if (fullConnectFloors.has(actualFloor)) {
+                    return `floor_${actualFloor}_full`;
+                } else {
+                    return `floor_${actualFloor}_cd`;
+                }
+            }
+
+            // FZ教室
+            let zone = target.elevatorStr;
+            if (zone.includes('/')) {
+                zone = zone.split('/')[0];
+            }
+            return getMapImageName(actualFloor, zone);
+        }
+
+        function setMapImage(mapImg, mapPlaceholder, imageName) {
+            if (imageName) {
+                mapImg.src = `images/${imageName}.png`;
+                mapImg.style.display = 'block';
+                mapPlaceholder.style.display = 'none';
+
+                mapImg.onerror = function () {
+                    mapImg.style.display = 'none';
+                    mapPlaceholder.style.display = 'flex';
+                    mapPlaceholder.innerHTML = '<p>平面图加载失败<br>请参考现场指引</p>';
+                };
+            } else {
+                // 室外：显示室外图
+                mapImg.src = `images/floor_1_outdoor.png`;  // 改成你的室外图片路径
+                mapImg.style.display = 'block';
+                mapPlaceholder.style.display = 'none';
+
+                mapImg.onerror = function () {
+                    mapImg.style.display = 'none';
+                    mapPlaceholder.style.display = 'flex';
+                    mapPlaceholder.innerHTML = '<p>室外图加载失败<br>请从逸夫楼正门进入</p>';
+                };
+            }
+        }
+
+        // ==================== 页面初始化 ====================
+
         document.addEventListener('DOMContentLoaded', function () {
             const targetType = document.getElementById('target-type');
             const targetFloor = document.getElementById('target-floor');
@@ -656,17 +968,14 @@
             const currentFloor = document.getElementById('current-floor');
             const currentNum = document.getElementById('current-num');
 
-            // 初始化教室号选项（仅2-7）
             generateClassroomNumbers(targetType, targetFloor, targetNum);
             generateClassroomNumbers(currentType, currentFloor, currentNum);
 
-            // 联动更新教室号
             targetType.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
             targetFloor.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
             currentType.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
             currentFloor.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
 
-            // 室内/室外切换
             document.querySelectorAll('.radio-item').forEach(el => {
                 el.addEventListener('click', () => {
                     document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('active'));
@@ -677,7 +986,6 @@
                 });
             });
 
-            // 页面1→页面2
             document.getElementById('page1-next').addEventListener('click', () => {
                 const type = targetType.value;
                 const first = targetFloor.value;
@@ -691,16 +999,14 @@
                 switchPage('page1', 'page2');
             });
 
-            // 页面2→页面1
             document.getElementById('page2-prev').addEventListener('click', () => {
                 switchPage('page2', 'page1');
             });
 
-            // 页面2→页面3（直接生成路线）
             document.getElementById('page2-next').addEventListener('click', () => {
                 const isOutdoor = document.querySelector('.radio-item.active').dataset.type === '室外';
                 if (isOutdoor) {
-                    currentPosition = { type: '室外', realFloor: 1 };
+                    currentPosition = { type: '室外', realFloor: 1, code: '室外' };
                 } else {
                     const type = currentType.value;
                     const first = currentFloor.value;
@@ -713,21 +1019,34 @@
                     currentPosition.type = '室内';
                 }
 
-                // 填充位置信息
                 document.getElementById('current-info').textContent = isOutdoor ? '室外' : currentPosition.code;
                 document.getElementById('target-info').textContent = targetClassroom.code;
-
-                // 生成并展示路线
                 const route = generateRoute(currentPosition, targetClassroom);
                 document.getElementById('route-text').innerHTML = route;
+
+                // 加载平面图图片
+                const currentImg = document.getElementById('current-map-img');
+                const currentPlaceholder = document.getElementById('current-map-placeholder');
+                const targetImg = document.getElementById('target-map-img');
+                const targetPlaceholder = document.getElementById('target-map-placeholder');
+
+                const currentImageName = getCurrentMapImage(currentPosition);
+                const targetImageName = getTargetMapImage(targetClassroom);
+
+                setMapImage(currentImg, currentPlaceholder, currentImageName);
+                setMapImage(targetImg, targetPlaceholder, targetImageName);
 
                 switchPage('page2', 'page3');
             });
 
-            // 页面3返回/结束
             document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page1'));
             document.getElementById('page3-end').addEventListener('click', () => switchPage('page3', 'page1'));
         });
+
+
+
+
     </script>
 </body>
+
 </html>
