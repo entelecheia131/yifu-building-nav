@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>西邮逸夫楼教室引导</title>
     <!-- Font Awesome 6 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+    <link rel="stylesheet" href="style.css">
+
+   <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-
+        
         html, body {
             width: 100%;
             min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #EFF2FA; /* 云朵色背景，与天空呼应 */
+            background: #EFF2FA;  /* 云朵色背景，与天空呼应 */
         }
-
+        
         /* 卡片容器 - 与背景融合 */
         .app-container {
             width: 92%;
             max-width: 400px;
             min-height: calc(100vh - 20px);
-            background-image: url('yifu_bg.png');
+            background-image: url('./images/yifu_bg.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: rgba(239, 242, 250, 0.7); /* 云朵色半透蒙版 */
+            background-color: rgba(239, 242, 250, 0.7);  /* 云朵色半透蒙版 */
             background-blend-mode: overlay;
             border-radius: 28px;
             padding: 30px 20px 40px 20px;
@@ -39,7 +43,7 @@
             z-index: 1;
             box-shadow: 0 10px 30px rgba(18, 49, 88, 0.12);
         }
-
+        
         .school-logo {
             position: absolute;
             top: 20px;
@@ -54,72 +58,67 @@
             transition: all 0.25s ease;
             border: 2px solid rgba(52, 145, 207, 0.3);
         }
-
-            .school-logo:hover {
-                transform: scale(1.02);
-                box-shadow: 0 6px 16px rgba(18, 49, 88, 0.2);
-            }
-
-            .school-logo img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
+        .school-logo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(18, 49, 88, 0.2);
+        }
+        .school-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .page {
             width: 100%;
             display: none;
             padding-top: 10px;
             animation: fadeIn 0.3s ease-out;
         }
-
-            .page.active {
-                display: block;
-            }
-
+        
+        .page.active {
+            display: block;
+        }
+        
         @keyframes fadeIn {
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
         }
-
+        
         /* 标题样式 */
         .page-title {
             text-align: center;
             margin-bottom: 28px;
             padding-top: 10px;
         }
-
-            .page-title h1 {
-                font-size: 27px;
-                font-weight: 600;
-                margin-bottom: 6px;
-                letter-spacing: 1px;
-                color: #123158; /* 校徽深蓝 */
-                font-family: "KaiTi", "STKaiti", serif;
-            }
-
-                .page-title h1:first-child {
-                    font-size: 25px;
-                    font-weight: 600;
-                    color: #7B5E66; /* 大楼暖棕 */
-                }
-
+        
+        .page-title h1 {
+            font-size: 27px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            color: #123158;  /* 校徽深蓝 */
+            font-family: "KaiTi", "STKaiti", serif;
+        }
+        
+        .page-title h1:first-child {
+            font-size: 25px;
+            font-weight: 600;
+            color: #7B5E66;  /* 大楼暖棕 */
+        }
         #page1 .page-title p {
-            font-size: 16px; /* 改成你想要的字号 */
-            font-weight: 500; /* 加粗，600-700 都可以 */
+            font-size: 16px;      /* 改成你想要的字号 */
+            font-weight: 500;     /* 加粗，600-700 都可以 */
             margin: 10 0 10px 0;
             padding-left: 10px;
             border-left: 3px solid #3491CF;
             line-height: 1.4;
             text-align: left;
-            color: #7B5E66; /* 大楼暖棕 */ /* 可选：改颜色 */
+            color:#7B5E66;  /* 大楼暖棕 */     /* 可选：改颜色 */
         }
-
         #page2 .page-title p {
             font-size: 17px;
             font-weight: 600;
@@ -128,14 +127,14 @@
             padding-top: 36px;
             margin-bottom: 20px;
             text-align: left;
-            border-left: 3px solid #3491CF; /* 天空蓝装饰线 */
+            border-left: 3px solid #3491CF;  /* 天空蓝装饰线 */
             padding-left: 12px;
         }
-
+        
         #page3 {
             padding-top: 65px !important;
         }
-
+        
         .page-title p {
             font-size: 14px;
             font-weight: 500;
@@ -143,22 +142,22 @@
             margin-top: 16px;
             color: #7B5E66;
         }
-
+        
         /* 图标样式 */
         i {
             margin-right: 8px;
             vertical-align: middle;
         }
-
+        
         .page-title h1 i {
-            color: #3491CF; /* 天空蓝 */
+            color: #3491CF;  /* 天空蓝 */
             font-size: 1.1em;
         }
-
+        
         .page-title p i {
             color: #7B5E66;
         }
-
+        
         /* 下拉选择器 */
         .picker-container {
             display: flex;
@@ -168,7 +167,7 @@
             margin: 16px 0 24px 0;
             gap: 10px;
         }
-
+        
         .picker-column {
             flex: 1;
             height: 52px;
@@ -178,12 +177,12 @@
             border-radius: 14px;
             transition: all 0.2s ease;
         }
-
-            .picker-column:focus-within {
-                border-color: #3491CF;
-                box-shadow: 0 0 0 3px rgba(52, 145, 207, 0.15);
-            }
-
+        
+        .picker-column:focus-within {
+            border-color: #3491CF;
+            box-shadow: 0 0 0 3px rgba(52, 145, 207, 0.15);
+        }
+        
         .picker-label {
             position: absolute;
             top: -10px;
@@ -197,7 +196,7 @@
             border-radius: 10px;
             pointer-events: none;
         }
-
+        
         .picker-select {
             width: 100%;
             height: 100%;
@@ -213,18 +212,18 @@
             appearance: none;
             -webkit-appearance: none;
         }
-
-            .picker-select option {
-                color: #123158;
-                font-size: 15px;
-                padding: 8px;
-            }
-
-                .picker-select option:checked {
-                    color: #3491CF;
-                    font-weight: 600;
-                }
-
+        
+        .picker-select option {
+            color: #123158;
+            font-size: 15px;
+            padding: 8px;
+        }
+        
+        .picker-select option:checked {
+            color: #3491CF;
+            font-weight: 600;
+        }
+        
         /* 下拉箭头 */
         .picker-column::after {
             content: '▼';
@@ -237,27 +236,27 @@
             pointer-events: none;
             transition: transform 0.2s linear;
         }
-
+        
         .picker-select:focus ~ .picker-column::after,
         .picker-column:focus-within::after {
             transform: translateY(-50%) rotate(180deg);
         }
-
+        
         .indoor-picker {
             margin-bottom: 0;
         }
-
-            .indoor-picker .picker-column {
-                background: white;
-            }
-
+        
+        .indoor-picker .picker-column {
+            background: white;
+        }
+        
         /* 单选按钮组 */
         .radio-group {
             display: flex;
             gap: 12px;
             margin-bottom: 24px;
         }
-
+        
         .radio-item {
             flex: 1;
             height: 48px;
@@ -274,29 +273,29 @@
             transition: all 0.2s ease;
             color: #7B5E66;
         }
-
-            .radio-item i {
-                font-size: 1em;
-                transition: all 0.2s ease;
-            }
-
-            .radio-item:hover {
-                border-color: #3491CF;
-                background: rgba(52, 145, 207, 0.05);
-                transform: translateY(-1px);
-            }
-
-            .radio-item.active {
-                background: #3491CF; /* 天空蓝选中 */
-                border-color: #3491CF;
-                color: white;
-                box-shadow: 0 4px 12px rgba(52, 145, 207, 0.25);
-            }
-
-                .radio-item.active i {
-                    color: white;
-                }
-
+        
+        .radio-item i {
+            font-size: 1em;
+            transition: all 0.2s ease;
+        }
+        
+        .radio-item:hover {
+            border-color: #3491CF;
+            background: rgba(52, 145, 207, 0.05);
+            transform: translateY(-1px);
+        }
+        
+        .radio-item.active {
+            background: #3491CF;  /* 天空蓝选中 */
+            border-color: #3491CF;
+            color: white;
+            box-shadow: 0 4px 12px rgba(52, 145, 207, 0.25);
+        }
+        
+        .radio-item.active i {
+            color: white;
+        }
+        
         /* 按钮组 */
         .btn-group {
             display: flex;
@@ -304,7 +303,7 @@
             gap: 12px;
             margin-top: 24px;
         }
-
+        
         .btn {
             width: 100%;
             height: 52px;
@@ -320,60 +319,60 @@
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: 0.3px;
         }
-
+        
         /* 主按钮 - 校徽深蓝 */
         .btn-primary {
-            background: #123158; /* 校徽深蓝 */
+            background: #123158;  /* 校徽深蓝 */
             color: white;
             box-shadow: 0 2px 8px rgba(18, 49, 88, 0.2);
         }
-
-            .btn-primary i {
-                color: white;
-                transition: transform 0.2s ease;
-            }
-
-            .btn-primary:hover {
-                background: #1A4680;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(18, 49, 88, 0.25);
-            }
-
-                .btn-primary:hover i {
-                    transform: translateX(3px);
-                }
-
-            .btn-primary:active {
-                transform: scale(0.98);
-            }
-
+        
+        .btn-primary i {
+            color: white;
+            transition: transform 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #1A4680;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(18, 49, 88, 0.25);
+        }
+        
+        .btn-primary:hover i {
+            transform: translateX(3px);
+        }
+        
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+        
         /* 次按钮 - 暖棕边框 */
         .btn-secondary {
             background: white;
             color: #7B5E66;
             border: 1px solid #D4DCE8;
         }
-
-            .btn-secondary i {
-                color: #7B5E66;
-                transition: all 0.2s ease;
-            }
-
-            .btn-secondary:hover {
-                background: #F8F9FC;
-                border-color: #3491CF;
-                color: #3491CF;
-                transform: translateY(-1px);
-            }
-
-                .btn-secondary:hover i {
-                    color: #3491CF;
-                }
-
-            .btn-secondary:active {
-                transform: scale(0.98);
-            }
-
+        
+        .btn-secondary i {
+            color: #7B5E66;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #F8F9FC;
+            border-color: #3491CF;
+            color: #3491CF;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary:hover i {
+            color: #3491CF;
+        }
+        
+        .btn-secondary:active {
+            transform: scale(0.98);
+        }
+        
         /* 地图卡片 */
         .map-box {
             border-radius: 16px;
@@ -383,12 +382,12 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             transition: all 0.2s ease;
         }
-
-            .map-box:hover {
-                box-shadow: 0 4px 12px rgba(18, 49, 88, 0.08);
-                transform: translateY(-1px);
-            }
-
+        
+        .map-box:hover {
+            box-shadow: 0 4px 12px rgba(18, 49, 88, 0.08);
+            transform: translateY(-1px);
+        }
+        
         .map-img {
             width: 100%;
             height: auto;
@@ -396,7 +395,7 @@
             display: none;
             margin: 0 auto;
         }
-
+        
         .map-placeholder {
             width: 100%;
             height: 170px;
@@ -411,12 +410,12 @@
             text-align: center;
             line-height: 1.5;
         }
-
-            .map-placeholder i {
-                color: #3491CF;
-                margin-right: 6px;
-            }
-
+        
+        .map-placeholder i {
+            color: #3491CF;
+            margin-right: 6px;
+        }
+        
         .map-title {
             font-size: 15px;
             font-weight: 600;
@@ -424,61 +423,60 @@
             color: #123158;
             letter-spacing: 0.3px;
         }
-
-            .map-title i {
-                color: #3491CF;
-                margin-right: 6px;
-            }
-
+        
+        .map-title i {
+            color: #3491CF;
+            margin-right: 6px;
+        }
+        
         .position-info {
             font-size: 18px;
             font-weight: 600;
             margin: 12px 0 0;
             line-height: 1.4;
-            color: #3491CF; /* 天空蓝高亮 */
+            color: #3491CF;  /* 天空蓝高亮 */
             padding: 8px 12px;
             background: rgba(52, 145, 207, 0.05);
             border-radius: 12px;
             text-align: center;
             animation: fadeInText 0.2s ease-out;
         }
-
+        
         @keyframes fadeInText {
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
         }
-
+        
         .position-info i {
             color: #3491CF;
         }
-
+        
         .position-info span {
             color: #3491CF;
             font-weight: 700;
         }
-
+        
         /* 路线结果 */
         .route-result {
             margin: 20px 0;
         }
-
-            .route-result h3 {
-                font-size: 18px;
-                margin-bottom: 12px;
-                color: #123158;
-                text-align: center;
-                font-weight: 600;
-            }
-
-                .route-result h3 i {
-                    color: #3491CF;
-                }
-
+        
+        .route-result h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #123158;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .route-result h3 i {
+            color: #3491CF;
+        }
+        
         .route-text {
             border-radius: 14px;
             padding: 18px;
@@ -490,33 +488,32 @@
             animation: fadeInText 0.2s ease-out;
             border: 1px solid #E8EDF3;
         }
-
-            .route-text .highlight {
-                color: #3491CF;
-                font-weight: 700;
-                display: inline-block;
-            }
-
+        
+        .route-text .highlight {
+            color: #3491CF;
+            font-weight: 700;
+            display: inline-block;
+        }
+        
         /* 辅助元素 */
         .tip-text {
             color: #7B5E66;
             font-size: 13px;
             margin: 8px 0;
         }
-
-            .tip-text i {
-                color: #3491CF;
-            }
-
-        .tip-text {
-            color: #123158; /* 改成深蓝色，更醒目 */
-            font-size: 17px; /* 更大字号 */
-            font-weight: 600; /* 加粗 */
-            margin: 12px 0 27px 0; /* 增加上下间距 */
-            padding-left: 8px; /* 左边留点空间 */
-            border-left: 3px solid #3491CF; /* 加蓝线装饰，和上面统一 */
+        
+        .tip-text i {
+            color: #3491CF;
         }
-
+        .tip-text {
+            color: #123158;       /* 改成深蓝色，更醒目 */
+            font-size: 17px;      /* 更大字号 */
+            font-weight: 600;     /* 加粗 */
+            margin: 12px 0 27px 0;  /* 增加上下间距 */
+            padding-left: 8px;    /* 左边留点空间 */
+            border-left: 3px solid #3491CF;  /* 加蓝线装饰，和上面统一 */
+        }
+        
         .error-text {
             color: #3491CF;
             font-size: 13px;
@@ -526,40 +523,336 @@
             border-radius: 10px;
             background: rgba(52, 145, 207, 0.05);
         }
-
+        
         /* 加载动画 */
         .btn-primary.loading {
             pointer-events: none;
             opacity: 0.8;
         }
-
-            .btn-primary.loading i {
-                animation: rotate 0.8s linear infinite;
-            }
-
+        
+        .btn-primary.loading i {
+            animation: rotate 0.8s linear infinite;
+        }
+        
         @keyframes rotate {
             from {
                 transform: rotate(0deg);
             }
-
             to {
                 transform: rotate(360deg);
             }
         }
-    </style>
+
+
+/* 快捷操作栏 */
+.quick-bar {
+    display: flex;
+    gap: 2px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.btn-quick {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #3491CF;
+    border-radius: 24px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3491CF;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-quick:hover {
+    background: #3491CF;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* 面板通用样式 */
+.panel {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    margin-bottom: 16px;
+    overflow: hidden;
+    animation: fadeIn 0.2s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.panel-header {
+    padding: 12px 16px;
+    background: #F8F9FC;
+    font-size: 14px;
+    font-weight: 600;
+    color: #123158;
+    border-bottom: 1px solid #E8EDF3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header i {
+    color: #3491CF;
+    margin-right: 8px;
+}
+
+.panel-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #999;
+    padding: 0 4px;
+    transition: color 0.2s;
+}
+
+.panel-close:hover {
+    color: #e74c3c;
+}
+
+.panel-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+/* 历史记录列表项 */
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #E8EDF3;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.history-item:hover {
+    background: #F0F7FF;
+}
+
+.history-info {
+    flex: 1;
+}
+
+.history-code {
+    font-size: 16px;
+    font-weight: 600;
+    color: #123158;
+    margin-bottom: 4px;
+}
+
+.history-code i {
+    color: #3491CF;
+    margin-right: 6px;
+}
+
+.history-time {
+    font-size: 11px;
+    color: #999;
+}
+
+.history-delete {
+    color: #ccc;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.history-delete:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* 常用教室列表项 */
+.favorite-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #E8EDF3;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.favorite-item:hover {
+    background: #F0F7FF;
+}
+
+.favorite-info {
+    flex: 1;
+}
+
+.favorite-code {
+    font-size: 16px;
+    font-weight: 600;
+    color: #123158;
+    margin-bottom: 4px;
+}
+
+.favorite-code i {
+    color: #FFB800;
+    margin-right: 6px;
+}
+
+.favorite-detail {
+    font-size: 12px;
+    color: #7B5E66;
+}
+
+.favorite-delete {
+    color: #ccc;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.favorite-delete:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* 添加常用按钮 */
+.panel-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #E8EDF3;
+    background: #FAFCFE;
+}
+
+.btn-add-favorite {
+    width: 100%;
+    background: rgba(52, 145, 207, 0.1);
+    border: 1px dashed #3491CF;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3491CF;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-add-favorite:hover {
+    background: rgba(52, 145, 207, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-add-favorite.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f5f5f5;
+    color: #999;
+    border-color: #ddd;
+}
+
+.btn-add-favorite.disabled:hover {
+    transform: none;
+    background: #f5f5f5;
+}
+
+/* 空状态 */
+.panel-empty {
+    padding: 32px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+
+.panel-empty i {
+    margin-right: 6px;
+    color: #ccc;
+}
+
+/* 提示消息 */
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    z-index: 1000;
+    animation: fadeInOut 2s ease;
+    pointer-events: none;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+}
+</style>
 </head>
+
 <body>
     <div class="app-container">
         <div class="school-logo" id="school-logo">
-            <img src="xupt.png" alt="西安邮电大学校徽">
+            <img src="./xupt.png" alt="西安邮电大学校徽">
         </div>
-        <!-- 页面1：选择目标教室 -->
-        <div class="page active" id="page1">
-            <div class="page-title">
-                <h1><i class="fas fa-school"></i> 欢迎来到</h1>
-                <h1>西安邮电大学逸夫教学楼</h1>
-                <p><i class="fas fa-chalkboard-user"></i> 选择您要去的教室：</p>
-            </div>
+
+       <!-- 页面1：选择目标教室 -->
+<div class="page active" id="page1">
+    <div class="page-title">
+        <h1><i class="fas fa-school"></i> 欢迎来到</h1>
+        <h1>西安邮电大学逸夫教学楼</h1>
+        <p><i class="fas fa-chalkboard-user"></i> 选择您要去的教室：</p>
+    </div>
+    
+    <!-- 快捷操作栏：历史记录 + 常用教室 -->
+    <div class="quick-bar">
+        <button class="btn-quick" id="historyBtn">
+            <i class="fas fa-history"></i> 历史记录
+        </button>
+        <button class="btn-quick" id="favoriteBtn">
+            <i class="fas fa-star"></i> 常去教室
+        </button>
+    </div>
+    
+    <!-- 历史记录面板 -->
+    <div class="panel" id="historyPanel" style="display:none;">
+        <div class="panel-header">
+            <i class="fas fa-history"></i> 最近搜索
+            <button class="panel-close" id="closeHistoryBtn">✕</button>
+        </div>
+        <div id="historyList" class="panel-list">
+            <p class="panel-empty">暂无历史记录</p>
+        </div>
+    </div>
+    
+    <!-- 常用教室面板 -->
+    <div class="panel" id="favoritePanel" style="display:none;">
+        <div class="panel-header">
+            <i class="fas fa-star"></i> 常用教室
+            <button class="panel-close" id="closeFavoriteBtn">✕</button>
+        </div>
+        <div id="favoriteList" class="panel-list favorite-list">
+            <!-- 常用教室列表会动态生成 -->
+        </div>
+        <div class="panel-footer">
+            <button class="btn-add-favorite" id="addFavoriteBtn">
+                <i class="fas fa-plus"></i> 添加当前教室为常用
+            </button>
+        </div>
+    </div>
+    
+    
             <div class="picker-container">
                 <div class="picker-column">
                     <div class="picker-label"><i class="fas fa-tag"></i> 教室</div>
@@ -585,13 +878,16 @@
                     <select class="picker-select" id="target-num"></select>
                 </div>
             </div>
-            <p class="error-text" id="page1-error"></p>
-            <div class="btn-group">
-                <button class="btn btn-primary" id="page1-next">
-                    <i class="fas fa-arrow-right"></i> 下一步
-                </button>
-            </div>
-        </div>
+    
+    <p class="error-text" id="page1-error"></p>
+    <div class="btn-group">
+        <button class="btn btn-primary" id="page1-next">
+            <i class="fas fa-arrow-right"></i> 下一步
+        </button>
+    </div>
+</div>
+          
+
         <!-- 页面2：选择当前位置 -->
         <div class="page" id="page2">
             <div class="page-title">
@@ -599,10 +895,10 @@
             </div>
             <div class="radio-group">
                 <div class="radio-item active" data-type="室外">
-                    <i class="fas fa-tree"></i> 室外
+                    <i class="fas fa-tree"></i> 楼外
                 </div>
                 <div class="radio-item" data-type="室内">
-                    <i class="fas fa-building"></i> 室内
+                    <i class="fas fa-building"></i> 楼内
                 </div>
             </div>
             <p class="tip-text" id="室内-tip" style="display:none;"><i class="fas fa-info-circle"></i> 选择离您最近的教室：</p>
@@ -641,6 +937,7 @@
                 </button>
             </div>
         </div>
+
         <!-- 页面3：结果页 -->
         <div class="page" id="page3">
             <div class="map-box">
@@ -655,6 +952,7 @@
                     <i class="fas fa-location-dot"></i> 您位于<span id="current-info">FZ301</span>
                 </div>
             </div>
+
             <div class="map-box">
                 <p class="map-title"><i class="fas fa-location-dot"></i> 您想到达的教室位置楼层图：</p>
                 <div id="target-map-container">
@@ -667,10 +965,12 @@
                     <i class="fas fa-flag-checkered"></i> 您要到达<span id="target-info">FZ540</span>
                 </div>
             </div>
+
             <div class="route-result">
                 <h3><i class="fas fa-map-signs"></i> 最优路线指引：</h3>
                 <div class="route-text" id="route-text"></div>
             </div>
+
             <div class="btn-group">
                 <button class="btn btn-secondary" id="page3-prev">
                     <i class="fas fa-redo"></i> 重新选择
@@ -681,354 +981,723 @@
             </div>
         </div>
     </div>
-    <script>
+
+    <script src="script.js"></script>
+<script>
+
         const classroomConfig = {
-            FZ: {
-                2: [
-                    { start: 1, end: 10, elevator: 'A' },
-                    { start: 11, end: 21, elevator: 'C' },
-                    { start: 22, end: 31, elevator: 'D' },
-                    { start: 32, end: 42, elevator: 'B' },
-                ],
-                3: [
-                    { start: 1, end: 11, elevator: 'A' },
-                    { start: 12, end: 22, elevator: 'C' },
-                    { start: 23, end: 33, elevator: 'D' },
-                    { start: 34, end: 44, elevator: 'B' },
-                ],
-                4: [
-                    { start: 1, end: 11, elevator: 'A' },
-                    { start: 12, end: 22, elevator: 'C' },
-                    { start: 23, end: 33, elevator: 'D' },
-                    { start: 34, end: 44, elevator: 'B' },
-                ],
-                5: [
-                    { start: 1, end: 15, elevator: 'A' },
-                    { start: 16, end: 28, elevator: 'C' },
-                    { start: 29, end: 41, elevator: 'D' },
-                    { start: 42, end: 59, elevator: 'B' },
-                ],
-                6: [
-                    { start: 1, end: 15, elevator: 'A' },
-                    { start: 16, end: 28, elevator: 'C' },
-                    { start: 29, end: 41, elevator: 'D' },
-                    { start: 42, end: 61, elevator: 'B' },
-                ],
-                7: [
-                    { start: 1, end: 26, elevator: 'A' },
-                    { start: 27, end: 48, elevator: 'C' },
-                    { start: 49, end: 69, elevator: 'D' },
-                    { start: 70, end: 96, elevator: 'B' },
-                ],
-                8: [
-                    { start: 1, end: 9, elevator: 'A' },
-                    { start: 10, end: 18, elevator: 'C' },
-                    { start: 19, end: 27, elevator: 'D' },
-                    { start: 28, end: 31, elevator: 'B' },
-                ]
-            },
-            FF: {
-                2: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
-                3: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
-                4: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
-                5: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
-                6: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
-                7: [{ start: 1, end: 10, elevator: ['C', 'D'] }],
-                8: []
-            }
-        };
+               FZ: {
+                 2: [
+                   { start: 1, end: 10, elevator: 'A' },
+                   { start: 11, end: 21, elevator: 'C' },
+                   { start: 22, end: 31, elevator: 'D' },
+                   { start: 32, end: 42, elevator: 'B' },
+                 ],
+                 3: [
+                   { start: 1, end: 11, elevator: 'A' },
+                   { start: 12, end: 22, elevator: 'C' },
+                   { start: 23, end: 33, elevator: 'D' },
+                   { start: 34, end: 44, elevator: 'B' },
+                 ],
+                 4: [
+                   { start: 1, end: 11, elevator: 'A' },
+                   { start: 12, end: 22, elevator: 'C' },
+                   { start: 23, end: 33, elevator: 'D' },
+                   { start: 34, end: 44, elevator: 'B' },
+                 ],
+                 5: [
+                   { start: 1, end: 15, elevator: 'A' },
+                   { start: 16, end: 28, elevator: 'C' },
+                   { start: 29, end: 41, elevator: 'D' },
+                   { start: 42, end: 59, elevator: 'B' },
+                 ],
+                 6: [
+                   { start: 1, end: 15, elevator: 'A' },
+                   { start: 16, end: 28, elevator: 'C' },
+                   { start: 29, end: 41, elevator: 'D' },
+                   { start: 42, end: 61, elevator: 'B' },
+                 ],
+                 7: [
+                   { start: 1, end: 26, elevator: 'A' },
+                   { start: 27, end: 48, elevator: 'C' },
+                   { start: 49, end: 69, elevator: 'D' },
+                   { start: 70, end: 96, elevator: 'B' },
+                 ],
+                 8: [
+                   { start: 1, end: 9, elevator: 'A' },
+                   { start: 10, end: 18, elevator: 'C' },
+                   { start: 19, end: 27, elevator: 'D' },
+                   { start: 28, end: 31, elevator: 'B' },
+                 ]
+               },
+               FF: {
+                 2: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
+                 3: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
+                 4: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
+                 5: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
+                 6: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
+                 7: [{ start: 1, end: 10, elevator: ['C', 'D'] }],
+                 8: []
+               }
+             };
+             
+             const ffFloorMap = {
+               '2': 2,
+               '3': 3,
+               '4': 4,
+               '5': 6,
+               '6': 7,
+               '7': 8
+             };
+             
+             const fullConnectFloors = new Set([2,5,6,7,8]);
+             const connectFloorList = '2楼、5楼、6楼、7楼、8楼';
+             const connectFloorText = '2楼、5楼、6楼、7楼、8楼（可任选其一）';
+             
+             let targetClassroom = null;
+             let currentPosition = null;
+             
+             function generateClassroomNumbers(typeSelect, floorSelect, numSelect) {
+               const type = typeSelect.value;
+               const classNumFirst = floorSelect.value;
+               const config = classroomConfig[type][classNumFirst] || [];
+               numSelect.innerHTML = '';
+               config.forEach(item => {
+                 for (let i = item.start; i <= item.end; i++) {
+                   const option = document.createElement('option');
+                   const displayNum = i < 10 ? `0${i}` : `${i}`;
+                   option.value = i;
+                   option.textContent = displayNum;
+                   numSelect.appendChild(option);
+                 }
+               });
+               if (numSelect.options.length > 0) {
+                 numSelect.selectedIndex = 0;
+               }
+             }
+             
+             function switchPage(fromPageId, toPageId) {
+               document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+               document.getElementById(toPageId).classList.add('active');
+             }
+             
+             function getClassroomInfo(type, numFirst, numLast) {
+               const num = parseInt(numLast);
+               const sections = classroomConfig[type][numFirst] || [];
+               const section = sections.find(s => num >= s.start && num <= s.end);
+               if (!section) return null;
+             
+               let realFloor;
+               if (type === 'FF') {
+                 realFloor = ffFloorMap[numFirst] || parseInt(numFirst);
+               } else {
+                 realFloor = parseInt(numFirst);
+               }
+             
+               return {
+                 code: `${type}${numFirst}${num.toString().padStart(2, '0')}`,
+                 type: type,
+                 realFloor: realFloor,
+                 elevator: section.elevator,
+                 elevatorStr: Array.isArray(section.elevator) ? section.elevator.join('/') : section.elevator
+               };
+             }
+             const isC = (e) => e === 'C';
+              const isD = (e) => e === 'D';
+             const isCD = (e) => e === 'C' || e === 'D';
+           function generateRoute(current, target) {
+    if (current.code === target.code) {
+        return `您当前就在<span class="highlight">${target.code}</span>，无需移动。`;
+    }
 
-        const ffFloorMap = {
-            '2': 2,
-            '3': 3,
-            '4': 4,
-            '5': 6,
-            '6': 7,
-            '7': 8
-        };
-
-        const fullConnectFloors = new Set([2, 5, 6, 7, 8]);
-        const connectFloorList = '2楼、5楼、6楼、7楼、8楼';
-        const connectFloorText = '2楼、5楼、6楼、7楼、8楼（可任选其一）';
-
-        let targetClassroom = null;
-        let currentPosition = null;
-
-        function generateClassroomNumbers(typeSelect, floorSelect, numSelect) {
-            const type = typeSelect.value;
-            const classNumFirst = floorSelect.value;
-            const config = classroomConfig[type][classNumFirst] || [];
-            numSelect.innerHTML = '';
-            config.forEach(item => {
-                for (let i = item.start; i <= item.end; i++) {
-                    const option = document.createElement('option');
-                    const displayNum = i < 10 ? `0${i}` : `${i}`;
-                    option.value = i;
-                    option.textContent = displayNum;
-                    numSelect.appendChild(option);
-                }
-            });
-            if (numSelect.options.length > 0) {
-                numSelect.selectedIndex = 0;
-            }
+    if (current.type === '室外') {
+        const targetElevator = target.elevatorStr;
+        const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
+        const directionText = direction ? `，${direction}` : '';
+        return `您当前在室外。<br>↓<br>请直接乘坐<span class="highlight">${targetElevator}</span>电梯前往${target.realFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
+    }   
+               const currElevator = current.elevatorStr;
+               const targetElevator = target.elevatorStr;
+               const currFloor = current.realFloor;
+               const targetFloor = target.realFloor;
+               const isCurrConnect = fullConnectFloors.has(currFloor);
+               const isTargetConnect = fullConnectFloors.has(targetFloor);
+             
+               if (currFloor === targetFloor) {
+                 if (currElevator === targetElevator || 
+                     (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
+                     (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
+                return `您要去的<span class="highlight">${target.code}</span>就在当前<span class="highlight">${current.code}</span>附近。<br>↓<br>直接步行到达即可。`;
+                 } else {
+                // 🆕 3-4楼的 C↔D 切换，直接步行
+                const isC = (e) => e === 'C';
+                const isD = (e) => e === 'D';
+                const isCDSwitch = (isC(currElevator) && isD(targetElevator)) || (isD(currElevator) && isC(targetElevator));
+        
+               if ((currFloor === 3 || currFloor === 4) && isCDSwitch) {
+              return `您与目标教室在同一楼层，C区和D区是连通的。<br>↓<br>可直接步行穿过阶梯教室所处走廊至<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。`;
         }
+        
+                   if (!isCurrConnect) {
+  const direction = (currElevator === 'A' || currElevator === 'B') ? '向左转' : (currElevator === 'C' || currElevator === 'D') ? '向右转' : '';
+        const directionText = direction ? `，${direction}` : '';
+                   return `您与目标教室在同一楼层但本楼层不连通。<br>↓<br>请先前往<span class="highlight">${connectFloorText}</span>。<br>↓<br>换乘<span class="highlight">${targetElevator}</span>电梯返回${target.realFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
 
-        function switchPage(fromPageId, toPageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(toPageId).classList.add('active');
-        }
-
-        function getClassroomInfo(type, numFirst, numLast) {
-            const num = parseInt(numLast);
-            const sections = classroomConfig[type][numFirst] || [];
-            const section = sections.find(s => num >= s.start && num <= s.end);
-            if (!section) return null;
-
-            let realFloor;
-            if (type === 'FF') {
-                realFloor = ffFloorMap[numFirst] || parseInt(numFirst);
-            } else {
-                realFloor = parseInt(numFirst);
-            }
-
-            return {
-                code: `${type}${numFirst}${num.toString().padStart(2, '0')}`,
-                realFloor: realFloor,
-                elevator: section.elevator,
-                elevatorStr: Array.isArray(section.elevator) ? section.elevator.join('/') : section.elevator
-            };
-        }
-
-        function generateRoute(current, target) {
-            if (current.code === target.code) {
-                return `您当前就在<span class="highlight">${target.code}</span>，无需移动。`;
-            }
-
-            if (current.type === '室外') {
-                const targetElevator = target.elevatorStr;
-                return `您当前在室外，请直接乘坐<span class="highlight">${targetElevator}</span>电梯前往${target.realFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
-            }
-
-            const currElevator = current.elevatorStr;
-            const targetElevator = target.elevatorStr;
-            const currFloor = current.realFloor;
-            const targetFloor = target.realFloor;
-            const isCurrConnect = fullConnectFloors.has(currFloor);
-            const isTargetConnect = fullConnectFloors.has(targetFloor);
-
-            if (currFloor === targetFloor) {
-                if (currElevator === targetElevator ||
-                    (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
-                    (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
-                    return `您要去的<span class="highlight">${target.code}</span>就在当前<span class="highlight">${current.code}</span>附近，直接步行到达即可。`;
-                } else {
-                    if (!isCurrConnect) {
-                        return `您与目标教室在同一楼层但本楼层不连通，请先前往${connectFloorText}，换乘<span class="highlight">${targetElevator}</span>电梯后，再前往${target.realFloor}楼的<span class="highlight">${target.code}</span>。`;
                     } else {
-                        return `您与目标教室在同一楼层且本楼层连通，可直接步行到<span class="highlight">${targetElevator}</span>电梯附近，再前往<span class="highlight">${target.code}</span>。`;
-                    }
-                }
-            }
-
-            if (currElevator === targetElevator ||
-                (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
-                (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
-                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，直接乘坐该电梯前往${targetFloor}楼，出电梯后<span class="highlight">${target.code}</span>就在您附近。`;
-            }
-
-            if (isTargetConnect && !isCurrConnect) {
-                return `您当前离<span class="highlight">${currElevator}</span>电梯最近，先乘坐该电梯前往${targetFloor}楼，再步行到<span class="highlight">${targetElevator}</span>电梯附近，即可到达<span class="highlight">${target.code}</span>。`;
-            } else if (!isTargetConnect && isCurrConnect) {
-                return `您当前所在楼层连通，可先步行到<span class="highlight">${targetElevator}</span>电梯附近，再乘坐该电梯前往${targetFloor}楼，<span class="highlight">${target.code}</span>就在附近。`;
+                   return `您与目标教室在同一楼层且本楼层连通。<br>↓<br>可直接步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可到达<span class="highlight">${target.code}</span>。`;
+                   }
+                 }
+               }
+             
+               if (currElevator === targetElevator || 
+                   (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
+                   (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
+                 const direction = (currElevator === 'A' || currElevator === 'B') ? '向左转' : (currElevator === 'C' || currElevator === 'D') ? '向右转' : '';
+        const directionText = direction ? `，${direction}` : '';
+        return `您当前离<span class="highlight">${currElevator}</span>电梯最近。<br>↓<br>直接乘坐该电梯前往${targetFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
+    }
+             
+               if (isTargetConnect && !isCurrConnect) {
+               const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
+        const directionText = direction ? `，${direction}` : '';
+        return `您当前离<span class="highlight">${currElevator}</span>电梯最近。<br>↓<br>请先乘坐该电梯前往${targetFloor}楼。<br>↓<br>步行至<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。`;
+               } else if (!isTargetConnect && isCurrConnect) {
+               const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
+        const directionText = direction ? `，${direction}` : '';
+        return `您当前所在楼层连通。<br>↓<br>请先步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>乘坐该电梯至${targetFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在附近。`;
+               }
+// 🆕 新增：3-4楼 C/D 跨楼层连通
+            else if ((currFloor === 3 || currFloor === 4) && (targetFloor === 3 || targetFloor === 4) && 
+            isCD(currElevator) && isCD(targetElevator)) {
+            return `您可乘坐<span class="highlight">${currElevator}</span>电梯到达${targetFloor}楼。<br>↓<br>右转，穿过FF教室所在走廊。<br>↓<br>到达${targetFloor}楼的<span class="highlight">${targetElevator}</span>区。<br>↓<br>依据墙面标识牌即可找到<span class="highlight">${target.code}</span>。`;
             } else if (!isTargetConnect && !isCurrConnect) {
-                return `您当前所在楼层和目标楼层均不连通，请先前往${connectFloorList}中的任意一层，换乘<span class="highlight">${targetElevator}</span>电梯后，再前往${targetFloor}楼的<span class="highlight">${target.code}</span>。`;
+                const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
+        const directionText = direction ? `，${direction}` : '';
+        return `您当前所在楼层和目标楼层均不连通。<br>↓<br>请先前往<span class="highlight">${connectFloorList}</span>中的任意一层。<br>↓<br>换乘<span class="highlight">${targetElevator}</span>电梯前往${targetFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在附近。`;
+             } else {
+    const direction1 = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
+    const directionText1 = direction1 ? `，${direction1}` : '';
+    return `您当前所在楼层和目标楼层均连通，有两种路线可选：<br><br>【路线一】<br>在当前楼层步行到<span class="highlight">${targetElevator}</span>电梯。<br>↓<br>乘坐该电梯前往${targetFloor}楼。<br>↓<br>出电梯后${directionText1}<span class="highlight">${target.code}</span>就在附近。<br><br>---<br><br>【路线二】<br>先乘坐<span class="highlight">${currElevator}</span>电梯前往${targetFloor}楼。<br>↓<br>再步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。<br><br>两种路线均可到达<span class="highlight">${target.code}</span>，您可任选其一。`;
+}
+             }
+             
+
+
+// ==================== 历史记录功能 ====================
+
+const MAX_HISTORY = 8;
+const MAX_FAVORITES = 5;
+const HISTORY_KEY = 'yifu_history';
+const FAVORITES_KEY = 'yifu_favorites';
+
+// 获取历史记录
+function getHistory() {
+    const history = localStorage.getItem(HISTORY_KEY);
+    return history ? JSON.parse(history) : [];
+}
+
+// 保存历史记录
+function saveHistory(history) {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+}
+
+// 添加历史记录（先入先出）
+function addToHistory(targetClassroom) {
+    if (!targetClassroom) return;
+    
+    const history = getHistory();
+    const newRecord = {
+        code: targetClassroom.code,
+        type: targetClassroom.type,
+        floor: targetClassroom.originalFloor || targetClassroom.realFloor,
+        time: new Date().toLocaleString(),
+        timestamp: Date.now()
+    };
+    
+    // 移除重复记录
+    const filtered = history.filter(item => item.code !== newRecord.code);
+    
+    // 添加到开头
+    filtered.unshift(newRecord);
+    
+    // 限制数量（先入先出）
+    const limited = filtered.slice(0, MAX_HISTORY);
+    
+    saveHistory(limited);
+    renderHistoryList();
+}
+
+// 删除历史记录
+function deleteHistoryItem(index) {
+    const history = getHistory();
+    history.splice(index, 1);
+    saveHistory(history);
+    renderHistoryList();
+}
+
+// ==================== 常用教室功能 ====================
+
+// 获取常用教室
+function getFavorites() {
+    const favorites = localStorage.getItem(FAVORITES_KEY);
+    return favorites ? JSON.parse(favorites) : [];
+}
+
+// 保存常用教室
+function saveFavorites(favorites) {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
+
+// 添加常用教室
+function addToFavorites(targetClassroom) {
+    if (!targetClassroom) return;
+    
+    const favorites = getFavorites();
+    
+    // 检查是否已存在
+    if (favorites.some(f => f.code === targetClassroom.code)) {
+        showToast('该教室已在常用列表中');
+        return false;
+    }
+    
+    // 检查数量限制
+    if (favorites.length >= MAX_FAVORITES) {
+        showToast(`最多只能添加 ${MAX_FAVORITES} 个常用教室，请先删除再添加`);
+        return false;
+    }
+    
+    const newFavorite = {
+        code: targetClassroom.code,
+        type: targetClassroom.type,
+        floor: targetClassroom.originalFloor || targetClassroom.realFloor,
+        addedTime: new Date().toLocaleString()
+    };
+    
+    favorites.push(newFavorite);
+    saveFavorites(favorites);
+    renderFavoriteList();
+    showToast(`已添加 ${targetClassroom.code} 到常用教室`);
+    return true;
+}
+
+// 删除常用教室
+function deleteFavoriteItem(index) {
+    const favorites = getFavorites();
+    const removed = favorites[index];
+    favorites.splice(index, 1);
+    saveFavorites(favorites);
+    renderFavoriteList();
+    showToast(`已删除 ${removed.code}`);
+}
+
+// 显示提示消息
+function showToast(message) {
+    // 移除已有的toast
+    const existingToast = document.querySelector('.toast-message');
+    if (existingToast) existingToast.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 2000);
+}
+
+// ==================== 渲染函数 ====================
+
+// 渲染历史记录列表
+function renderHistoryList() {
+    const history = getHistory();
+    const historyList = document.getElementById('historyList');
+    
+    if (!historyList) return;
+    
+    if (history.length === 0) {
+        historyList.innerHTML = '<p class="panel-empty"><i class="fas fa-inbox"></i> 暂无历史记录</p>';
+        return;
+    }
+    
+    historyList.innerHTML = history.map((item, index) => `
+        <div class="history-item" data-code="${item.code}" data-type="${item.type}" data-floor="${item.floor}">
+            <div class="history-info">
+                <div class="history-code">
+                    <i class="fas fa-chalkboard"></i> ${item.code}
+                </div>
+                <div class="history-time">
+                    <i class="fas fa-clock"></i> ${item.time}
+                </div>
+            </div>
+            <div class="history-delete" data-index="${index}">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+        </div>
+    `).join('');
+    
+    // 绑定点击事件
+    document.querySelectorAll('.history-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (e.target.closest('.history-delete')) return;
+            selectAndGoToNext(item.dataset);
+        });
+    });
+    
+    // 绑定删除按钮
+    document.querySelectorAll('.history-delete').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const index = parseInt(btn.dataset.index);
+            deleteHistoryItem(index);
+        });
+    });
+}
+
+// 渲染常用教室列表
+function renderFavoriteList() {
+    const favorites = getFavorites();
+    const favoriteList = document.getElementById('favoriteList');
+    const addBtn = document.getElementById('addFavoriteBtn');
+    
+    if (!favoriteList) return;
+    
+    if (favorites.length === 0) {
+        favoriteList.innerHTML = '<p class="panel-empty"><i class="fas fa-star"></i> 点击下方按钮添加常用教室</p>';
+    } else {
+        favoriteList.innerHTML = favorites.map((item, index) => `
+            <div class="favorite-item" data-code="${item.code}" data-type="${item.type}" data-floor="${item.floor}">
+                <div class="favorite-info">
+                    <div class="favorite-code">
+                        <i class="fas fa-star"></i> ${item.code}
+                    </div>
+                    <div class="favorite-detail">
+                        <i class="fas fa-layer-group"></i> ${item.floor}楼 · 
+                        ${item.type === 'FZ' ? '普通教室' : '阶梯教室'}
+                    </div>
+                </div>
+                <div class="favorite-delete" data-index="${index}">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // 绑定常用教室点击事件
+    document.querySelectorAll('.favorite-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (e.target.closest('.favorite-delete')) return;
+            selectAndGoToNext(item.dataset);
+        });
+    });
+    
+    // 绑定删除按钮
+    document.querySelectorAll('.favorite-delete').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const index = parseInt(btn.dataset.index);
+            deleteFavoriteItem(index);
+        });
+    });
+    
+    // 更新添加按钮状态
+    if (addBtn) {
+        if (favorites.length >= MAX_FAVORITES) {
+            addBtn.classList.add('disabled');
+            addBtn.innerHTML = `<i class="fas fa-ban"></i> 已达上限 (${MAX_FAVORITES}/${MAX_FAVORITES})`;
+        } else {
+            addBtn.classList.remove('disabled');
+            addBtn.innerHTML = `<i class="fas fa-plus"></i> 添加当前教室为常用 (${favorites.length}/${MAX_FAVORITES})`;
+        }
+    }
+}
+
+// 选择记录并跳转
+function selectAndGoToNext(data) {
+    const targetType = document.getElementById('target-type');
+    const targetFloor = document.getElementById('target-floor');
+    const targetNum = document.getElementById('target-num');
+    
+    const code = data.code;
+    const type = data.type;
+    const floor = data.floor;
+    const num = code.slice(-2);
+    
+    targetType.value = type;
+    targetFloor.value = floor;
+    
+    generateClassroomNumbers(targetType, targetFloor, targetNum);
+    
+    for (let i = 0; i < targetNum.options.length; i++) {
+        if (targetNum.options[i].value === num) {
+            targetNum.selectedIndex = i;
+            break;
+        }
+    }
+    
+    // 关闭面板
+    document.getElementById('historyPanel').style.display = 'none';
+    document.getElementById('favoritePanel').style.display = 'none';
+    
+    setTimeout(() => {
+        document.getElementById('page1-next').click();
+    }, 100);
+}
+
+// 初始化面板
+function initPanels() {
+    const historyBtn = document.getElementById('historyBtn');
+    const favoriteBtn = document.getElementById('favoriteBtn');
+    const historyPanel = document.getElementById('historyPanel');
+    const favoritePanel = document.getElementById('favoritePanel');
+    const closeHistory = document.getElementById('closeHistoryBtn');
+    const closeFavorite = document.getElementById('closeFavoriteBtn');
+    const addFavoriteBtn = document.getElementById('addFavoriteBtn');
+    
+    if (historyBtn) {
+        historyBtn.addEventListener('click', () => {
+            favoritePanel.style.display = 'none';
+            renderHistoryList();
+            historyPanel.style.display = historyPanel.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+    
+    if (favoriteBtn) {
+        favoriteBtn.addEventListener('click', () => {
+            historyPanel.style.display = 'none';
+            renderFavoriteList();
+            favoritePanel.style.display = favoritePanel.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+    
+    if (closeHistory) {
+        closeHistory.addEventListener('click', () => {
+            historyPanel.style.display = 'none';
+        });
+    }
+    
+    if (closeFavorite) {
+        closeFavorite.addEventListener('click', () => {
+            favoritePanel.style.display = 'none';
+        });
+    }
+    
+    if (addFavoriteBtn) {
+        addFavoriteBtn.addEventListener('click', () => {
+            const favorites = getFavorites();
+            if (favorites.length >= MAX_FAVORITES) {
+                showToast(`最多只能添加 ${MAX_FAVORITES} 个常用教室`);
+                return;
+            }
+            
+            const type = document.getElementById('target-type').value;
+            const first = document.getElementById('target-floor').value;
+            const num = document.getElementById('target-num').value;
+            const tempTarget = getClassroomInfo(type, first, num);
+            
+            if (tempTarget) {
+                addToFavorites(tempTarget);
             } else {
-                return `您当前所在楼层和目标楼层均连通，有两种路线可选：<br>1. 在当前楼层步行到<span class="highlight">${targetElevator}</span>电梯附近，乘坐该电梯前往${targetFloor}楼；<br>2. 先乘坐<span class="highlight">${currElevator}</span>电梯前往${targetFloor}楼，再步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>两种路线均可到达<span class="highlight">${target.code}</span>。`;
+                showToast('请先选择有效的教室');
             }
+        });
+    }
+    
+    // 点击其他地方关闭面板
+    document.addEventListener('click', (e) => {
+        if (!historyBtn?.contains(e.target) && !historyPanel?.contains(e.target)) {
+            if (historyPanel) historyPanel.style.display = 'none';
         }
-
-        // ==================== 图片加载功能 ====================
-
-        function getMapImageName(floor, zone) {
-            // 二楼统一使用 floor_2_full
-            if (floor === 2) {
-                return `floor_2_full`;
-            }
-
-            // 全联通楼层（5-8F）
-            if (fullConnectFloors.has(floor)) {
-                return `floor_${floor}_full`;
-            }
-
-            // 不连通楼层（3-4F）
-            if (zone === 'A') {
-                return `floor_${floor}_a`;
-            }
-            if (zone === 'B') {
-                return `floor_${floor}_b`;
-            }
-            // C区或D区都返回 cd 图
-            if (zone === 'C' || zone === 'D') {
-                return `floor_${floor}_cd`;
-            }
-
-            return `floor_${floor}_full`;
+        if (!favoriteBtn?.contains(e.target) && !favoritePanel?.contains(e.target)) {
+            if (favoritePanel) favoritePanel.style.display = 'none';
         }
+    });
+}
 
-        function getCurrentMapImage(current) {
-            // 室外：返回 null，显示室外占位符
-            if (current.type === '室外') {
-                return null;
+
+
+
+
+// ==================== 图片加载功能 ====================
+        
+        function getMapImageName(floor, zone, roomNum = 0) {
+            let zoneKey = zone.toLowerCase();
+            
+            // 2楼FF教室特殊处理：FF207和FF208在C区
+            if (floor === 2 && zoneKey === 'ff' && roomNum >= 207 && roomNum <= 208) {
+        return `floor_2_c`;
             }
-
-            const actualFloor = current.realFloor;
-
-            // FF教室特殊处理
-            if (current.type === 'FF') {
-                if (fullConnectFloors.has(actualFloor)) {
-                    return `floor_${actualFloor}_full`;
-                } else {
-                    return `floor_${actualFloor}_cd`;
-                }
-            }
-
-            // FZ教室：根据区间获取图片
-            let zone = current.elevatorStr;
-            if (zone.includes('/')) {
-                zone = zone.split('/')[0];
-            }
-            return getMapImageName(actualFloor, zone);
+            
+            // 其他所有情况：floor_楼层_区间
+            return `floor_${floor}_${zoneKey}`;
         }
-
-        function getTargetMapImage(target) {
-            const actualFloor = target.realFloor;
-
-            // FF教室
-            if (target.type === 'FF') {
-                if (fullConnectFloors.has(actualFloor)) {
-                    return `floor_${actualFloor}_full`;
-                } else {
-                    return `floor_${actualFloor}_cd`;
-                }
-            }
-
-            // FZ教室
-            let zone = target.elevatorStr;
-            if (zone.includes('/')) {
-                zone = zone.split('/')[0];
-            }
-            return getMapImageName(actualFloor, zone);
-        }
-
+        
         function setMapImage(mapImg, mapPlaceholder, imageName) {
             if (imageName) {
-                mapImg.src = `${imageName}.png`;
-                mapImg.style.display = 'block';
-                mapPlaceholder.style.display = 'none';
-
-                mapImg.onerror = function () {
-                    mapImg.style.display = 'none';
-                    mapPlaceholder.style.display = 'flex';
-                    mapPlaceholder.innerHTML = '<p>平面图加载失败<br>请参考现场指引</p>';
-                };
+        mapImg.src = `images/${imageName}.png`;  // 添加 .png
+        mapImg.style.display = 'block';
+        mapPlaceholder.style.display = 'none';
+        
+        mapImg.onerror = function() {
+            mapImg.style.display = 'none';
+            mapPlaceholder.style.display = 'flex';
+            mapPlaceholder.innerHTML = `<p>📷 图片加载失败<br>${imageName}.png<br>请参考现场指引</p>`;
+        };
             } else {
-                // 室外：显示室外图
-                mapImg.src = `floor_1_outdoor.png`;
-                mapImg.style.display = 'block';
-                mapPlaceholder.style.display = 'none';
-
-                mapImg.onerror = function () {
-                    mapImg.style.display = 'none';
-                    mapPlaceholder.style.display = 'flex';
-                    mapPlaceholder.innerHTML = '<p>室外图加载失败<br>请从逸夫楼正门进入</p>';
-                };
+        mapImg.src = `images/floor_1_outdoor.png`;
+        mapImg.style.display = 'block';
+        mapPlaceholder.style.display = 'none';
+        
+        mapImg.onerror = function() {
+            mapImg.style.display = 'none';
+            mapPlaceholder.style.display = 'flex';
+            mapPlaceholder.innerHTML = '<p>floor_1_outdoor加载失败<br>请从逸夫楼正门进入</p>';
+        };
             }
         }
+        
+        function getCurrentMapImage(current) {
+            console.log('当前对象:', current);  // 调试用
+            
+            if (current.type === '室外') {
+        return null;
+            }
+            
+            const actualFloor = current.realFloor;
+            
+            if (current.type === 'FF') {
+        let roomNum = 0;
+        if (current.code) {
+            roomNum = parseInt(current.code.slice(-3));
+        }
+        console.log('FF教室，roomNum:', roomNum);  // 调试用
+        return getMapImageName(actualFloor, 'ff', roomNum);
+            }
+            
+            let zone = current.elevatorStr;
+            if (zone && zone.includes('/')) {
+        zone = zone.split('/')[0];
+            }
+            console.log('FZ教室，floor:', actualFloor, 'zone:', zone);  // 调试用
+            return getMapImageName(actualFloor, zone, 0);
+        }
+        
+        function getTargetMapImage(target) {
+            console.log('目标对象:', target);  // 调试用
+            
+            const actualFloor = target.realFloor;
+            
+            if (target.type === 'FF') {
+        let roomNum = 0;
+        if (target.code) {
+            roomNum = parseInt(target.code.slice(-3));
+        }
+        return getMapImageName(actualFloor, 'ff', roomNum);
+            }
+            
+            let zone = target.elevatorStr;
+            if (zone && zone.includes('/')) {
+        zone = zone.split('/')[0];
+            }
+            return getMapImageName(actualFloor, zone, 0);
+        }
+        
+             
 
-        // ==================== 页面初始化 ====================
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const targetType = document.getElementById('target-type');
-            const targetFloor = document.getElementById('target-floor');
-            const targetNum = document.getElementById('target-num');
-            const currentType = document.getElementById('current-type');
-            const currentFloor = document.getElementById('current-floor');
-            const currentNum = document.getElementById('current-num');
-
-            generateClassroomNumbers(targetType, targetFloor, targetNum);
-            generateClassroomNumbers(currentType, currentFloor, currentNum);
-
-            targetType.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
-            targetFloor.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
-            currentType.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
-            currentFloor.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
-
-            document.querySelectorAll('.radio-item').forEach(el => {
-                el.addEventListener('click', () => {
-                    document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('active'));
-                    el.classList.add('active');
-                    const isIndoor = el.dataset.type === '室内';
-                    document.getElementById('室内-tip').style.display = isIndoor ? 'block' : 'none';
-                    document.getElementById('室内-picker').style.display = isIndoor ? 'flex' : 'none';
-                });
-            });
-
-            document.getElementById('page1-next').addEventListener('click', () => {
-                const type = targetType.value;
-                const first = targetFloor.value;
-                const num = targetNum.value;
-                targetClassroom = getClassroomInfo(type, first, num);
-                if (!targetClassroom) {
-                    document.getElementById('page1-error').textContent = '请选择有效的教室号！';
-                    return;
-                }
-                document.getElementById('page1-error').textContent = '';
-                switchPage('page1', 'page2');
-            });
-
-            document.getElementById('page2-prev').addEventListener('click', () => {
-                switchPage('page2', 'page1');
-            });
-
-            document.getElementById('page2-next').addEventListener('click', () => {
-                const isOutdoor = document.querySelector('.radio-item.active').dataset.type === '室外';
-                if (isOutdoor) {
-                    currentPosition = { type: '室外', realFloor: 1, code: '室外' };
-                } else {
-                    const type = currentType.value;
-                    const first = currentFloor.value;
-                    const num = currentNum.value;
-                    currentPosition = getClassroomInfo(type, first, num);
-                    if (!currentPosition) {
-                        document.getElementById('page2-error').textContent = '请选择有效的当前教室！';
-                        return;
-                    }
-                    currentPosition.type = '室内';
-                }
-
-                document.getElementById('current-info').textContent = isOutdoor ? '室外' : currentPosition.code;
-                document.getElementById('target-info').textContent = targetClassroom.code;
-                const route = generateRoute(currentPosition, targetClassroom);
-                document.getElementById('route-text').innerHTML = route;
-
-                // 加载平面图图片
-                const currentImg = document.getElementById('current-map-img');
-                const currentPlaceholder = document.getElementById('current-map-placeholder');
-                const targetImg = document.getElementById('target-map-img');
-                const targetPlaceholder = document.getElementById('target-map-placeholder');
-
-                const currentImageName = getCurrentMapImage(currentPosition);
-                const targetImageName = getTargetMapImage(targetClassroom);
-
-                setMapImage(currentImg, currentPlaceholder, currentImageName);
-                setMapImage(targetImg, targetPlaceholder, targetImageName);
-
-                switchPage('page2', 'page3');
-            });
-
-            document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page1'));
-            document.getElementById('page3-end').addEventListener('click', () => switchPage('page3', 'page1'));
-        });
-    </script>
+             
+             // ==================== 页面初始化 ====================
+             
+             document.addEventListener('DOMContentLoaded', function() {
+               const targetType = document.getElementById('target-type');
+               const targetFloor = document.getElementById('target-floor');
+               const targetNum = document.getElementById('target-num');
+               const currentType = document.getElementById('current-type');
+               const currentFloor = document.getElementById('current-floor');
+               const currentNum = document.getElementById('current-num');
+             
+               generateClassroomNumbers(targetType, targetFloor, targetNum);
+               generateClassroomNumbers(currentType, currentFloor, currentNum);
+             
+               targetType.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
+               targetFloor.addEventListener('change', () => generateClassroomNumbers(targetType, targetFloor, targetNum));
+               currentType.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
+               currentFloor.addEventListener('change', () => generateClassroomNumbers(currentType, currentFloor, currentNum));
+             
+               document.querySelectorAll('.radio-item').forEach(el => {
+                 el.addEventListener('click', () => {
+                   document.querySelectorAll('.radio-item').forEach(i => i.classList.remove('active'));
+                   el.classList.add('active');
+                   const isIndoor = el.dataset.type === '室内';
+                   document.getElementById('室内-tip').style.display = isIndoor ? 'block' : 'none';
+                   document.getElementById('室内-picker').style.display = isIndoor ? 'flex' : 'none';
+                 });
+               });
+             
+               document.getElementById('page1-next').addEventListener('click', () => {
+                 const type = targetType.value;
+                 const first = targetFloor.value;
+                 const num = targetNum.value;
+                 targetClassroom = getClassroomInfo(type, first, num);
+                 if (!targetClassroom) {
+                   document.getElementById('page1-error').textContent = '请选择有效的教室号！';
+                   return;
+                 }
+                 document.getElementById('page1-error').textContent = '';
+                 addToHistory(targetClassroom);
+                 switchPage('page1', 'page2');
+               });
+             
+               document.getElementById('page2-prev').addEventListener('click', () => {
+                 switchPage('page2', 'page1');
+               });
+             
+               document.getElementById('page2-next').addEventListener('click', () => {
+                 const isOutdoor = document.querySelector('.radio-item.active').dataset.type === '室外';
+                 if (isOutdoor) {
+                   currentPosition = { type: '室外', realFloor: 1, code: '室外' };
+                 } else {
+                   const type = currentType.value;
+                   const first = currentFloor.value;
+                   const num = currentNum.value;
+                   currentPosition = getClassroomInfo(type, first, num);
+                   if (!currentPosition) {
+                     document.getElementById('page2-error').textContent = '请选择有效的当前教室！';
+                     return;
+                   }
+                 //  currentPosition.type = '室内';
+                 }
+             
+                 document.getElementById('current-info').textContent = isOutdoor ? '室外' : currentPosition.code;
+                 document.getElementById('target-info').textContent = targetClassroom.code;
+                
+                 // 加载平面图图片
+                 const currentImg = document.getElementById('current-map-img');
+                 const currentPlaceholder = document.getElementById('current-map-placeholder');
+                 const targetImg = document.getElementById('target-map-img');
+                 const targetPlaceholder = document.getElementById('target-map-placeholder');
+                 
+                 const currentImageName = getCurrentMapImage(currentPosition);
+                 const targetImageName = getTargetMapImage(targetClassroom);
+                 
+                 setMapImage(currentImg, currentPlaceholder, currentImageName);
+                 setMapImage(targetImg, targetPlaceholder, targetImageName);
+                 
+                 const route = generateRoute(currentPosition, targetClassroom);
+                 document.getElementById('route-text').innerHTML = route;
+             
+             
+                 switchPage('page2', 'page3');
+               });
+             
+               document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page1'));
+               document.getElementById('page3-end').addEventListener('click', () => switchPage('page3', 'page1'));
+// 初始化历史记录和常用教室面板
+    initPanels();
+    renderFavoriteList();
+             });
+             
+</script>
+  
 </body>
+
 </html>
