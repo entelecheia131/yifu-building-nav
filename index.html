@@ -42,6 +42,7 @@
             position: relative;
             z-index: 1;
             box-shadow: 0 10px 30px rgba(18, 49, 88, 0.12);
+            position: relative;  /* 确保这一行存在 */
         }
         
         .school-logo {
@@ -91,7 +92,7 @@
         /* 标题样式 */
         .page-title {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 21px;
             padding-top: 10px;
         }
         
@@ -164,7 +165,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin: 16px 0 24px 0;
+            margin: 16px 0 10px 0;
             gap: 10px;
         }
         
@@ -798,11 +799,235 @@
     85% { opacity: 1; transform: translateX(-50%) translateY(0); }
     100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
+
+
+
+------------icon自定义---------------
+/* 自定义图标样式 - 天空蓝 + 垂直居中 */
+.map-title img,
+.position-info img {
+    width: 1.4em;
+    height: 1.4em;
+    margin-right: 8px;
+    vertical-align: middle;
+    display: inline-block;
+    /* 染成天空蓝 #3491CF */
+    filter: brightness(0) saturate(100%) invert(47%) sepia(76%) saturate(1234%) hue-rotate(176deg) brightness(97%) contrast(94%);
+}
+--------三按钮布局---------------------
+/* 按钮组 - 三按钮布局 */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 0px;
+}
+
+.btn-group-row {
+    display: flex;
+    gap: 12px;
+}
+-------------第二页按钮位置调整------------
+/* 第二页的三级选择器下边距 */
+#室内-picker {
+    margin-bottom: 0px !important;
+}
+
+
+-----------测试--------------
+/* 第二页三级选择器下边距归零 */
+#室内-picker {
+    margin-bottom: 0 !important;
+}
+
+/* 第二页按钮组上边距归零 */
+#page2 .btn-group {
+    margin-top: 7px !important;
+}
+
+/* 确保按钮组内部没有额外间距 */
+#page2 .btn-group .btn {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+--------结束动画---------------
+/* 波纹扩散 - 多层渐变，更明显 */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+        box-shadow: 0 0 0 0 rgba(52, 145, 207, 0.7);
+    }
+    50% {
+        transform: scale(3);
+        opacity: 0.5;
+        box-shadow: 0 0 0 20px rgba(52, 145, 207, 0.3);
+    }
+    100% {
+        transform: scale(6);
+        opacity: 0;
+        box-shadow: 0 0 0 40px rgba(52, 145, 207, 0);
+    }
+}
+
+/* 心跳 */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* 文字从左边滑入 */
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 文字停留后淡出 */
+@keyframes fadeUpStay {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+/* 只向上浮动 */
+@keyframes gentleFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-4.5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}/* 光晕呼吸感 - 更深颜色 */
+@keyframes breathGlow {
+    0% {
+        filter: drop-shadow(0 0 2px rgba(15, 108, 189, 0.4));
+    }
+    25% {
+        filter: drop-shadow(0 0 8px rgba(15, 108, 189, 0.7));
+    }
+    50% {
+        filter: drop-shadow(0 0 14px rgba(15, 108, 189, 0.9));
+    }
+    75% {
+        filter: drop-shadow(0 0 8px rgba(15, 108, 189, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 2px rgba(15, 108, 189, 0.4));
+    }
+}
+
+/* 应用到图标 */
+#current-position-text i,
+#target-position-text img {
+    display: inline-block;
+    animation: gentleFloat 2s ease-in-out infinite, breathGlow 2.5s ease-in-out infinite;
+}
+--------------箭头效果---------
+
+/* 选中所有向下的箭头 */
+.route-text {
+    font-size: 14px;
+}
+/* 直接给 ↓ 符号加样式 */
+.route-text {
+    position: relative;
+}
+
+.route-text span:contains('↓') {
+    display: inline-block;
+    animation: glowPulse 0.8s ease-in-out infinite;
+}
+
+/* 用属性选择器，匹配所有包含 ↓ 的元素 */
+*:has(> .route-text) {
+    /* 这个不用管 */
+}
+
+/* 最终方案：用伪元素覆盖箭头 */
+.route-text {
+    position: relative;
+}
+/* 箭头加粗 */
+.route-text br + span {
+    display: inline-block;
+    font-weight: 550;
+    font-size: 1.2em;
+    color: #3491CF;
+    animation: flowGlowIntense 1.5s linear infinite;
+}
+
+@keyframes bounceAndPulse {
+    0% {
+        transform: translateY(0px);
+        text-shadow: 
+            0 0 2px rgba(52, 145, 207, 0.3),
+            0 0 4px rgba(52, 145, 207, 0.2);
+    }
+    25% {
+        transform: translateY(-2px);
+        text-shadow: 
+            0 0 8px rgba(52, 145, 207, 0.7),
+            0 0 12px rgba(52, 145, 207, 0.5);
+    }
+    50% {
+        transform: translateY(-4px);
+        text-shadow: 
+            0 0 16px rgba(52, 145, 207, 1),
+            0 0 24px rgba(52, 145, 207, 0.8);
+    }
+    75% {
+        transform: translateY(-2px);
+        text-shadow: 
+            0 0 10px rgba(52, 145, 207, 0.7),
+            0 0 16px rgba(52, 145, 207, 0.5);
+    }
+    100% {
+        transform: translateY(0px);
+        text-shadow: 
+            0 0 2px rgba(52, 145, 207, 0.3),
+            0 0 4px rgba(52, 145, 207, 0.2);
+    }
+}
+
+.route-text br + span {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 1.3em;
+    color: #3491CF;
+    animation: bounceAndPulse 1.2s ease-in-out infinite;
+}.highlight {
+    animation: none !important;
+    /* 保留原有样式，不加动态阴影 */
+}
 </style>
 </head>
 
 <body>
     <div class="app-container">
+
         <div class="school-logo" id="school-logo">
             <img src="./xupt.png" alt="西安邮电大学校徽">
         </div>
@@ -864,7 +1089,8 @@
                 <div class="picker-column">
                     <div class="picker-label"><i class="fas fa-layer-group"></i> 编号</div>
                     <select class="picker-select" id="target-floor">
-                        <option value="2" selected>2</option>
+                        <option value="1"selected>1</option>
+                        <option value="2" >2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
@@ -878,13 +1104,30 @@
                     <select class="picker-select" id="target-num"></select>
                 </div>
             </div>
-    
+
     <p class="error-text" id="page1-error"></p>
-    <div class="btn-group">
-        <button class="btn btn-primary" id="page1-next">
-            <i class="fas fa-arrow-right"></i> 下一步
-        </button>
-    </div>
+  <!-- 第一页的按钮单独放，不用 btn-group -->
+<div style="margin-top: 8px; margin-bottom: 0;">
+    <button class="btn btn-primary" id="page1-next">
+        <i class="fas fa-arrow-right"></i> 下一步
+    </button>
+</div>
+<span style="
+        position: absolute;
+        bottom: 12px;
+        right: 16px;
+        font-size: 12px;
+        color: rgba(52, 145, 207, 0.45);
+        font-family: 'KaiTi', 'STKaiti', monospace;
+        z-index: 999;
+        pointer-events: none;
+      
+        padding: 2px 8px;
+        border-radius: 16px;
+        backdrop-filter: blur(2px);
+    ">
+        逸路寻堂 · dxp
+    </span>
 </div>
           
 
@@ -913,7 +1156,8 @@
                 <div class="picker-column">
                     <div class="picker-label"><i class="fas fa-layer-group"></i> 编号</div>
                     <select class="picker-select" id="current-floor">
-                        <option value="2" selected>2</option>
+                        <option value="1" selected>1</option>
+                        <option value="2" >2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
@@ -936,12 +1180,31 @@
                     <i class="fas fa-route"></i> 生成路线
                 </button>
             </div>
+<span style="
+        position: absolute;
+        bottom: 12px;
+        right: 16px;
+        font-size: 12px;
+        color: rgba(52, 145, 207, 0.45);
+        font-family: 'KaiTi', 'STKaiti', monospace;
+        z-index: 999;
+        pointer-events: none;
+      
+        padding: 2px 8px;
+        border-radius: 16px;
+        backdrop-filter: blur(2px);
+    ">
+        逸路寻堂 · dxp
+    </span>	
         </div>
 
         <!-- 页面3：结果页 -->
         <div class="page" id="page3">
             <div class="map-box">
-                <p class="map-title"><i class="fas fa-map"></i> 您的当前位置楼层图：</p>
+               <p class="map-title">
+    <img src="images/icons_diy/map_local.svg" style="width: 1em; height: 1em; margin-right: 8px; vertical-align: middle;">
+    您的当前位置楼层图：
+</p>
                 <div id="current-map-container">
                     <img id="current-map-img" class="map-img" src="" alt="当前位置平面图">
                     <div id="current-map-placeholder" class="map-placeholder">
@@ -954,16 +1217,20 @@
             </div>
 
             <div class="map-box">
-                <p class="map-title"><i class="fas fa-location-dot"></i> 您想到达的教室位置楼层图：</p>
+              <p class="map-title">
+    <img src="images/icons_diy/map_tag.svg" style="width: 1em; height: 1em; margin-right: 8px; vertical-align: middle;">
+    您想到达的教室位置楼层图：
+</p>
                 <div id="target-map-container">
                     <img id="target-map-img" class="map-img" src="" alt="目标位置平面图">
                     <div id="target-map-placeholder" class="map-placeholder">
                         <p><i class="fas fa-image"></i> 目标位置楼层图占位</p>
                     </div>
                 </div>
-                <div class="position-info" id="target-position-text">
-                    <i class="fas fa-flag-checkered"></i> 您要到达<span id="target-info">FZ540</span>
-                </div>
+              <div class="position-info" id="target-position-text">
+    <img src="images/icons_diy/only_target.svg" style="width: 1.1em; height: 1.1em; margin-right: 6px; vertical-align: middle;">
+    您要到达<span id="target-info">FZ540</span>
+</div>
             </div>
 
             <div class="route-result">
@@ -972,14 +1239,34 @@
             </div>
 
             <div class="btn-group">
-                <button class="btn btn-secondary" id="page3-prev">
-                    <i class="fas fa-redo"></i> 重新选择
-                </button>
-                <button class="btn btn-primary" id="page3-end">
-                    <i class="fas fa-check"></i> 结束
-                </button>
-            </div>
-        </div>
+    <button class="btn btn-secondary" id="page3-back">
+        <i class="fas fa-arrow-left"></i> 返回上一步
+    </button>
+    <div class="btn-group-row">
+        <button class="btn btn-secondary" id="page3-prev">
+            <i class="fas fa-redo"></i> 重新选择
+        </button>
+        <button class="btn btn-primary" id="page3-end">
+            <i class="fas fa-check"></i> 结束
+        </button>
+    </div>
+<span style="
+        position: absolute;
+        bottom: 12px;
+        right: 16px;
+        font-size: 12px;
+        color: rgba(52, 145, 207, 0.45);
+        font-family: 'KaiTi', 'STKaiti', monospace;
+        z-index: 999;
+        pointer-events: none;
+      
+        padding: 2px 8px;
+        border-radius: 16px;
+        backdrop-filter: blur(2px);
+    ">
+        逸路寻堂 · dxp
+    </span>
+</div>
     </div>
 
     <script src="script.js"></script>
@@ -987,6 +1274,12 @@
 
         const classroomConfig = {
                FZ: {
+                   1: [
+                      { start: 1, end: 15, elevator: 'A' },    // 101-115 → A区
+                      { start: 17, end: 31, elevator: 'C' },   // 116-130 → C区（根据你的范围 117-131，我调整为 116-130）
+                      { start: 31, end: 46, elevator: 'D' },   // 131-146 → D区
+                      { start: 47, end: 62, elevator: 'B' },   // 147-162 → B区
+                   ],
                  2: [
                    { start: 1, end: 10, elevator: 'A' },
                    { start: 11, end: 21, elevator: 'C' },
@@ -1031,6 +1324,7 @@
                  ]
                },
                FF: {
+                 1: [{ start: 1, end: 9, elevator: ['C', 'D'] }],  
                  2: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
                  3: [{ start: 1, end: 8, elevator: ['C', 'D'] }],
                  4: [{ start: 1, end: 11, elevator: ['C', 'D'] }],
@@ -1050,7 +1344,7 @@
                '7': 8
              };
              
-             const fullConnectFloors = new Set([2,5,6,7,8]);
+             const fullConnectFloors = new Set([1,2,5,6,7,8]);
              const connectFloorList = '2楼、5楼、6楼、7楼、8楼';
              const connectFloorText = '2楼、5楼、6楼、7楼、8楼（可任选其一）';
              
@@ -1102,9 +1396,7 @@
                  elevatorStr: Array.isArray(section.elevator) ? section.elevator.join('/') : section.elevator
                };
              }
-             const isC = (e) => e === 'C';
-              const isD = (e) => e === 'D';
-             const isCD = (e) => e === 'C' || e === 'D';
+             
            function generateRoute(current, target) {
     if (current.code === target.code) {
         return `您当前就在<span class="highlight">${target.code}</span>，无需移动。`;
@@ -1114,7 +1406,7 @@
         const targetElevator = target.elevatorStr;
         const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
         const directionText = direction ? `，${direction}` : '';
-        return `您当前在室外。<br>↓<br>请直接乘坐<span class="highlight">${targetElevator}</span>电梯前往${target.realFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
+        return `您当前在室外。<br><span class="arrow">↓</span><br>请直接乘坐<span class="highlight">${targetElevator}</span>电梯前往${target.realFloor}楼。<br><span class="arrow">↓</span><br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
     }   
                const currElevator = current.elevatorStr;
                const targetElevator = target.elevatorStr;
@@ -1127,7 +1419,7 @@
                  if (currElevator === targetElevator || 
                      (Array.isArray(current.elevator) && current.elevator.includes(targetElevator)) ||
                      (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
-                return `您要去的<span class="highlight">${target.code}</span>就在当前<span class="highlight">${current.code}</span>附近。<br>↓<br>直接步行到达即可。`;
+                return `您要去的<span class="highlight">${target.code}</span>就在当前<span class="highlight">${current.code}</span>附近。<br><span class="arrow">↓</span><br>根据墙面标识牌，步行即可到达。`;
                  } else {
                 // 🆕 3-4楼的 C↔D 切换，直接步行
                 const isC = (e) => e === 'C';
@@ -1135,16 +1427,16 @@
                 const isCDSwitch = (isC(currElevator) && isD(targetElevator)) || (isD(currElevator) && isC(targetElevator));
         
                if ((currFloor === 3 || currFloor === 4) && isCDSwitch) {
-              return `您与目标教室在同一楼层，C区和D区是连通的。<br>↓<br>可直接步行穿过阶梯教室所处走廊至<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。`;
+              return `您与目标教室在同一楼层，C区和D区是连通的。<br><span class="arrow">↓</span><br>可直接步行穿过阶梯教室所处走廊至<span class="highlight">${targetElevator}</span>电梯附近。<br><span class="arrow">↓</span><br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。`;
         }
         
                    if (!isCurrConnect) {
   const direction = (currElevator === 'A' || currElevator === 'B') ? '向左转' : (currElevator === 'C' || currElevator === 'D') ? '向右转' : '';
         const directionText = direction ? `，${direction}` : '';
-                   return `您与目标教室在同一楼层但本楼层不连通。<br>↓<br>请先前往<span class="highlight">${connectFloorText}</span>。<br>↓<br>换乘<span class="highlight">${targetElevator}</span>电梯返回${target.realFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
+                   return `您与目标教室在同一楼层但本楼层不连通。<br><span class="arrow">↓</span><br>请先前往<span class="highlight">${connectFloorText}</span>。<br><span class="arrow">↓</span><br>换乘<span class="highlight">${targetElevator}</span>电梯返回${target.realFloor}楼。<br><span class="arrow">↓</span><br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
 
                     } else {
-                   return `您与目标教室在同一楼层且本楼层连通。<br>↓<br>可直接步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可到达<span class="highlight">${target.code}</span>。`;
+                   return `您与目标教室在同一楼层且本楼层连通。<br><span class="arrow">↓</span><br>可直接步行到<span class="highlight">${targetElevator}</span>电梯附近。<br><span class="arrow">↓</span><br>根据墙面指引牌即可到达<span class="highlight">${target.code}</span>。`;
                    }
                  }
                }
@@ -1154,30 +1446,25 @@
                    (Array.isArray(target.elevator) && target.elevator.includes(currElevator))) {
                  const direction = (currElevator === 'A' || currElevator === 'B') ? '向左转' : (currElevator === 'C' || currElevator === 'D') ? '向右转' : '';
         const directionText = direction ? `，${direction}` : '';
-        return `您当前离<span class="highlight">${currElevator}</span>电梯最近。<br>↓<br>直接乘坐该电梯前往${targetFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
+        return `您当前离<span class="highlight">${currElevator}</span>电梯最近。<br><span class="arrow">↓</span><br>直接乘坐该电梯前往${targetFloor}楼。<br><span class="arrow">↓</span><br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在您附近。`;
     }
              
                if (isTargetConnect && !isCurrConnect) {
                const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
         const directionText = direction ? `，${direction}` : '';
-        return `您当前离<span class="highlight">${currElevator}</span>电梯最近。<br>↓<br>请先乘坐该电梯前往${targetFloor}楼。<br>↓<br>步行至<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。`;
+        return `您当前离<span class="highlight">${currElevator}</span>电梯最近。<br><span class="arrow">↓</span><br>请先乘坐该电梯前往${targetFloor}楼。<br><span class="arrow">↓</span><br>步行至<span class="highlight">${targetElevator}</span>电梯附近。<br><span class="arrow">↓</span><br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。`;
                } else if (!isTargetConnect && isCurrConnect) {
                const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
         const directionText = direction ? `，${direction}` : '';
-        return `您当前所在楼层连通。<br>↓<br>请先步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>乘坐该电梯至${targetFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在附近。`;
-               }
-// 🆕 新增：3-4楼 C/D 跨楼层连通
-            else if ((currFloor === 3 || currFloor === 4) && (targetFloor === 3 || targetFloor === 4) && 
-            isCD(currElevator) && isCD(targetElevator)) {
-            return `您可乘坐<span class="highlight">${currElevator}</span>电梯到达${targetFloor}楼。<br>↓<br>右转，穿过FF教室所在走廊。<br>↓<br>到达${targetFloor}楼的<span class="highlight">${targetElevator}</span>区。<br>↓<br>依据墙面标识牌即可找到<span class="highlight">${target.code}</span>。`;
-            } else if (!isTargetConnect && !isCurrConnect) {
+        return `您当前所在楼层连通。<br><span class="arrow">↓</span><br>请先步行到<span class="highlight">${targetElevator}</span>电梯附近。<br><span class="arrow">↓</span><br>乘坐该电梯至${targetFloor}楼。<br><span class="arrow">↓</span><br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在附近。`;
+               } else if (!isTargetConnect && !isCurrConnect) {
                 const direction = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
         const directionText = direction ? `，${direction}` : '';
-        return `您当前所在楼层和目标楼层均不连通。<br>↓<br>请先前往<span class="highlight">${connectFloorList}</span>中的任意一层。<br>↓<br>换乘<span class="highlight">${targetElevator}</span>电梯前往${targetFloor}楼。<br>↓<br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在附近。`;
+        return `您当前所在楼层和目标楼层均不连通。<br><span class="arrow">↓</span><br>请先前往<span class="highlight">${connectFloorList}</span>中的任意一层。<br><span class="arrow">↓</span><br>换乘<span class="highlight">${targetElevator}</span>电梯前往${targetFloor}楼。<br><span class="arrow">↓</span><br>出电梯后${directionText}<span class="highlight">${target.code}</span>就在附近。`;
              } else {
     const direction1 = (targetElevator === 'A' || targetElevator === 'B') ? '向左转' : (targetElevator === 'C' || targetElevator === 'D') ? '向右转' : '';
     const directionText1 = direction1 ? `，${direction1}` : '';
-    return `您当前所在楼层和目标楼层均连通，有两种路线可选：<br><br>【路线一】<br>在当前楼层步行到<span class="highlight">${targetElevator}</span>电梯。<br>↓<br>乘坐该电梯前往${targetFloor}楼。<br>↓<br>出电梯后${directionText1}<span class="highlight">${target.code}</span>就在附近。<br><br>---<br><br>【路线二】<br>先乘坐<span class="highlight">${currElevator}</span>电梯前往${targetFloor}楼。<br>↓<br>再步行到<span class="highlight">${targetElevator}</span>电梯附近。<br>↓<br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。<br><br>两种路线均可到达<span class="highlight">${target.code}</span>，您可任选其一。`;
+    return `您当前所在楼层和目标楼层均连通，有两种路线可选：<br><br>【路线一】<br>在当前楼层步行到<span class="highlight">${targetElevator}</span>电梯。<br><span class="arrow">↓</span><br>乘坐该电梯前往${targetFloor}楼。<br><span class="arrow">↓</span><br>出电梯后${directionText1}<span class="highlight">${target.code}</span>就在附近。<br><br>---------<br><br>【路线二】<br>先乘坐<span class="highlight">${currElevator}</span>电梯前往${targetFloor}楼。<br><span class="arrow">↓</span><br>再步行到<span class="highlight">${targetElevator}</span>电梯附近。<br><span class="arrow">↓</span><br>根据墙面指引牌即可找到<span class="highlight">${target.code}</span>。<br><br>两种路线均可到达<span class="highlight">${target.code}</span>，您可任选其一。`;
 }
              }
              
@@ -1517,7 +1804,6 @@ function initPanels() {
 
 
 
-
 // ==================== 图片加载功能 ====================
         
         function getMapImageName(floor, zone, roomNum = 0) {
@@ -1532,9 +1818,15 @@ function initPanels() {
             return `floor_${floor}_${zoneKey}`;
         }
         
-        function setMapImage(mapImg, mapPlaceholder, imageName) {
+        function setMapImage(mapImg, mapPlaceholder, imageName,isTarget = false) {
             if (imageName) {
-        mapImg.src = `images/${imageName}.png`;  // 添加 .png
+        let fullPath;
+        if (isTarget) {
+           fullPath = `images/target/${imageName}.png`;
+        } else {
+            fullPath = `images/${imageName}.png`;
+        }
+      mapImg.src = fullPath;
         mapImg.style.display = 'block';
         mapPlaceholder.style.display = 'none';
         
@@ -1582,26 +1874,30 @@ function initPanels() {
             return getMapImageName(actualFloor, zone, 0);
         }
         
-        function getTargetMapImage(target) {
-            console.log('目标对象:', target);  // 调试用
-            
-            const actualFloor = target.realFloor;
-            
-            if (target.type === 'FF') {
+  function getTargetMapImage(target) {
+    console.log('目标对象:', target);
+    
+    const actualFloor = target.realFloor;
+    let imageName = null;
+    
+    if (target.type === 'FF') {
         let roomNum = 0;
         if (target.code) {
             roomNum = parseInt(target.code.slice(-3));
         }
-        return getMapImageName(actualFloor, 'ff', roomNum);
-            }
-            
-            let zone = target.elevatorStr;
-            if (zone && zone.includes('/')) {
-        zone = zone.split('/')[0];
-            }
-            return getMapImageName(actualFloor, zone, 0);
+        imageName = getMapImageName(actualFloor, 'ff', roomNum);
+    } else {
+        let zone = target.elevatorStr;
+        if (zone && zone.includes('/')) {
+            zone = zone.split('/')[0];
         }
-        
+        imageName = getMapImageName(actualFloor, zone, 0);
+    }
+    
+    // 返回纯文件名（不带路径和后缀），由 setMapImage 添加路径
+    // 注意：文件名已经包含 _t 后缀
+    return imageName ? `${imageName}_t` : null;
+}
              
 
              
@@ -1679,25 +1975,225 @@ function initPanels() {
                  const currentImageName = getCurrentMapImage(currentPosition);
                  const targetImageName = getTargetMapImage(targetClassroom);
                  
-                 setMapImage(currentImg, currentPlaceholder, currentImageName);
-                 setMapImage(targetImg, targetPlaceholder, targetImageName);
+                 setMapImage(currentImg, currentPlaceholder, currentImageName,false);
+                 setMapImage(targetImg, targetPlaceholder, targetImageName,true);
                  
                  const route = generateRoute(currentPosition, targetClassroom);
                  document.getElementById('route-text').innerHTML = route;
              
-             
                  switchPage('page2', 'page3');
                });
-             
+               document.getElementById('page3-back').addEventListener('click', () => switchPage('page3', 'page2'));
                document.getElementById('page3-prev').addEventListener('click', () => switchPage('page3', 'page1'));
-               document.getElementById('page3-end').addEventListener('click', () => switchPage('page3', 'page1'));
-// 初始化历史记录和常用教室面板
-    initPanels();
-    renderFavoriteList();
+           // 结束按钮动画 ✨
+document.getElementById('page3-end').addEventListener('click', () => {
+    // 俏皮文字库
+    const messages = [
+        '💙 下次别迷路啦～',
+        '🏃‍♀️ 快跑！要迟到啦！',
+        '✨ 祝你这节课不点名 ✨',
+        '📍 下次记得点“常用教室”哦',
+        '🌿 逸夫楼等你回来～',
+        '🎯 教室就在前方，冲！',
+        '📚 好好学习，天天向上',
+        '⭐ 你已解锁“寻路大师”成就',
+        '🍃 导航结束，一路顺风～',
+        '💫 希望你今天上课不困'
+    ];
+    
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    
+    // 自动计算字号
+    let fontSize = 18;
+    const len = randomMessage.length;
+    if (len <= 12) fontSize = 20;
+    else if (len <= 18) fontSize = 18;
+    else if (len <= 24) fontSize = 16;
+    else if (len <= 30) fontSize = 14;
+    else fontSize = 13;
+    
+    // 1. 背景模糊层
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(0px);
+        z-index: 9998;
+        transition: all 0.5s ease;
+        pointer-events: none;
+    `;
+    document.body.appendChild(overlay);
+    
+    setTimeout(() => {
+        overlay.style.background = 'rgba(255, 255, 255, 0.4)';
+        overlay.style.backdropFilter = 'blur(4px)';
+    }, 10);
+    
+    // 2. 波纹效果（3层）
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                width: 40px;
+                height: 40px;
+                background: rgba(52, 145, 207, 0.6);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                animation: ripple 1s ease-out forwards;
+                pointer-events: none;
+                box-shadow: 0 0 10px rgba(52, 145, 207, 0.5);
+            `;
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 1000);
+        }, i * 150);
+    }
+    
+    // 3. 光晕层
+    const glowRipple = document.createElement('div');
+    glowRipple.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, rgba(52,145,207,0.4) 0%, rgba(52,145,207,0) 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9998;
+        animation: ripple 0.8s ease-out forwards;
+        pointer-events: none;
+    `;
+    document.body.appendChild(glowRipple);
+    setTimeout(() => glowRipple.remove(), 800);
+ // 4. 文字浮层（从右向左滑入）
+const messageDiv = document.createElement('div');
+messageDiv.style.cssText = `
+    position: fixed;
+    top: calc(50% + 65px);
+    right: -200px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 60px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    max-width: calc(100% - 48px);
+    text-align: center;
+    font-family: inherit;
+    box-sizing: border-box;
+    pointer-events: none;
+    transition: right 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+    padding: 14px 24px;
+`;
+
+// 主文字
+const mainText = document.createElement('div');
+mainText.textContent = randomMessage;
+mainText.style.cssText = `
+    font-size: ${fontSize}px;
+    font-weight: 600;
+    color: #3491CF;
+    line-height: 1.4;
+    white-space: normal;；
+    word-break: break-word;
+`;
+messageDiv.appendChild(mainText);
+
+// 名字签名（右下角）
+const nameSpan = document.createElement('div');
+nameSpan.textContent = '—— 逸路寻堂 · dxp';
+nameSpan.style.cssText = `
+    font-size: 10px;
+    color: #CCCCCC;
+    margin-top: 5px;
+    text-align: right;
+`;
+messageDiv.appendChild(nameSpan);
+
+document.body.appendChild(messageDiv);
+    // 触发滑入动画
+    setTimeout(() => {
+        messageDiv.style.right = '50%';
+    messageDiv.style.transform = 'translateX(50%)';
+      }, 50);
+    
+    // 5. 按钮心跳效果
+    const btn = document.getElementById('page3-end');
+    btn.style.animation = 'heartbeat 0.4s ease 2';
+    
+// 6. 中心图标（无背景，实心对勾，和波纹同步）
+const centerIcon = document.createElement('div');
+centerIcon.innerHTML = '✓';
+centerIcon.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 10px rgba(52, 145, 207, 0.5);
+    z-index: 10001;
+    pointer-events: none;
+    opacity: 1;
+`;
+document.body.appendChild(centerIcon);
+
+// 和波纹一起消失（在最后的 setTimeout 里移除）
+// 注意：不要添加 iconPop 和 iconFadeOut 动画
+
+    // 6. 2.5秒后返回首页
+setTimeout(() => {
+    messageDiv.style.transition = 'opacity 0.3s ease';
+    messageDiv.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.3s ease';
+    overlay.style.opacity = '0';
+    centerIcon.style.transition = 'opacity 0.3s ease';  // 添加这行
+    centerIcon.style.opacity = '0';                     // 添加这行
+    
+    setTimeout(() => {
+        switchPage('page3', 'page1');
+        overlay.remove();
+        messageDiv.remove();
+        centerIcon.remove();  // 添加这行
+        btn.style.animation = '';
+    }, 300);
+}, 1500);
+});
+        // 初始化历史记录和常用教室面板
+               initPanels();
+               renderFavoriteList();
+
+//---------箭头------------
+function startArrowFlow() {
+        const arrows = document.querySelectorAll('.arrow');
+        if (arrows.length === 0) return;
+        
+        let step = 0;
+        setInterval(() => {
+            step = (step + 1) % 4;
+            let offset = 0;
+            if (step === 1) offset = 3;
+            else if (step === 2) offset = 6;
+            else if (step === 3) offset = 3;
+            
+            arrows.forEach(arrow => {
+                arrow.style.transform = `translateY(${offset}px)`;
+            });
+        }, 300);
+    }
+    
+    startArrowFlow();
              });
              
 </script>
-  
+
 </body>
 
 </html>
